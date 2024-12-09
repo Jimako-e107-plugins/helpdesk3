@@ -59,7 +59,7 @@ class helpdesk
     var $hduprefs_showfixes = false;
     var $hduprefs_escalateon = 0;
 
-    function helpdesk()
+    function __construct()
     {
         global $sql, $HELPDESK_PREF;
         $this->load_prefs();
