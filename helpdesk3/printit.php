@@ -7,10 +7,7 @@
 // ****************************************************************
 // USE GET method for form - get round bug in IE that forces download.  See docs
 // in fpdf
-if (!defined("USER_WIDTH"))
-{
-    define(USER_WIDTH, "width:100%;");
-}
+ 
 $hdu_text .= "
 
 <form method='get' action='pdfit.php' id='printform' >

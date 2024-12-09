@@ -22,10 +22,7 @@ switch ($HELPDESK_PREF['hdu_dateformat'])
     default:
         $hdu_calformat = "d-m-Y";
 }
-if (!defined("USER_WIDTH"))
-{
-    define(USER_WIDTH, "width:100%");
-}
+
 $hdu_text .= "
 <form method='get' action='pdfrep.php' id='repform' >
 	<div>

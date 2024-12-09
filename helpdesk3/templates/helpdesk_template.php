@@ -1,8 +1,5 @@
 <?php
-if (!defined("USER_WIDTH"))
-{
-    define(USER_WIDTH, "width:100%");
-}
+ 
 // *
 // * FAQs list. This part is the front opening screen of the FAQ Plugin
 // *

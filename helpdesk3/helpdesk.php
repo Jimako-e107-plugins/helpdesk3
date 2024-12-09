@@ -40,19 +40,19 @@ $eplug_css[] = e_PLUGIN . HELPDESK_FOLDER . "/includes/plain/hdu_pop.css";
 // get the template  from themes, if not then use default
 if (is_readable(THEME . "helpdesk_template.php"))
 {
-    define(HDU_THEME, THEME . "helpdesk_template.php");
+    define("HDU_THEME", THEME . "helpdesk_template.php");
 }
 else
 {
-    define(HDU_THEME, e_PLUGIN . HELPDESK_FOLDER . "/templates/helpdesk_template.php");
+    define("HDU_THEME", e_PLUGIN . HELPDESK_FOLDER . "/templates/helpdesk_template.php");
 }
 // get logo from theme, if not see if there is a default, if not then not using logo
 if (is_readable(THEME . "helpdesk.png"))
 {
-    define(HDU_LOGO, THEME . "helpdesk.png");
+    define("HDU_LOGO ", THEME . "helpdesk.png");
 } elseif (is_readable(e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png"))
 {
-    define(HDU_LOGO, e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png");
+    define("HDU_LOGO", e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png");
 }
 require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
 $gen = new convert;
