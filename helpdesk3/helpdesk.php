@@ -17,12 +17,16 @@ if (!defined('e107_INIT'))
     exit;
 }
 
-if (!is_object($helpdesk_obj))
+if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {
-    // check if helpdesk class loaded and running, if not create it.
-    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
-    $helpdesk_obj = new helpdesk;
+	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+	$helpdesk_obj = new helpdesk;
 }
+$hdu_aaction = NULL;
+$hdu_text = "";
+$hdu_user = "";
+$hdu_colours = "";
+
 // Check if the user is allowed to use the helpdesk system.  If not display an error message
 // and exit.  helpdesk technicians, supervisors and admin automatically allowed in.
 if (!$helpdesk_obj->hdu_read)
@@ -70,7 +74,7 @@ $hdu_savemsg = $_SESSION['hdu_savemsg'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $from = intval($_POST['from']);
-    $hdu_aaction = $_POST['hdu_aaction'];
+    $hdu_aaction = $_POST['hdu_aaction'] ?? NULL;
     $id = intval($_POST['id']);
     $R1 = $_POST['R1'];
     $hdu_goto = intval($_POST['goto']);
