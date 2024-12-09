@@ -20,7 +20,7 @@ if (!defined("ADMIN_WIDTH"))
 {
     define(ADMIN_WIDTH, "width:100%;");
 }
-print_a($_POST);
+ 
 // If updating then update prefs and tell user
 //$sql->db_Select("hdu_prefs", "*");
 if (e_QUERY == "update")
