@@ -20,9 +20,9 @@ if (!defined("ADMIN_WIDTH"))
 {
     define(ADMIN_WIDTH, "width:100%;");
 }
-
+print_a($_POST);
 // If updating then update prefs and tell user
-$sql->db_Select("hdu_prefs", "*");
+//$sql->db_Select("hdu_prefs", "*");
 if (e_QUERY == "update")
 {
     // Get the existing pref id for updating
@@ -30,19 +30,19 @@ if (e_QUERY == "update")
     $HELPDESK_PREF['hduprefs_mailhelpdesk'] = intval($_POST['hduprefs_mailhelpdesk']);
     $HELPDESK_PREF['hduprefs_mailtechnician'] = intval($_POST['hduprefs_mailtechnician']);
     $HELPDESK_PREF['hduprefs_mailuser'] = intval($_POST['hduprefs_mailuser']);
-    $HELPDESK_PREF['hduprefs_helpdeskemail'] = $tp->toDB($_POST['hduprefs_helpdeskemail']);
+   // $HELPDESK_PREF['hduprefs_helpdeskemail'] = $tp->toDB($_POST['hduprefs_helpdeskemail']); not used
     $HELPDESK_PREF['hduprefs_usersubject'] = $tp->toDB($_POST['hduprefs_usersubject']) ;
-    $HELPDESK_PREF['hduprefs_techniciansubject'] = $tp->toDB($_POST['hduprefs_techniciansubject']) ;
+   // $HELPDESK_PREF['hduprefs_techniciansubject'] = $tp->toDB($_POST['hduprefs_techniciansubject']) ; not used
     $HELPDESK_PREF['hduprefs_helpupsubject'] = $tp->toDB($_POST['hduprefs_helpupsubject']);
-    $HELPDESK_PREF['hduprefs_technicianupsubject'] = $tp->toDB($_POST['hduprefs_technicianupsubject']);
+   // $HELPDESK_PREF['hduprefs_technicianupsubject'] = $tp->toDB($_POST['hduprefs_technicianupsubject']); not used
     $HELPDESK_PREF['hduprefs_userupsubject'] = $tp->toDB($_POST['hduprefs_userupsubject']);
     $HELPDESK_PREF['hduprefs_emailfrom'] = $tp->toDB($_POST['hduprefs_emailfrom']) ;
-    $HELPDESK_PREF['hduprefs_sendas'] = $tp->toDB($_POST['hduprefs_sendas']) ;
+   // $HELPDESK_PREF['hduprefs_sendas'] = $tp->toDB($_POST['hduprefs_sendas']) ; not used
     $HELPDESK_PREF['hduprefs_usertext'] = $tp->toDB($_POST['hduprefs_usertext']) ;
-    $HELPDESK_PREF['hduprefs_techniciantext'] = $tp->toDB($_POST['hduprefs_techniciantext']) ;
+    //$HELPDESK_PREF['hduprefs_techniciantext'] = $tp->toDB($_POST['hduprefs_techniciantext']) ; not used
     $HELPDESK_PREF['hduprefs_helpdesktext'] = $tp->toDB($_POST['hduprefs_helpdesktext']) ;
     $HELPDESK_PREF['hduprefs_updateuser'] = $tp->toDB($_POST['hduprefs_updateuser']) ;
-    $HELPDESK_PREF['hduprefs_updatetechnician'] = $tp->toDB($_POST['hduprefs_updatetechnician']) ;
+  //  $HELPDESK_PREF['hduprefs_updatetechnician'] = $tp->toDB($_POST['hduprefs_updatetechnician']) ; not used
     $HELPDESK_PREF['hduprefs_updatehelpdesk'] = $tp->toDB($_POST['hduprefs_updatehelpdesk']);
     $HELPDESK_PREF['hduprefs_helpdesksubject'] = $tp->toDB($_POST['hduprefs_helpdesksubject']);
     $HELPDESK_PREF['hduprefs_pmfrom'] = intval($_POST['hduprefs_pmfrom']) ;
