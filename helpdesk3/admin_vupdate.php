@@ -10,7 +10,7 @@ if (!getperms("P"))
     exit;
 }
 
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/eversion/" . e_LANGUAGE . "_eversion.php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/eversion/" . e_LANGUAGE . "_eversion.php");
 require_once(e_ADMIN . "auth.php");
 if (!defined("ADMIN_WIDTH"))
 {

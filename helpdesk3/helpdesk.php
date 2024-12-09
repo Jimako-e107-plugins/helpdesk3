@@ -20,7 +20,7 @@ if (!defined('e107_INIT'))
 if (!is_object($helpdesk_obj))
 {
     // check if helpdesk class loaded and running, if not create it.
-    require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_class.php");
+    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
     $helpdesk_obj = new helpdesk;
 }
 // Check if the user is allowed to use the helpdesk system.  If not display an error message
@@ -35,8 +35,8 @@ if (!$helpdesk_obj->hdu_read)
     exit();
 }
 // for tooltip popup
-$eplug_js[] = e_PLUGIN . 'helpdesk3_menu/includes/plain/hdu_pop.js';
-$eplug_css[] = e_PLUGIN . 'helpdesk3_menu/includes/plain/hdu_pop.css';
+$eplug_js[] = e_PLUGIN . HELPDESK_FOLDER . "/includes/plain/hdu_pop.js";
+$eplug_css[] = e_PLUGIN . HELPDESK_FOLDER . "/includes/plain/hdu_pop.css";
 // get the template  from themes, if not then use default
 if (is_readable(THEME . "helpdesk_template.php"))
 {
@@ -44,17 +44,17 @@ if (is_readable(THEME . "helpdesk_template.php"))
 }
 else
 {
-    define(HDU_THEME, e_PLUGIN . "helpdesk3_menu/templates/helpdesk_template.php");
+    define(HDU_THEME, e_PLUGIN . HELPDESK_FOLDER . "/templates/helpdesk_template.php");
 }
 // get logo from theme, if not see if there is a default, if not then not using logo
 if (is_readable(THEME . "helpdesk.png"))
 {
     define(HDU_LOGO, THEME . "helpdesk.png");
-} elseif (is_readable(e_PLUGIN . "helpdesk3_menu/images/helpdesk.png"))
+} elseif (is_readable(e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png"))
 {
-    define(HDU_LOGO, e_PLUGIN . "helpdesk3_menu/images/helpdesk.png");
+    define(HDU_LOGO, e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png");
 }
-require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_shortcodes.php");
+require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
 $gen = new convert;
 // *
 // set show and id to 0
@@ -199,7 +199,7 @@ switch ($hdu_aaction)
                 $hdu_savemsg .= HDU_50 . " $hdu_result<br />";
         } // switch
         $_SESSION['hdu_savemsg'] = $hdu_savemsg;
-        $location = SITEURL . $PLUGINS_DIRECTORY . 'helpdesk3_menu/helpdesk.php';
+        $location = SITEURL . $PLUGINS_DIRECTORY . HELPDESK_FOLDER . "/helpdesk.php";
         header('Location:' . $location);
         break;
 

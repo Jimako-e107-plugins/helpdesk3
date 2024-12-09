@@ -23,7 +23,7 @@ $hdu_text .= "
 		</tr>
 		<tr>
 			<td style='vertical-align:top;' class='forumheader3' colspan = '2' >
-				<a href='".e_PLUGIN."helpdesk3_menu/helpdesk.php?$from.show.$id'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a>&nbsp;
+				<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.show.$id'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>

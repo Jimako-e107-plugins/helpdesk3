@@ -32,7 +32,7 @@ $eplug_latest = TRUE;
 $eplug_status = TRUE;
 
 // Name of the plugin's folder -------------------------------------------------------------------------------------
-$eplug_folder = 'helpdesk3_menu';
+$eplug_folder = 'helpdesk3';
 
 // Mane of menu item for plugin ----------------------------------------------------------------------------------
 $eplug_menu_name = '';
@@ -43,7 +43,7 @@ $eplug_conffile = 'admin_config.php';
 // Icon image and caption text ------------------------------------------------------------------------------------
 $eplug_icon = $eplug_folder.'/images/hdu_32.png';
 $eplug_icon_small = $eplug_folder.'/images/hdu_16.png';
-$eplug_caption =  'Helpdesk 3.2';
+$eplug_caption =  'Helpdesk 4.0';
 
 // List of preferences -----------------------------------------------------------------------------------------------
 $eplug_prefs = '';
@@ -63,7 +63,7 @@ array_pop($eplug_tables); // Get rid of last (empty) entry
 // Create a link in main menu (yes=TRUE, no=FALSE) -------------------------------------------------------------
 $eplug_link = TRUE;
 $eplug_link_name = 'Helpdesk';
-$eplug_link_url = e_PLUGIN.'helpdesk3_menu/helpdesk.php';
+$eplug_link_url = e_PLUGIN. "helpdesk3/helpdesk.php";
 
 
 // Text to display after plugin successfully installed ------------------------------------------------------------------
@@ -83,9 +83,9 @@ $upgrade_alter_tables = array(
 );
 
 $eplug_upgrade_done = '';
-if (!function_exists('helpdesk3_menu_uninstall'))
+if (!function_exists('helpdesk3_uninstall'))
 {
-    function helpdesk3_menu_uninstall()
+    function helpdesk3_uninstall()
     {
         global $sql;
         $sql->db_Delete('core', ' e107_name="helpdesk" ');

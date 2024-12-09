@@ -1,6 +1,6 @@
 <?php
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/admin/" . e_LANGUAGE . ".php");
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/" . e_LANGUAGE . ".php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . ".php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . ".php");
 
 $return_fields = 't.hdu_id,t.hdu_description,t.hdu_datestamp,t.hdu_poster,t.hdu_summary,x.hducat_category,y.hdures_resolution';
 $search_fields = array('t.hdu_poster', 't.hdu_description','t.hdu_summary', "x.hducat_category", "y.hdures_resolution");
@@ -23,7 +23,7 @@ function search_helpdesk($row)
 
     $link_id = $row['hdu_id'];
     $dept = $row['dept_id'];
-    $res['link'] = e_PLUGIN . "helpdesk3_menu/helpdesk.php?0.show." . $link_id . "";
+    $res['link'] = e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.show." . $link_id . "";
     $res['pre_title'] = $title ?HDU_201 . " " : "";
     $res['title'] = $title ? $title : LAN_SEARCH_9;
     $hdu_post = explode(".", $row['hdu_poster']);

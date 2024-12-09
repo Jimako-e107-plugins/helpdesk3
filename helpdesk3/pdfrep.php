@@ -37,7 +37,7 @@ define('FPDF_FONTPATH', e_PLUGIN.'pdf/font/');
 require(e_PLUGIN.'pdf/ufpdf.php');
 
 
-require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_class.php");
+require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
 if (!is_object($helpdesk_obj))
 {
     $helpdesk_obj = new helpdesk;
@@ -46,8 +46,8 @@ if (!is_object($helpdesk_obj))
 switch ($_GET['hdu_repselection'])
 {
     case 1:
-        require_once(e_PLUGIN . "helpdesk3_menu/reports/report1.php");
+        require_once(e_PLUGIN . HELPDESK_FOLDER . "/reports/report1.php");
         break;
     default:
-        require_once(e_PLUGIN . "helpdesk3_menu/reports/report0.php");
+        require_once(e_PLUGIN . HELPDESK_FOLDER . "/reports/report0.php");
 } // switch

@@ -6,7 +6,7 @@ require(e_PLUGIN . 'pdf/ufpdf.php');
 
 if (!is_object($helpdesk_obj))
 {
-    require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_class.php");
+    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
     $helpdesk_obj = new helpdesk;
 }
 

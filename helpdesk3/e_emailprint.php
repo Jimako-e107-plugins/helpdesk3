@@ -11,8 +11,8 @@ function print_item($id)
     $hdu_drate, $hdu_dcost, $hdu_eqptcost, $hdu_callout, $hduc_date, $hduc_postername, $hduc_comment, $hdu_priority, $hdu_savemsg, $hdu_totalcost,
     $hdupostername;
 
-    require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_class.php");
-    require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_shortcodes.php");
+    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
     if (!is_object($helpdesk_obj))
     {
         $helpdesk_obj = new helpdesk;
@@ -28,7 +28,7 @@ function print_item($id)
     }
     else
     {
-        define(HDU_TEMPLATE, e_PLUGIN . "helpdesk3_menu/templates/helpdesk_print_template.php");
+        define(HDU_TEMPLATE, e_PLUGIN . HELPDESK_FOLDER . "/templates/helpdesk_print_template.php");
     }
     if (!isset($gen))
     {
@@ -62,7 +62,7 @@ select * from #hdunit
 function email_item($id)
 {
     global $tp, $sql;
-    require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_class.php");
+    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
     if (!is_object($helpdesk_obj))
     {
         $helpdesk_obj = new helpdesk;
@@ -75,7 +75,7 @@ function email_item($id)
 		where hdu_id = $id";
     $sql->db_Select_gen($hdu_arg, false);
     $row = $sql->db_Fetch();
-    $hdu_message = HDU_235 . "<br /><br />" . HDU_238 . " <a href='" . SITEURL . e_PLUGIN . "helpdesk3_menu/helpdesk.php?0.show.$id'>" . HDU_239 . "</a><br /><br />";
+    $hdu_message = HDU_235 . "<br /><br />" . HDU_238 . " <a href='" . SITEURL . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.show.$id'>" . HDU_239 . "</a><br /><br />";
     $hdu_message .= "<br /><br />" . HDU_236 . " <b>" . $tp->toHTML($row['hdu_summary']) . "</b> " . HDU_237 . " <b>$id</b><br />" ;
     return $hdu_message;
 }

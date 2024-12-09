@@ -45,7 +45,7 @@ SC_BEGIN HDU_NEWTICKET
 global $helpdesk_obj,$show;
 if ($helpdesk_obj->hdu_poster)
 {
-	return "<a href ='".e_PLUGIN."helpdesk3_menu/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
+	return "<a href ='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
 }
 else
 {
@@ -57,7 +57,7 @@ SC_BEGIN HDU_REPORTS
 global $helpdesk_obj,$from,$id;
 if ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
 {
-    return "<a href ='".e_PLUGIN."helpdesk3_menu/helpdesk.php?$from.repmenu.$id' ><img src='".e_PLUGIN."helpdesk3_menu/images/print.gif' style='border:0;' alt='' title='" . HDU_101 . "' /></a>";
+    return "<a href ='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.repmenu.$id' ><img src='".e_PLUGIN.HELPDESK_FOLDER . "/images/print.gif' style='border:0;' alt='' title='" . HDU_101 . "' /></a>";
 }
 SC_END
 
@@ -92,7 +92,7 @@ SC_END
 
 SC_BEGIN HDU_TICKET_SUMMARY
 global $tp, $hdu_id, $hdu_summary,$from;
-return "<a href ='".e_PLUGIN."helpdesk3_menu/helpdesk.php?$from.show." . $hdu_id  . "' > " . $tp->toFORM($hdu_summary) . "</a>";
+return "<a href ='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.show." . $hdu_id  . "' > " . $tp->toFORM($hdu_summary) . "</a>";
 SC_END
 
 SC_BEGIN HDU_TICKET_POSTED
@@ -169,7 +169,7 @@ SC_END
 
 SC_BEGIN HDU_SHOW_UPDIR
 global $id, $R1,$from;
-return "<a href='".e_PLUGIN."helpdesk3_menu/helpdesk.php?$from.list.$id'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a>";
+return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.list.$id'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a>";
 SC_END
 
 
@@ -200,7 +200,7 @@ SC_BEGIN HDU_SHOW_PDF
 global $helpdesk_obj, $id, $R1,$from;
 if (!$helpdesk_obj->hdu_new )
 {
-    return "<a href='".e_PLUGIN."helpdesk3_menu/helpdesk.php?$from.print.$id'><img src='" . e_PLUGIN."helpdesk3_menu/images/pdf_16.png' alt='" . HDU_229 . "' title='" . HDU_229 . "' style='border:0;' /></a>";
+    return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.print.$id'><img src='" . e_PLUGIN.HELPDESK_FOLDER . "/images/pdf_16.png' alt='" . HDU_229 . "' title='" . HDU_229 . "' style='border:0;' /></a>";
 }
 else
 {
@@ -378,7 +378,7 @@ SC_BEGIN HDU_SHOW_DELETE
 global $helpdesk_obj,$id,$from;
 if (!$helpdesk_obj->hdu_new && $helpdesk_obj->hdu_super)
 {
-	return "<a href='".e_PLUGIN."helpdesk3_menu/helpdesk.php?$from.delete.$id' ><img src='".e_IMAGE."admin_images/delete_16.png' style='border:0px;' alt='".HDU_228."' title='".HDU_228."' /></a>";
+	return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.delete.$id' ><img src='".e_IMAGE."admin_images/delete_16.png' style='border:0px;' alt='".HDU_228."' title='".HDU_228."' /></a>";
 }
 else
 {

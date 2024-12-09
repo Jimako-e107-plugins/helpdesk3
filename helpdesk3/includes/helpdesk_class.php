@@ -1,7 +1,7 @@
 <?php
 
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/" . e_LANGUAGE . "_helpdesk.php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . "_helpdesk.php");
 require_once(e_HANDLER . "userclass_class.php");
 class helpdesk
 {
@@ -274,7 +274,7 @@ class helpdesk
     {
         global $e107cache;
         // $e107cache->clear("nq_helpdesktop_menu");
-        $e107cache->clear("nq_helpdesk3_menu");
+        $e107cache->clear("nq_helpdesk3");
         // $e107cache->clear("nq_helpdesknew_menu");
     }
     // **********************************************************************************************
@@ -1308,7 +1308,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                 if ($this->hduprefs_mailpdf)
                 {
                     require_once("pdfit.php");
-                    pdfit($hdu_recno, "f", "Helpdesk", e_PLUGIN . "helpdesk3_menu/pdfout/" . "helpdesk" . $hdu_recno . ".pdf", "A4");
+                    pdfit($hdu_recno, "f", "Helpdesk", e_PLUGIN . HELPDESK_FOLDER . "/pdfout/" . "helpdesk" . $hdu_recno . ".pdf", "A4");
                     $this->hdu_notify($id, $this->hdu_new);
                 }
                 else
@@ -1391,13 +1391,13 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                 $hdu_message1 = $tp->toFORM(($hdu_notifyaction? $this->hduprefs_usertext:$this->hduprefs_updateuser)) . "<br /><br />";
                 $hdu_message1 .= HDU_44 . "<br /><br />";
                 $hdu_plugloc = SITEURL . $PLUGINS_DIRECTORY;
-                $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . "helpdesk3_menu/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
+                $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . HELPDESK_FOLDER . "/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
                 $hdu_message1 .= HDU_43 . "<br /><br />";
                 $hdu_subject = $tp->toFORM(($hdu_notifyaction?$this->hduprefs_usersubject:$this->hduprefs_userupsubject));
                 if ($this->hduprefs_mailpdf)
                 {
                     // Do we send ticket as a pdf
-                    if (sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . "helpdesk3_menu/pdfout/helpdesk" . $hdu_notifyid . ".pdf"))
+                    if (sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . HELPDESK_FOLDER . "/pdfout/helpdesk" . $hdu_notifyid . ".pdf"))
                     {
                         $hdu_msg .= HDU_46 . " $hdu_email<br />";
                     }
@@ -1429,7 +1429,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                 $hdu_message1 = "<hr />" . $tp->toFORM(($hdu_notifyaction? $this->hduprefs_usertext:$this->hduprefs_updateuser)) . "<br /><br />";
                 $hdu_message1 .= HDU_44 . "<br /><br />";
                 $hdu_plugloc = SITEURL . $PLUGINS_DIRECTORY;
-                $hdu_message1 .= HDU_22 . " <a href='" . $hdu_plugloc . "helpdesk3_menu/helpdesk.php?0.show.{$hdu_notifyid }' >" . HDU_209 . "</a><br /><br />";
+                $hdu_message1 .= HDU_22 . " <a href='" . $hdu_plugloc . HELPDESK_FOLDER . "/helpdesk.php?0.show.{$hdu_notifyid }' >" . HDU_209 . "</a><br /><br />";
                 $hdu_message1 .= HDU_43 . "<br /><br /><hr />";
                 $hdu_subject = $tp->toFORM(($hdu_notifyaction?$this->hduprefs_usersubject:$this->hduprefs_userupsubject));
                 $hdu_vars['pm_subject'] = $hdu_subject;
@@ -1483,7 +1483,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     $hdu_message1 = $tp->toFORM(($hdu_notifyaction? $this->hduprefs_helpdesktext:$this->hduprefs_updatehelpdesk)) . "<br /><br />";
                     $hdu_message1 .= HDU_44 . "<br /><br />";
                     $hdu_plugloc = SITEURL . $PLUGINS_DIRECTORY;
-                    $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . "helpdesk3_menu/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
+                    $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . HELPDESK_FOLDER . "/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
                     $hdu_message1 .= HDU_43 . "<br /><br />";
                     $hdu_subject = $tp->toFORM(($hdu_notifyaction?$this->hduprefs_helpdesksubject:$this->hduprefs_helpupsubject));
                     // Get all the members of the class for this helpdesk and email each one
@@ -1500,7 +1500,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     if ($this->hduprefs_mailpdf)
                     {
                         // print " uemail - $user_email ";
-                        sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . "helpdesk3_menu/pdfout/helpdesk" . $hdu_notifyid . ".pdf");
+                        sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . HELPDESK_FOLDER . "/pdfout/helpdesk" . $hdu_notifyid . ".pdf");
                     }
                     else
                     {
@@ -1518,7 +1518,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     $hdu_message1 = $tp->toFORM(($hdu_newing?$hduprefs_helpdesktext:$hduprefs_updatehelpdesk)) . "<br /><br />";
                     $hdu_message1 .= HDU_44 . "<br /><br />";
                     $hdu_plugloc = SITEURL . $PLUGINS_DIRECTORY;
-                    $hdu_message1 .= HDU_22 . " <a href='" . $hdu_plugloc . "helpdesk3_menu/helpdesk.php?0.show.{$hdu_notifyid }' >" . HDU_209 . "</a><br /><br />";
+                    $hdu_message1 .= HDU_22 . " <a href='" . $hdu_plugloc . HELPDESK_FOLDER . "/helpdesk.php?0.show.{$hdu_notifyid }' >" . HDU_209 . "</a><br /><br />";
                     $hdu_message1 .= HDU_43 . "<br /><br /><hr />";
                     $hdu_subject = $tp->toFORM(($hdu_notifyaction?$this->hduprefs_helpdesksubject:$this->hduprefs_helpupsubject));
                     // $hdu_mailarg = "select user_id,user_email,user_class from #user where find_in_set('$hdudesk_class',user_class)";
@@ -1584,7 +1584,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     $hdu_message1 = $tp->toFORM(($hdu_notifyaction? $this->hduprefs_helpdesktext:$this->hduprefs_updatehelpdesk)) . "<br /><br />";
                     $hdu_message1 .= HDU_44 . "<br /><br />";
                     $hdu_plugloc = SITEURL . $PLUGINS_DIRECTORY;
-                    $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . "helpdesk3_menu/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
+                    $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . HELPDESK_FOLDER . "/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
                     $hdu_message1 .= HDU_43 . "<br /><br />";
                     $hdu_subject = $tp->toFORM(($hdu_notifyaction?$this->hduprefs_helpdesksubject:$this->hduprefs_helpupsubject));
                     $hdu_technician_class = $hdu_a_tech;
@@ -1592,7 +1592,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     if ($this->hduprefs_mailpdf)
                     {
                         // print " uemail - $user_email ";
-                        sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . "helpdesk3_menu/pdfout/helpdesk" . $hdu_notifyid . ".pdf");
+                        sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . HELPDESK_FOLDER . "/pdfout/helpdesk" . $hdu_notifyid . ".pdf");
                     }
                     else
                     {
@@ -1610,7 +1610,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     $hdu_message1 = $tp->toFORM(($hdu_newing?$hduprefs_helpdesktext:$hduprefs_updatehelpdesk)) . "<br /><br />";
                     $hdu_message1 .= HDU_44 . "<br /><br />";
                     $hdu_plugloc = SITEURL . $PLUGINS_DIRECTORY;
-                    $hdu_message1 .= HDU_22 . " <a href='" . $hdu_plugloc . "helpdesk3_menu/helpdesk.php?0.show.{$hdu_notifyid }' >" . HDU_209 . "</a><br /><br />";
+                    $hdu_message1 .= HDU_22 . " <a href='" . $hdu_plugloc . HELPDESK_FOLDER . "/helpdesk.php?0.show.{$hdu_notifyid }' >" . HDU_209 . "</a><br /><br />";
                     $hdu_message1 .= HDU_43 . "<br /><br /><hr />";
                     $hdu_subject = $tp->toFORM(($hdu_notifyaction?$this->hduprefs_helpdesksubject:$this->hduprefs_helpupsubject));
                     // $hdu_mailarg = "select user_id,user_email,user_class from #user where find_in_set('$hdudesk_class',user_class)";
@@ -1639,14 +1639,14 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
             $hdu_message1 = $tp->toFORM(($hdu_notifyaction? $this->hduprefs_helpdesktext:$this->hduprefs_updatehelpdesk)) . "<br /><br />";
             $hdu_message1 .= HDU_44 . "<br /><br />";
             $hdu_plugloc = SITEURL . $PLUGINS_DIRECTORY;
-            $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . "helpdesk3_menu/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
+            $hdu_message1 .= HDU_22 . "<a href='" . $hdu_plugloc . HELPDESK_FOLDER . "/helpdesk.php?0.show.$hdu_notifyid '>" . HDU_209 . "</a><br /><br />";
             $hdu_message1 .= HDU_43 . "<br /><br />";
             $hdu_subject = $tp->toFORM(($hdu_notifyaction?$this->hduprefs_helpdesksubject:$this->hduprefs_helpupsubject));
             $user_email = $hdudesk_email;
             if ($this->hduprefs_mailpdf)
             {
                 // print " uemail - $user_email ";
-                sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . "helpdesk3_menu/pdfout/helpdesk" . $hdu_notifyid . ".pdf");
+                sendemail($user_email, $hdu_subject . "- [$hdu_id]", $hdu_message1, $user_name, $hdudesk_email, $this->hduprefs_emailfrom . " " . $hdudesk_name, e_PLUGIN . HELPDESK_FOLDER . "/pdfout/helpdesk" . $hdu_notifyid . ".pdf");
             }
             else
             {
@@ -1761,10 +1761,10 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
         // $modules = apache_get_modules();
         if ($HELPDESK_PREF['hduprefs_seo'] == 1)
         {
-            $patterns[0] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk3_menu\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+).([0-9]+)/';
-            $patterns[1] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk3_menu\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+)/';
-            $replacements[0] = '/helpdesk3_menu/helpdesk-$1-$2-$3-$4.html';
-            $replacements[1] = '/helpdesk3_menu/helpdesk-$1-$2-$3.html';
+            $patterns[0] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk3\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+).([0-9]+)/';
+            $patterns[1] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk3\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+)/';
+            $replacements[0] = '/helpdesk3/helpdesk-$1-$2-$3-$4.html';
+            $replacements[1] = '/helpdesk3/helpdesk-$1-$2-$3.html';
 
             $text = preg_replace($patterns, $replacements, $text);
         }

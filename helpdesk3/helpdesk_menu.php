@@ -3,7 +3,7 @@ if (!defined('e107_INIT'))
 {
     exit;
 }
-if ($cacheData = $e107cache->retrieve("nq_helpdesk3_menu"))
+if ($cacheData = $e107cache->retrieve("nq_helpdesk3"))
 {
     echo $cacheData;
     return;
@@ -12,12 +12,12 @@ if ($cacheData = $e107cache->retrieve("nq_helpdesk3_menu"))
 global $helpdesk_obj;
 if (!is_object($helpdesk_obj))
 {
-    require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_class.php");
+    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
     $helpdesk_obj = new helpdesk;
 }
 if ($helpdesk_obj->hdu_read)
 {
-$hurl=e_PLUGIN.'helpdesk3_menu/helpdesk.php';
+$hurl=e_PLUGIN. HELPDESK_FOLDER . "/helpdesk.php";
     // Get the counts for each of the three display items, total, open, not assigned
     // $hdu_totcount = $sql->db_Count("hdunit", "(*)");
     // $hdu_opencount = $sql->db_Count("hdunit", "(*)", "where hdu_closed=0");
@@ -47,6 +47,6 @@ $hurl=e_PLUGIN.'helpdesk3_menu/helpdesk.php';
     ob_start(); // Set up a new output buffer
     $helpdesk_obj->tablerender($helpdesk_obj->hduprefs_menutitle, $hdu_text, 'hdu_menu'); // Render the menu
     $cache_data = ob_get_flush(); // Get the menu content, and display it
-    $e107cache->set("nq_helpdesk3_menu", $cache_data); // Save to cache
+    $e107cache->set("nq_helpdesk3", $cache_data); // Save to cache
 
 }

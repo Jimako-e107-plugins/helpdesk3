@@ -3,6 +3,10 @@ if (!defined('e107_INIT'))
 {
     exit;
 }
+
+require(e_PLUGIN."helpdesk3/heldesk_defines.php");
+
+
 $e_event->register("postuserset", "helpdesk3_menu_postuserset");
 
 function helpdesk3_menu_postuserset($data)

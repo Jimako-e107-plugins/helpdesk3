@@ -14,8 +14,8 @@ if (!getperms("P"))
     header("location:" . e_HTTP . "index.php");
     exit;
 }
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/readme/" . e_LANGUAGE . "_helpdesk_readme.php");
-require_once(e_PLUGIN . "helpdesk3_menu/plugin.php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/readme/" . e_LANGUAGE . "_helpdesk_readme.php");
+require_once(e_PLUGIN . HELPDESK_FOLDER . "/plugin.php");
 require_once(e_ADMIN . "auth.php");
 if (!defined('ADMIN_WIDTH'))
 {

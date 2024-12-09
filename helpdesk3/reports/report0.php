@@ -9,9 +9,9 @@ class HDU_PDF extends UFPDF
 
         global $hdu_now, $hdu_title, $hdu_siteurl, $hdu_subtitle;
         // Logo
-        if (file_exists(e_PLUGIN . "helpdesk3_menu/images/logo_hd.png"))
+        if (file_exists(e_PLUGIN . HELPDESK_FOLDER . "/images/logo_hd.png"))
         {
-            $this->Image(e_PLUGIN . "helpdesk3_menu/images/logo_hd.png", 10, 8, 33, '', '', $hdu_siteurl);
+            $this->Image(e_PLUGIN . HELPDESK_FOLDER . "/images/logo_hd.png", 10, 8, 33, '', '', $hdu_siteurl);
         }
         // Arial bold 15
         $this->SetFont('Arial', 'B', 15);

@@ -10,10 +10,10 @@ if (!getperms("P"))
     header("location:" . e_BASE . "index.php");
     exit;
 }
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
 if (!is_object($helpdesk_obj))
 {
-    require_once(e_PLUGIN . "helpdesk3_menu/includes/helpdesk_class.php");
+    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
     $helpdesk_obj = new helpdesk;
 }
 

@@ -36,7 +36,7 @@ $hdu_text .= "
 			<td class='fcaption' colspan='2'>" . HDU_126 . "</td>
 		</tr>
 		<tr>
-			<td style='vertical-align:top;' class='forumheader3' colspan = '2' ><a href='" . e_PLUGIN . "helpdesk3_menu/helpdesk.php?0.list.0'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a></td>
+			<td style='vertical-align:top;' class='forumheader3' colspan = '2' ><a href='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.list.0'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a></td>
 		</tr>
 		<tr>
 			<td class='forumheader3' colspan='2'>" . HDU_127 . "</td>

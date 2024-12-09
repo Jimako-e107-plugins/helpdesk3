@@ -1,5 +1,5 @@
 <?php
-include_lan(e_PLUGIN . "helpdesk3_menu/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
+include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
 
 $action = basename($_SERVER['PHP_SELF'], ".php");
 $text = "<table width='100%' class='fborder'>";
