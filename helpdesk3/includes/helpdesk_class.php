@@ -978,8 +978,10 @@ function changed()
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
             {
                 $hdu_retval .= $tp->parseTemplate($HDU_SHOWTICKET_COMMENT_HEADER, false, $hdu_shortcodes);
-                $sql->db_Select("hdu_comments", "*", "where hduc_ticketid='$hdu_showid' order by hduc_date asc", "nowhere", false);
-                while ($hducrow = $sql->db_Fetch())
+		
+				$where = " hduc_ticketid='$hdu_showid' order by hduc_date asc";
+				$hducrows = e107::getDb()->retrieve("hdu_comments", "*", $where, true);
+				foreach($hducrows AS $hducrow)
                 {
                     extract($hducrow);
                     $hduc_poster = explode(".", $hduc_poster);
