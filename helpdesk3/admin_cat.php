@@ -10,19 +10,26 @@ if (!getperms("P"))
     exit;
 }
 include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
-if (!is_object($helpdesk_obj))
+if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {
-require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
-    $helpdesk_obj = new helpdesk;
+	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+	$helpdesk_obj = new helpdesk;
 }
+
 
 require_once(e_ADMIN . "auth.php");
 if (!defined("ADMIN_WIDTH"))
 {
     define(ADMIN_WIDTH, "width:100%;");
 }
+
+$hdu_msg = "";
+$hdu_ac_text = "";
+$hdu_ac_catopt = "";
+$hdu_ed = false;
+
 // Check that valid user class to do this if not tell them
-$hdu_ac_action = $_POST['hdu_ac_action'];
+$hdu_ac_action = $_POST['hdu_ac_action'] ?? null;
 // * If we are updating then update or insert the record
 if ($hdu_ac_action == 'update')
 {
@@ -199,6 +206,7 @@ if ($hdu_ac_action == 'dothings')
 </form>";
     }
 }
+
 if (!$hdu_ed)
 {
     // Get the category names to display in combo box

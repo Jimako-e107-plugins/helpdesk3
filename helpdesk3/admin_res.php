@@ -11,18 +11,25 @@ if (!getperms("P"))
 }
 
 include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
-if (!is_object($helpdesk_obj))
+if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {
-    require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
-    $helpdesk_obj = new helpdesk;
+	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+	$helpdesk_obj = new helpdesk;
 }
+
+$hdu_msg = "";
+$hdu_text = "";
+$hdu_ac_catopt = "";
+$hdu_ac_text = "";
+$hdu_ed = false;
+
 require_once(e_ADMIN . "auth.php");
 if (!defined("ADMIN_WIDTH"))
 {
     define(ADMIN_WIDTH, "width:100%;");
 }
 
-$hdu_ac_action = $_POST['hdu_ac_action'];
+$hdu_ac_action = $_POST['hdu_ac_action'] ?? null;;
 // * If we are updating then update or insert the record
 if ($hdu_ac_action == 'update')
 {

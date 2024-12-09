@@ -1,4 +1,15 @@
 <?php
+
+if (!isset($id))
+{
+	$id = ''; // Or set a default value
+}
+
+if (!isset($hduprefs_autoclosedays))
+{
+	$hduprefs_autoclosedays = ''; // Or set a default value
+}
+
 define("HDU_REP", "Standard,Financial");
 define("HDU_REPORTTITLE", "Helpdesk Report");
 define("HDU_MONTHS", " ,January,February,March,April,May,June,July,August,September,October,November,December");

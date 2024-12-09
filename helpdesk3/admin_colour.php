@@ -11,11 +11,14 @@ if (!getperms("P"))
 }
 include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
 
-if (!is_object($helpdesk_obj))
+if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {
-require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
-    $helpdesk_obj = new helpdesk;
+	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+	$helpdesk_obj = new helpdesk;
 }
+$hdu_msg = "";
+$hdu_text = "";
+$hdu_msgtext = "";
 
 require_once(e_ADMIN . "auth.php");
 if (!defined("ADMIN_WIDTH"))
