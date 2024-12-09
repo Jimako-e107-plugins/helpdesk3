@@ -27,9 +27,6 @@ $var['admin_fixes']['link'] = "admin_fixes.php";
 
 $var['admin_readme']['text'] = HDU_A352;
 $var['admin_readme']['link'] = "admin_readme.php";
-
-$var['admin_vupdate']['text'] = HDU_A500;
-$var['admin_vupdate']['link'] = "admin_vupdate.php";
-
+ 
 show_admin_menu(HDU_A33, $action, $var);
 ?>
