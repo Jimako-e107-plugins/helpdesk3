@@ -51,7 +51,7 @@ class helpdesk
     var $hduprefs_callout = 0;
     var $hduprefs_autoassign = false;
     var $hduprefs_assigned = 0;
-    var $hduprefs_statcloses = false;
+ //   var $hduprefs_statcloses = false;
     var $hduprefs_reopen = false;
     var $hduprefs_mailuser = 0;
     var $hduprefs_mailhelpdesk = 0;
@@ -111,7 +111,7 @@ class helpdesk
         $this->hduprefs_showassettag = $HELPDESK_PREF['hduprefs_showassettag'] == 1;
         $this->hduprefs_showfixes = $HELPDESK_PREF['hduprefs_showfixes'] == 1;
         $this->hduprefs_autoassign = $HELPDESK_PREF['hduprefs_autoassign'] == 1;
-        $this->hduprefs_statcloses = $HELPDESK_PREF['hduprefs_statcloses'] == 1;
+       // $this->hduprefs_statcloses = $HELPDESK_PREF['hduprefs_statcloses'] == 1;
         $this->hduprefs_reopen = $HELPDESK_PREF['hduprefs_reopen'] == 1;
         $this->hduprefs_mailpdf = $HELPDESK_PREF['hduprefs_mailpdf'] == 1;
         $this->hduprefs_allread = $HELPDESK_PREF['hduprefs_allread'] == 1;
