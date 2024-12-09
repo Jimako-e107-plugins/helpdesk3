@@ -2,6 +2,30 @@
 
 include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
 include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . "_helpdesk.php");
+
+
+$admin_style_fix = '
+tr td.forumheader3:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing between elements */
+    flex-wrap: wrap; /* Allows wrapping if needed */
+}
+
+tr td.forumheader3:nth-of-type(2) input[type="radio"],
+tr td.forumheader3:nth-of-type(2) input[type="checkbox"] {
+    margin-right: 5px; /* Space between input and label */
+}
+
+tr td.forumheader3:nth-of-type(2) label {
+    margin-right: 15px; /* Space between label groups */
+}
+
+';
+
+e107::css('inline', $admin_style_fix);
+
+
 require_once(e_HANDLER . "userclass_class.php");
 class helpdesk
 {
@@ -1337,7 +1361,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
     // *
     // *
     // **********************************************************************************************
-    function hdu_notify($hdu_notifyid = 0, $hdu_notifyaction)
+    function hdu_notify($hdu_notifyid = 0, $hdu_notifyaction = NULL)
     {
         global $tp, $sql, $sql2, $PLUGINS_DIRECTORY, $pref, $sysprefs, $pm_prefs, $HELPDESK_PREF,
         $hdu_up_db, $hdu_msg, $hdu_recno,
@@ -1781,6 +1805,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
             $file = file($hta);
             $skip_line = false;
             unset($new_line);
+			$new_line = array();
             foreach($file as $line)
             {
                 if (strpos($line, '*** HELPDESK REWRITE BEGIN ***') > 0)
