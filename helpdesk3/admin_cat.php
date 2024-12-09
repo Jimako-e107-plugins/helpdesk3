@@ -186,7 +186,7 @@ if ($hdu_ac_action == 'dothings')
         $hdu_ac_text .= "
 		<tr>
 			<td class='forumheader3'>" . HDU_A172 . "</td>
-			<td class='forumheader3'>$hdu_ac_selhelp&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_scat\")' />
+			<td class='forumheader3'>$hdu_ac_selhelp&nbsp;<img src='". HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_scat\")' />
 			<div id='hdu_scat' style='display:none' ><em>" . HDU_A330 . "</em></div></td>
 		</tr>
 				<tr>

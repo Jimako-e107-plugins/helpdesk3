@@ -71,7 +71,7 @@ if (file_exists("plugin.php"))
 
                 if ($evrsn_pcurrent != $evrsn_current)
                 {
-                    $evrsn_text .= "<tr><td class='forumheader3'><img src='" . e_IMAGE . "admin_images/upgrade.png' alt='' title='' /> " . EVERSION_U19 . " <strong>" . $evrsn_pversion . "</strong> " . EVERSION_U20 . "</td></tr>";
+                    $evrsn_text .= "<tr><td class='forumheader3'><img src='" . HELPDESK_IMAGES_PATH . "admin_images/upgrade.png' alt='' title='' /> " . EVERSION_U19 . " <strong>" . $evrsn_pversion . "</strong> " . EVERSION_U20 . "</td></tr>";
                 }
                 $evrsn_nownotbeta = false;
                 // Check if now not beta
@@ -82,7 +82,7 @@ if (file_exists("plugin.php"))
                 if ($evrsn_update > $evrsn_current || $evrsn_nownotbeta)
                 {
                     // if server version greater than installed version
-                    $evrsn_text .= "<tr><td class='forumheader3'><img src='" . e_IMAGE . "admin_images/uninstalled.png' alt='' title='' /> " . EVERSION_U7 . " - <strong>" . $evrsn_serversion . "</strong>";
+                    $evrsn_text .= "<tr><td class='forumheader3'><img src='" . HELPDESK_IMAGES_PATH . "admin_images/uninstalled.png' alt='' title='' /> " . EVERSION_U7 . " - <strong>" . $evrsn_serversion . "</strong>";
                     if ($evrsn_tmpupdate[2] > 0)
                     {
                         // is it a beta version?
@@ -110,7 +110,7 @@ if (file_exists("plugin.php"))
                 else
                 {
                     // It is the latest version
-                    $evrsn_text .= "<tr><td class='forumheader3'><img src='" . e_IMAGE . "admin_images/installed.png' alt='' title='' /> " . EVERSION_U9;
+                    $evrsn_text .= "<tr><td class='forumheader3'><img src='" . HELPDESK_IMAGES_PATH . "admin_images/installed.png' alt='' title='' /> " . EVERSION_U9;
                     $evrsn_text .= "<br /><br />" . EVERSION_U13 . " <a href='" . $evrsn_url . "'>" . EVERSION_U14 . "</a><br /></td></tr>";
                 }
             }

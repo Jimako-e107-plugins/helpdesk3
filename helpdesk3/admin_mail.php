@@ -69,7 +69,7 @@ $hdu_text .= "
 					<option value='0' " . ($HELPDESK_PREF['hduprefs_mailuser'] == 0 ?"selected='selected'":"") . " >" . HDU_A468 . "</option>
 					<option value='1' " . ($HELPDESK_PREF['hduprefs_mailuser'] == 1 ?"selected='selected'":"") . " >" . HDU_A469 . "</option>
 					<option value='2' " . ($HELPDESK_PREF['hduprefs_mailuser'] == 2 ?"selected='selected'":"") . " >" . HDU_A470 . "</option>
-				</select>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_muser\")' />
+				</select>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_muser\")' />
 				<div id='hdu_muser' style='display:none' ><em>" . HDU_A340 . "</em></div>
 			</td>
 		</tr>";
@@ -82,7 +82,7 @@ $hdu_text .= "
 					<option value='0' " . ($HELPDESK_PREF['hduprefs_mailhelpdesk'] == 0 ?"selected='selected'":"") . " >" . HDU_A468 . "</option>
 					<option value='1' " . ($HELPDESK_PREF['hduprefs_mailhelpdesk'] == 1 ?"selected='selected'":"") . " >" . HDU_A469 . "</option>
 					<option value='2' " . ($HELPDESK_PREF['hduprefs_mailhelpdesk'] == 2 ?"selected='selected'":"") . " >" . HDU_A470 . "</option>
-				</select>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_mdesk\")' />
+				</select>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_mdesk\")' />
 				<div id='hdu_mdesk' style='display:none' ><em>" . HDU_A506 . "</em></div>
 			</td>
 		</tr>";
@@ -94,7 +94,7 @@ $hdu_text .= "
 					<option value='0' " . ($HELPDESK_PREF['hduprefs_mailtechnician'] == 0 ?"selected='selected'":"") . " >" . HDU_A468 . "</option>
 					<option value='1' " . ($HELPDESK_PREF['hduprefs_mailtechnician'] == 1 ?"selected='selected'":"") . " >" . HDU_A469 . "</option>
 					<option value='2' " . ($HELPDESK_PREF['hduprefs_mailtechnician'] == 2 ?"selected='selected'":"") . " >" . HDU_A470 . "</option>
-				</select>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_tdesk\")' />
+				</select>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_tdesk\")' />
 				<div id='hdu_tdesk' style='display:none' ><em>" . HDU_A341 . "</em></div>
 			</td>
 		</tr>";
@@ -113,7 +113,7 @@ while ($hdu_row = $sql->db_Fetch())
     extract($hdu_row);
     $hdu_ul .= "<option value='$user_id' " . ($user_id == $HELPDESK_PREF['hduprefs_pmfrom']?"selected='selected'":"") . ">" . $tp->toFORM($user_name) . "</option>";
 } // while
-$hdu_ul .= "</select>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_pmfo\")' />";
+$hdu_ul .= "</select>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_pmfo\")' />";
 $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A471 . "</td>
@@ -126,7 +126,7 @@ $hdu_text .= "
 		<tr>
  			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A121 . "</td>
  			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-			 	<input type='text' size='50' class='tbox' name='hduprefs_emailfrom' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_emailfrom']) . "' />&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_efro\")' />
+			 	<input type='text' size='50' class='tbox' name='hduprefs_emailfrom' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_emailfrom']) . "' />&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_efro\")' />
 				<div id='hdu_efro' style='display:none' ><em>" . HDU_A342 . "</em></div>
 			</td>
 	 	</tr>";
@@ -138,7 +138,7 @@ $hdu_text .= "
 				<input type='radio' style='border:0px;' class='radio' name='hduprefs_mailpdf' id='hduprefs_mailpdfY' value='1' " .
 ($HELPDESK_PREF['hduprefs_mailpdf'] == 1 ?"checked='checked'":"") . " /><label for='hduprefs_mailpdfY' > " . HDU_A28 . "&nbsp;</label>&nbsp;&nbsp;
 				<input type='radio' style='border:0px;' class='radio' name='hduprefs_mailpdf' id='hduprefs_mailpdfN' value='0' " .
-($HELPDESK_PREF['hduprefs_mailpdf'] == 0 ?"checked='checked'":"") . " /><label for='hduprefs_mailpdfN' > " . HDU_A29."&nbsp;</label><img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_mpdf\")' />";
+($HELPDESK_PREF['hduprefs_mailpdf'] == 0 ?"checked='checked'":"") . " /><label for='hduprefs_mailpdfN' > " . HDU_A29."&nbsp;</label><img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_mpdf\")' />";
 $hdu_text .= "
 				<div id='hdu_mpdf' style='display:none' ><em>" . HDU_A331 . "</em></div>
 			</td>
@@ -148,7 +148,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A118 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<input type='text' size='50' class='tbox' name='hduprefs_usersubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_usersubject']) . "' />&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_usub\")' />
+				<input type='text' size='50' class='tbox' name='hduprefs_usersubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_usersubject']) . "' />&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_usub\")' />
 				<div id='hdu_usub' style='display:none' ><em>" . HDU_A343 . "</em></div>
 			</td>
 		</tr>";
@@ -157,7 +157,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A120 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<input type='text' size='50' class='tbox' name='hduprefs_helpdesksubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_helpdesksubject']) . "' />&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hsub\")' />
+				<input type='text' size='50' class='tbox' name='hduprefs_helpdesksubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_helpdesksubject']) . "' />&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hsub\")' />
 				<div id='hdu_hsub' style='display:none' ><em>" . HDU_A344 . "</em></div>
 			</td>
 		</tr>";
@@ -166,7 +166,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A137 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<input type='text' size='50' class='tbox' name='hduprefs_userupsubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_userupsubject']) . "' />&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_uups\")' />
+				<input type='text' size='50' class='tbox' name='hduprefs_userupsubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_userupsubject']) . "' />&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_uups\")' />
 				<div id='hdu_uups' style='display:none' ><em>" . HDU_A345 . "</em></div>
 			</td>
 		</tr>";
@@ -175,7 +175,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A139 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<input type='text' size='50' class='tbox' name='hduprefs_helpupsubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_helpupsubject']) . "' />&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hups\")' />
+				<input type='text' size='50' class='tbox' name='hduprefs_helpupsubject' maxlength='100' value='" . $tp->toFORM($HELPDESK_PREF['hduprefs_helpupsubject']) . "' />&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hups\")' />
 				<div id='hdu_hups' style='display:none' ><em>" . HDU_A346 . "</em></div>
 			</td>
 		</tr>";
@@ -184,7 +184,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A122 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<textarea class='tbox' name='hduprefs_usertext' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_usertext']) . "</textarea>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hpref\")' />
+				<textarea class='tbox' name='hduprefs_usertext' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_usertext']) . "</textarea>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hpref\")' />
 				<div id='hdu_hpref' style='display:none' ><em>" . HDU_A347 . "</em></div>
 			</td>
 		</tr>";
@@ -193,7 +193,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A124 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<textarea class='tbox' name='hduprefs_helpdesktext' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_helpdesktext']) . "</textarea>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hntik\")' />
+				<textarea class='tbox' name='hduprefs_helpdesktext' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_helpdesktext']) . "</textarea>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_hntik\")' />
 				<div id='hdu_hntik' style='display:none' ><em>" . HDU_A348 . "</em></div>
 			</td>
 		</tr>";
@@ -202,7 +202,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A125 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<textarea class='tbox' name='hduprefs_updateuser' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_updateuser']) . "</textarea>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_uuuser\")' />
+				<textarea class='tbox' name='hduprefs_updateuser' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_updateuser']) . "</textarea>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_uuuser\")' />
 				<div id='hdu_uuuser' style='display:none' ><em>" . HDU_A349 . "</em></div>
 			</td>
 		</tr>";
@@ -211,7 +211,7 @@ $hdu_text .= "
 		<tr>
 			<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_A127 . "</td>
 			<td style='width:70%; vertical-align:top;' class='forumheader3'>
-				<textarea class='tbox' name='hduprefs_updatehelpdesk' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_updatehelpdesk']) . "</textarea>&nbsp;<img src='".e_IMAGE."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_uhdesk\")' />
+				<textarea class='tbox' name='hduprefs_updatehelpdesk' rows='4' cols='50'>" . $tp->toFORM($HELPDESK_PREF['hduprefs_updatehelpdesk']) . "</textarea>&nbsp;<img src='".HELPDESK_IMAGES_PATH."admin_images/docs_16.png'  alt='".HDU_A503."' title='".HDU_A503."' onclick='expandit(\"hdu_uhdesk\")' />
 				<div id='hdu_uhdesk' style='display:none' ><em>" . HDU_A350 . "</em></div>
 			</td>
 		</tr>";
