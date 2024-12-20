@@ -8,7 +8,7 @@ CREATE TABLE hdu_helpdesk (
   PRIMARY KEY  (hdudesk_id),
   KEY hdures_id (hdudesk_id),
   KEY helpdesk_name (hdudesk_name)
- ) TYPE=MyISAM;
+ ) ENGINE=InnoDB;
 CREATE TABLE hdu_comments (
   hduc_id int(10) unsigned NOT NULL auto_increment,
   hduc_ticketid int(10) unsigned NOT NULL default '0',
@@ -18,7 +18,7 @@ CREATE TABLE hdu_comments (
   hduc_status tinyint(1) unsigned NOT NULL default '0',
   hduc_comment text,
   PRIMARY KEY  (hduc_id)
-  ) TYPE=MyISAM;
+  ) ENGINE=InnoDB;
 CREATE TABLE hdu_categories (
   hducat_id int(10) unsigned NOT NULL auto_increment,
   hducat_category varchar(30) default NULL,
@@ -26,7 +26,7 @@ CREATE TABLE hdu_categories (
   hducat_helpdesk int(10) unsigned NOT NULL default '0',
   hducat_lastupdate int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY  (hducat_id)
-  ) TYPE=MyISAM;
+  ) ENGINE=InnoDB;
 CREATE TABLE hdu_fixes (
   hdufix_id int(10) unsigned NOT NULL auto_increment,
   hdufix_fix varchar(30) default NULL,
@@ -34,7 +34,7 @@ CREATE TABLE hdu_fixes (
   hdufix_order int(10) unsigned NOT NULL default '0',
   hdufix_lastupdate int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY  (hdufix_id)
-  ) TYPE=MyISAM;
+  ) ENGINE=InnoDB;
 CREATE TABLE hdu_resolve (
   hdures_id int(10) unsigned NOT NULL auto_increment,
   hdures_resolution varchar(30) default NULL,
@@ -44,7 +44,7 @@ CREATE TABLE hdu_resolve (
   hdures_lastupdate int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY  (hdures_id),
   KEY hdures_id (hdures_id)
-  ) TYPE=MyISAM;
+  ) ENGINE=InnoDB;
 CREATE TABLE hdunit (
   hdu_id int(10) unsigned NOT NULL auto_increment,
   hdu_datestamp int(10) unsigned NOT NULL default '0',
@@ -82,4 +82,4 @@ CREATE TABLE hdunit (
   KEY hdu_category (hdu_category),
   KEY hdu_resolution (hdu_resolution),
   KEY hdu_tech (hdu_tech)
-  ) TYPE=MyISAM;
+  ) ENGINE=InnoDB;
