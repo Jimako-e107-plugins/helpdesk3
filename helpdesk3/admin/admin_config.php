@@ -4,7 +4,7 @@
 // *  Helpdesk Ticketing configuration for e107 v6xx
 // *
 // **************************************************************************
-require_once("../../class2.php");
+require_once("../../../class2.php");
 if (!getperms("P"))
 {
     header("location:" . e_BASE . "index.php");

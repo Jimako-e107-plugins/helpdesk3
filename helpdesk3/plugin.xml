@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="Help Desk" lan="" version="1.0" date="2024-12-20" compatibility="2.0" installRequired="true" >
+	<author name="Father Barry" url="http://www.keal.me.uk" />
+	<summary lan="">Helpdesk plugin allows users of your system to post help requests and track their progress.</summary>
+	<description lan="">Helpdesk plugin allows users of your system to post help requests and track their progress.</description>
+	<keywords>
+		<word>admin</word>
+		<word>content</word>
+		<word>helpdesk</word>
+	</keywords>
+	<category>content</category>
+	<copyright></copyright>
+	<adminLinks>
+		<link url="admin/admin_config.php" description="" icon="images/hdu_32.png" iconSmall="images/hdu_32.png" icon128="images/hdu_32.png" primary="true" >LAN_CONFIGURE</link>
+	</adminLinks>
+	
+</e107Plugin>

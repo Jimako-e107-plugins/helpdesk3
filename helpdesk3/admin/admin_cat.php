@@ -1,5 +1,5 @@
 <?php
-require_once("../../class2.php");
+require_once("../../../class2.php");
 if (!defined('e107_INIT'))
 {
     exit;
@@ -15,6 +15,8 @@ if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
 	$helpdesk_obj = new helpdesk;
 }
+
+
 
 
 require_once(e_ADMIN . "auth.php");
@@ -206,6 +208,7 @@ if ($hdu_ac_action == 'dothings')
 </form>";
     }
 }
+
 
 if (!$hdu_ed)
 {
