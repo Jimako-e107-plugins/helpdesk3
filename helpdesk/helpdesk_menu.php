@@ -3,7 +3,7 @@ if (!defined('e107_INIT'))
 {
     exit;
 }
-if ($cacheData = $e107cache->retrieve("nq_helpdesk3"))
+if ($cacheData = $e107cache->retrieve("nq_helpdesk"))
 {
     echo $cacheData;
     return;
@@ -47,6 +47,6 @@ $hurl=e_PLUGIN. HELPDESK_FOLDER . "/helpdesk.php";
     ob_start(); // Set up a new output buffer
     $helpdesk_obj->tablerender($helpdesk_obj->hduprefs_menutitle, $hdu_text, 'hdu_menu'); // Render the menu
     $cache_data = ob_get_flush(); // Get the menu content, and display it
-    $e107cache->set("nq_helpdesk3", $cache_data); // Save to cache
+    $e107cache->set("nq_helpdesk", $cache_data); // Save to cache
 
 }

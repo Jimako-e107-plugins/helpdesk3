@@ -178,7 +178,7 @@ SC_BEGIN HDU_SHOW_PRINT
 global $helpdesk_obj, $id, $R1,$from;
 if (!$helpdesk_obj->hdu_new)
 {
-    return "<a href='../../print.php?plugin:helpdesk3_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . IMODE . "/printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
+    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . IMODE . "/printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
 }
 SC_END
 
@@ -187,7 +187,7 @@ SC_BEGIN HDU_SHOW_EMAILLINK
 global $helpdesk_obj, $id;
 if (!$helpdesk_obj->hdu_new && (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super))
 {
-    return "<a href='../../email.php?plugin:helpdesk3_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . IMODE . "/email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
+    return "<a href='../../email.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . IMODE . "/email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
 }
 else
 {

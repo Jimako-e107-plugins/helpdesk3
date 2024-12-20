@@ -16,14 +16,14 @@ if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 	$helpdesk_obj = new helpdesk;
 }
 
-include_once(e_PLUGIN . "helpdesk3/admin/left_menu.php");
+include_once(e_PLUGIN .  HELPDESK_FOLDER .  "/admin/left_menu.php");
 
 class hdu_categories_ui extends e_admin_ui
 {
 
 	protected $pluginTitle		= 'Help Desk';
-	protected $pluginName		= 'helpdesk3';
-	//	protected $eventName		= 'helpdesk3-hdu_categories'; // remove comment to enable event triggers in admin. 		
+	protected $pluginName		= 'helpdesk';
+	//	protected $eventName		= 'helpdesk-hdu_categories'; // remove comment to enable event triggers in admin. 		
 	protected $table			= 'hdu_categories';
 	protected $pid				= 'hducat_id';
 	protected $perPage			= 10;
@@ -170,7 +170,7 @@ class hdu_categories_form_ui extends e_admin_form_ui
 }
 
 
-new helpdesk3_adminArea();
+new helpdesk_adminArea();
 
 require_once(e_ADMIN . "auth.php");
 e107::getAdminUI()->runPage();

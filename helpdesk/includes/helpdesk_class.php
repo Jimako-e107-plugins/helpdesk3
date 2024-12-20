@@ -298,7 +298,7 @@ class helpdesk
     {
         global $e107cache;
         // $e107cache->clear("nq_helpdesktop_menu");
-        $e107cache->clear("nq_helpdesk3");
+        $e107cache->clear("nq_helpdesk");
         // $e107cache->clear("nq_helpdesknew_menu");
     }
     // **********************************************************************************************
@@ -1787,10 +1787,10 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
         // $modules = apache_get_modules();
         if ($HELPDESK_PREF['hduprefs_seo'] == 1)
         {
-            $patterns[0] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk3\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+).([0-9]+)/';
-            $patterns[1] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk3\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+)/';
-            $replacements[0] = '/helpdesk3/helpdesk-$1-$2-$3-$4.html';
-            $replacements[1] = '/helpdesk3/helpdesk-$1-$2-$3.html';
+            $patterns[0] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+).([0-9]+)/';
+            $patterns[1] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+)/';
+            $replacements[0] = '/helpdesk/helpdesk-$1-$2-$3-$4.html';
+            $replacements[1] = '/helpdesk/helpdesk-$1-$2-$3.html';
 
             $text = preg_replace($patterns, $replacements, $text);
         }

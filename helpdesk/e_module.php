@@ -4,12 +4,12 @@ if (!defined('e107_INIT'))
     exit;
 }
 
-require(e_PLUGIN."helpdesk3/helpdesk_defines.php");
+require(e_PLUGIN."helpdesk/helpdesk_defines.php");
 
 
-$e_event->register("postuserset", "helpdesk3_menu_postuserset");
+$e_event->register("postuserset", "helpdesk_menu_postuserset");
 
-function helpdesk3_menu_postuserset($data)
+function helpdesk_menu_postuserset($data)
 {
     global $tp;
 

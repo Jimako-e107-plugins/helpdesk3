@@ -21,14 +21,14 @@ $hdu_text = "";
 $hdu_ac_catopt = "";
 $hdu_ac_text = "";
 
-include_once(e_PLUGIN . "helpdesk3/admin/left_menu.php");
+include_once(e_PLUGIN . HELPDESK_FOLDER .  "/admin/left_menu.php");
 
 class hdu_helpdesk_ui extends e_admin_ui
 {
 
 	protected $pluginTitle		= HDU_A154;
-	protected $pluginName		= 'helpdesk3';
-	//	protected $eventName		= 'helpdesk3-'; // remove comment to enable event triggers in admin. 		
+	protected $pluginName		= 'helpdesk';
+	//	protected $eventName		= 'helpdesk-'; // remove comment to enable event triggers in admin. 		
 	protected $table			= 'hdu_helpdesk';
 	protected $pid				= 'hdudesk_id';
 	protected $perPage			= 10;
@@ -357,7 +357,7 @@ class hdu_helpdesk_form_ui extends e_admin_form_ui
 // require_once(e_ADMIN . "footer.php");
 
 
-new helpdesk3_adminArea();
+new helpdesk_adminArea();
 
 require_once(e_ADMIN . "auth.php");
 e107::getAdminUI()->runPage();

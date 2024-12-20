@@ -2,7 +2,7 @@
 
 include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
 
-class helpdesk3_adminArea extends e_admin_dispatcher
+class helpdesk_adminArea extends e_admin_dispatcher
 {
 	protected $modes = array(
 
