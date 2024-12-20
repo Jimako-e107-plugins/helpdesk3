@@ -12,7 +12,12 @@ class helpdesk3_adminArea extends e_admin_dispatcher
 			'ui' 			=> 'hdu_helpdesk_form_ui',
 			'uipath' 		=> null
 		),
-
+		'cat'	=> array(
+			'controller' 	=> 'hdu_categories_ui',
+			'path' 			=> null,
+			'ui' 			=> 'hdu_categories_form_ui',
+			'uipath' 		=> null
+		),
 
 	);
 
@@ -22,8 +27,8 @@ class helpdesk3_adminArea extends e_admin_dispatcher
 		'desk/list'			=> array('caption' => LAN_MANAGE, 'perm' => 'P'),
 		'desk/create'		=> array('caption' => LAN_CREATE, 'perm' => 'P'),
 
-		// 'main/div0'      => array('divider'=> true),
-		// 'main/custom'		=> array('caption'=> 'Custom Page', 'perm' => 'P'),
+		'cat/list'			=> array('caption' => LAN_MANAGE, 'perm' => 'P'),
+		'cat/create'		=> array('caption' => LAN_CREATE, 'perm' => 'P'),
 
 	);
 

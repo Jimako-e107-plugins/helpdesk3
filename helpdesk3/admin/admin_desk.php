@@ -104,6 +104,12 @@ class hdu_helpdesk_ui extends e_admin_ui
 		return array('caption' => $caption, 'text' => $text);
 	}
 
+	public function beforeCreate($new_data, $old_data)
+	{
+		$new_data['hdudesk_lastupdate'] = time();
+		return $new_data;
+	}
+
 	public function beforeUpdate($new_data, $old_data, $id)
 	{
 		$new_data['hdudesk_lastupdate'] = time();

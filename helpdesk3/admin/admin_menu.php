@@ -17,7 +17,7 @@ $var['admin_desk']['text'] = HDU_A140;
 $var['admin_desk']['link'] = "admin_desk.php";
 
 $var['admin_cat']['text'] = HDU_A31;
-$var['admin_cat']['link'] = "admin_cat.php";
+$var['admin_cat']['link'] = "admin_cat.php?mode=cat&action=list";
 
 $var['admin_res']['text'] = HDU_A43;
 $var['admin_res']['link'] = "admin_res.php";
