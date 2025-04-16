@@ -13,5 +13,7 @@
 	<adminLinks>
 		<link url="admin/admin_config.php" description="" icon="images/hdu_32.png" iconSmall="images/hdu_32.png" icon128="images/hdu_32.png" primary="true" >LAN_CONFIGURE</link>
 	</adminLinks>
-	
+    <siteLinks>
+		<link url="{e_PLUGIN}helpdesk/helpdesk.php" perm='everyone' lan=''>Helpdesk</link>
+	</siteLinks>	
 </e107Plugin>

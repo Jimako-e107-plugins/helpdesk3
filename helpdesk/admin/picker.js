@@ -10,16 +10,31 @@ var TCP = new TColorPicker();
 
 function TCPopup(field, palette,sample) {
 	this.field = field;
-	this.initPalette = !palette || palette > 2 ? 0 : palette;
-	var w = 194, h = 206,
+    this.initPalette = !palette || palette > 2 ? 0 : palette;
+    
+    var w = 388, h = 412;
+
+    // Get the screen dimensions
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+
+    // Calculate the top and left positions for the popup
+    const left = (screenWidth - w) / 2;
+    const top = (screenHeight - h) / 2;
+
+
+	var  
 	move = screen ?
-		',left=' + ((screen.width - w) >> 1) + ',top=' + ((screen.height - h) >> 1) : '',
-	o_colWindow = window.open('picker.html', null, "help=no,status=no,scrollbars=no,resizable=no" + move + ",width=" + w + ",height=" + h + ",dependent=yes", true);
+        ',left=' + left + ',top=' + top : '',
+        o_colWindow = window.open('picker.html', null, "help=no,status=no,scrollbars=no,resizable=no" + move + ", width=" + w + ",height=" + h + " ", true);
+    console.log("help=no,status=no,scrollbars=no,resizable=no" + move + ", width=" + w + ",height=" + h + " ");
 	o_colWindow.opener = window;
 	o_colWindow.focus();
 }
 
-function TCBuildCell (R, G, B, w, h) {
+function TCBuildCell(R, G, B, w, h) {
+    w = 16;
+    h = 16;
 	return '<td bgcolor="#' + this.dec2hex((R << 16) + (G << 8) + B) + '"><a href="javascript:P.S(\'' + this.dec2hex((R << 16) + (G << 8) + B) + '\')" onmouseover="P.P(\'' + this.dec2hex((R << 16) + (G << 8) + B) + '\')"><img src="pixel.gif" width="' + w + '" height="' + h + '" border="0"></a></td>';
 }
 
@@ -114,12 +129,12 @@ function TCDraw(o_win, o_doc) {
 	this.doc = o_doc;
 	var
 	s_tag_openT  = o_doc.layers ?
-		'layer visibility=hidden top=54 left=5 width=182' :
-		'div style=visibility:hidden;position:absolute;left:6px;top:54px;width:182px;height:0',
+		'layer visibility=hidden top=54 left=5 width=364' :
+		'div style=visibility:hidden;position:absolute;left:6px;top:54px;width:364px;height:0',
 	s_tag_openS  = o_doc.layers ? 'layer top=32 left=6' : 'div',
 	s_tag_close  = o_doc.layers ? 'layer' : 'div'
 
-	this.doc.write('<' + s_tag_openS + ' id=sam name=sam><table cellpadding=0 cellspacing=0 border=1 width=181 align=center class=bd><tr><td align=center height=18><div id="samp"><font face=Tahoma size=2>sample <font color=white>sample</font></font></div></td></tr></table></' + s_tag_close + '>');
+	this.doc.write('<' + s_tag_openS + ' id=sam name=sam><table cellpadding=0 cellspacing=0 border=1 width=362 align=center class=bd><tr><td align=center height=18><div id="samp"><font face=Tahoma size=2>sample <font color=white>sample</font></font></div></td></tr></table></' + s_tag_close + '>');
 	this.sample = o_doc.layers ? o_doc.layers['sam'] :
 		o_doc.getElementById ? o_doc.getElementById('sam').style : o_doc.all['sam'].style
 

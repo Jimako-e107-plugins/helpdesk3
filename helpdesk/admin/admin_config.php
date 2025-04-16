@@ -77,7 +77,7 @@ if (e_QUERY == "update")
 // Check if pdf out folder is writable
 // If not display a massage
 #print $HELPDESK_PREF['hduprefs_supervisorclass'];
-$hdu_testfile = fopen("./pdfout/test.htm", "w");
+$hdu_testfile = fopen("./../pdfout/test.htm", "w");
 if (!$hdu_testfile)
 {
     $hdu_testmsg = HDU_A200;
