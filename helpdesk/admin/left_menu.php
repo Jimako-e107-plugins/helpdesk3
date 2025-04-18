@@ -6,6 +6,14 @@ class helpdesk_adminArea extends e_admin_dispatcher
 {
 	protected $modes = array(
 
+		'main'	=> array(
+			'controller' 	=> 'helpdesk_prefs_ui',
+			'path' 			=> null,
+			'ui' 			=> 'helpdesk_prefs_form_ui',
+			'uipath' 		=> null
+		),
+
+
 		'desk'	=> array(
 			'controller' 	=> 'hdu_helpdesk_ui',
 			'path' 			=> null,
@@ -23,6 +31,9 @@ class helpdesk_adminArea extends e_admin_dispatcher
 
 
 	protected $adminMenu = array(
+
+		'main/prefs'		=> array('caption' => HDU_A2, 'perm' => 'P'),
+	 
 
 		'desk/list'			=> array('caption' => LAN_MANAGE, 'perm' => 'P'),
 		'desk/create'		=> array('caption' => LAN_CREATE, 'perm' => 'P'),

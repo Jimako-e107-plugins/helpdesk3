@@ -163,35 +163,13 @@ class helpdesk
 
 
         // otherwise create new default prefs
-        $HELPDESK_PREF = array("hduprefs_messagetop" => "Helpdesk Message",
-            "hduprefs_messagebottom" => "Bottom",
-            "hduprefs_phone" => "0800 123 45678",
-            "hduprefs_rows" => 10,
-            "hduprefs_escalateon" => 0,
-            "hduprefs_escalatedays" => 14,
-            "hduprefs_autoclosedays" => 28,
-            "hduprefs_autocloseres" => 0,
-            "hduprefs_defaultres" => 0,
-            "hduprefs_reopen" => 0,
-            "hduprefs_allread" => 0,
-            "hduprefs_posteronly" => 0,
-            "hduprefs_title" => "Helpdesk",
-            "hduprefs_showassettag" => 0,
-            "hduprefs_showfixes" => 0,
-            "hduprefs_showfinance" => 0,
-            "hduprefs_userclass" => 253,
-            "hduprefs_postclass" => 253,
-            "hduprefs_supervisorclass" => 255,
-            "hduprefs_hourlyrate" => 10,
+        $HELPDESK_PREF = array( 
+
             "hduprefs_callout" => 10,
             "hduprefs_showfinusers" => 0,
-            "hduprefs_distancerate" => 0,
             "hduprefs_assignto" => 0,
             "hduprefs_restech" => 0,
             "hduprefs_autoassign" => 0,
-            "hduprefs_assigned" => 0,
-            "hduprefs_closestat" => 0,
-            "hduprefs_faq" => "",
             "hduprefs_p1col" => "#00CC00",
             "hduprefs_p2col" => "#99CC00",
             "hduprefs_p3col" => "#FFFF33",
@@ -217,7 +195,7 @@ class helpdesk
             "hduprefs_helpdesksubject" => "Update Text",
             "hduprefs_pmfrom" => 0,
             "hduprefs_mailpdf" => 0,
-            "hduprefs_seo" => 0,
+ 
             "hduprefs_menutitle" => "HelpDesk"
             );
 

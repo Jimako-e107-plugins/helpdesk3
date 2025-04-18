@@ -16,4 +16,32 @@
     <siteLinks>
 		<link url="{e_PLUGIN}helpdesk/helpdesk.php" perm='everyone' lan=''>Helpdesk</link>
 	</siteLinks>	
+    <pluginPrefs>
+        <pref name='hduprefs_seo'>0</pref>
+        <pref name='hduprefs_supervisorclass'>255</pref>
+        <pref name='hduprefs_postclass'>253</pref>
+        <pref name='hduprefs_userclass'>253</pref>
+        <pref name='hduprefs_messagetop'>Helpdesk Message</pref>
+        <pref name='hduprefs_messagebottom'>Bottom</pref>
+        <pref name='hduprefs_phone'>0800 123 45678</pref>
+        <pref name='hduprefs_faq'></pref>
+        <pref name='hduprefs_rows'>10</pref>
+        <pref name='hduprefs_menutitle'></pref>
+        <pref name='hduprefs_title'>Helpdesk</pref>
+        <pref name='hduprefs_hourlyrate'>10</pref>
+        <pref name='hduprefs_distancerate'>0</pref>
+        <pref name='hduprefs_escalatedays'>14</pref>
+        <pref name='hduprefs_escalateon'>0</pref>
+        <pref name='hduprefs_autoclosedays'>28</pref>
+        <pref name='hduprefs_autocloseres'>0</pref>
+        <pref name='hduprefs_defaultres'>0</pref>
+        <pref name='hduprefs_assigned'>0</pref>
+        <pref name='hduprefs_closestat'>0</pref>
+        <pref name='hduprefs_posteronly'>0</pref>
+        <pref name='hduprefs_reopen'>0</pref>
+        <pref name='hduprefs_allread'>0</pref>
+        <pref name='hduprefs_showassettag'>0</pref>
+        <pref name='hduprefs_showfixes'>0</pref>
+        <pref name='hduprefs_showfinance'>0</pref>
+    </pluginPrefs>
 </e107Plugin>
