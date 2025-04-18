@@ -165,11 +165,11 @@ class helpdesk
         // otherwise create new default prefs
         $HELPDESK_PREF = array( 
 
-            "hduprefs_callout" => 10,
-            "hduprefs_showfinusers" => 0,
+    
+         
             "hduprefs_assignto" => 0,
             "hduprefs_restech" => 0,
-            "hduprefs_autoassign" => 0,
+    
             "hduprefs_p1col" => "#00CC00",
             "hduprefs_p2col" => "#99CC00",
             "hduprefs_p3col" => "#FFFF33",

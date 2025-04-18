@@ -32,7 +32,7 @@ class helpdesk_adminArea extends e_admin_dispatcher
 
 	protected $adminMenu = array(
 
-		'main/prefs'		=> array('caption' => HDU_A2, 'perm' => 'P'),
+		'main/prefs'		=> array('caption' => HDU_A30, 'perm' => 'P'),
 	 
 
 		'desk/list'			=> array('caption' => LAN_MANAGE, 'perm' => 'P'),

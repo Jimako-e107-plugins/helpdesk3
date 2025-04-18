@@ -26,7 +26,7 @@
         <pref name='hduprefs_phone'>0800 123 45678</pref>
         <pref name='hduprefs_faq'></pref>
         <pref name='hduprefs_rows'>10</pref>
-        <pref name='hduprefs_menutitle'></pref>
+        <pref name='hduprefs_menutitle'>Helpdesk</pref>
         <pref name='hduprefs_title'>Helpdesk</pref>
         <pref name='hduprefs_hourlyrate'>10</pref>
         <pref name='hduprefs_distancerate'>0</pref>
@@ -43,5 +43,8 @@
         <pref name='hduprefs_showassettag'>0</pref>
         <pref name='hduprefs_showfixes'>0</pref>
         <pref name='hduprefs_showfinance'>0</pref>
+        <pref name='hduprefs_callout'>10</pref>
+        <pref name='hduprefs_autoassign'>0</pref>
+        <pref name='hduprefs_showfinusers'>0</pref>
     </pluginPrefs>
 </e107Plugin>

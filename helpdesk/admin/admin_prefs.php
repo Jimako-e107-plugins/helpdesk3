@@ -21,13 +21,13 @@ include_once(e_PLUGIN .  HELPDESK_FOLDER .  "/admin/left_menu.php");
 class helpdesk_prefs_ui extends e_admin_ui
 {
 
-	protected $pluginTitle		= LAN_PREFS;
+	protected $pluginTitle		= HDU_A2;
 	protected $pluginName		= HELPDESK_FOLDER;
 
 
 	protected $prefs = array(
 		'hduprefs_seo' => array(
-			'title'      => HDU_A504,
+			'title'      => HDU_A30,
 			'tab'        => 0,
 			'type'       => 'radio',
 			'data'       => 'int',
@@ -104,7 +104,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 			'type'       => 'text',
 			'data'       => 'str',
 			'help'       => HDU_A502,
-			'writeParms' => array('size' => '80', 'maxlength' => 200)
+			'writeParms' => array('size' => 'block-level', 'maxlength' => 200)
 		),
 
 		// Rows per page
@@ -188,13 +188,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 			'title' => HDU_A112,
 			'type' => 'dropdown',
 			'data' => 'int',
-			'writeParms' => [
-				'table' => 'hdu_resolve',
-				'id' => 'hdures_id',
-				'label' => 'hdures_resolution',
-				'order' => 'hdures_resolution',
-				'default' => [0 => HDU_A128],
-			],
+			'writeParms' => [],
 			'help' => HDU_A314,
 		],
 
@@ -203,13 +197,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 			'title' => HDU_A114,
 			'type' => 'dropdown',
 			'data' => 'int',
-			'writeParms' => [
-				'table' => 'hdu_resolve',
-				'id' => 'hdures_id',
-				'label' => 'hdures_resolution',
-				'order' => 'hdures_resolution',
-				'default' => [0 => HDU_A128],
-			],
+			'writeParms' => [],
 			'help' => HDU_A315,
 		],
 
@@ -218,13 +206,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 			'title' => HDU_A198,
 			'type' => 'dropdown',
 			'data' => 'int',
-			'writeParms' => [
-				'table' => 'hdu_resolve',
-				'id' => 'hdures_id',
-				'label' => 'hdures_resolution',
-				'order' => 'hdures_resolution',
-				'default' => [0 => HDU_A128],
-			],
+			'writeParms' => [],
 			'help' => HDU_A316,
 		],
 
@@ -233,13 +215,7 @@ class helpdesk_prefs_ui extends e_admin_ui
 			'title' => HDU_A199,
 			'type' => 'dropdown',
 			'data' => 'int',
-			'writeParms' => [
-				'table' => 'hdu_resolve',
-				'id' => 'hdures_id',
-				'label' => 'hdures_resolution',
-				'order' => 'hdures_resolution',
-				'default' => [0 => HDU_A128],
-			],
+			'writeParms' => [],
 			'help' => HDU_A317,
 		],
 
@@ -285,13 +261,45 @@ class helpdesk_prefs_ui extends e_admin_ui
 			'help' => HDU_A323,
 		],
 
+		'hduprefs_showfinusers' => [
+			'title' => HDU_A130,
+			'type' => 'boolean',
+			'help' => HDU_A324,
+		],
 
-		
+		'hduprefs_callout' => [
+			'title' => HDU_A129,
+			'type' => 'number',
+			'data' => 'int',
+			'help' => HDU_A325,
+		],
+
+		'hduprefs_autoassign' => [
+			'title' => HDU_A197,
+			'type' => 'boolean',
+			'help' => HDU_A327,
+		],
+
 	);
 
 	public function init()
 	{
+		$status_array = [];
+		$sql = e107::getDb();
+		$status_array = array();
+		$status_list = $sql->retrieve("SELECT hdures_id, hdures_resolution FROM #hdu_resolve ORDER BY hdures_resolution", true);
  
+		$status_array[0] = HDU_A128;
+		foreach ($status_list as $status)
+		{
+			 
+			$status_array[$status['hdures_id']] = $status['hdures_resolution'];
+		}
+ 
+		$this->prefs['hduprefs_assigned']['writeParms']['optArray'] = $status_array;
+		$this->prefs['hduprefs_defaultres']['writeParms']['optArray'] = $status_array;
+		$this->prefs['hduprefs_autocloseres']['writeParms']['optArray'] = $status_array;
+		$this->prefs['hduprefs_closestat']['writeParms']['optArray'] = $status_array;
 	}
 	
  
