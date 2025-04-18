@@ -5,7 +5,7 @@ include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_he
 $action = basename($_SERVER['PHP_SELF'], ".php");
 
 $var['admin_prefs']['text'] = HDU_A30;
-$var['admin_prefs']['link'] = "admin_prefs.php?mode=main&action=prefs";
+$var['admin_prefs']['link'] = "admin_config.php?mode=main&action=prefs";
 
 $var['admin_mail']['text'] = HDU_A106;
 $var['admin_mail']['link'] = "admin_mail.php";
