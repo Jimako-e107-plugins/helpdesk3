@@ -70,10 +70,13 @@ $from = 0;
 $id = 0;
 // Get passed parameters
 // get the filter
-session_start();
-$R1 = $_SESSION['R1'];
-$hdu_goto = $_SESSION['hdu_goto'];
-$hdu_savemsg = $_SESSION['hdu_savemsg'];
+
+// session_start();  done in class2.php
+if (e107::getSession()->is('R1')) $R1 = e107::getSession()->get('R1');
+if (e107::getSession()->is('hdu_goto')) $R1 = e107::getSession()->get('hdu_goto');
+if (e107::getSession()->is('hdu_savemsg')) $R1 = e107::getSession()->get('hdu_savemsg');
+
+ 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $from = intval($_POST['from']);
@@ -98,9 +101,10 @@ if (empty($R1))
     $R1 = 'all';
 }
 // save the filter
-$_SESSION['R1'] = $R1;
-$_SESSION['hdu_goto'] = $hdu_goto;
-$_SESSION['hdu_savemsg'] = '';
+e107::getSession()->set('R1', $R1);
+e107::getSession()->set('hdu_goto', $hdu_goto);
+e107::getSession()->set('hdu_savemsg', '');
+ 
 $eplug_js[] = "includes/helpdesk.js";
 // $eplug_css = "helpdesk.css";
 if (!empty($_POST['hdu_confirm']))

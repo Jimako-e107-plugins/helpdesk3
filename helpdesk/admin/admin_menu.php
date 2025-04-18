@@ -4,11 +4,11 @@ include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_he
 
 $action = basename($_SERVER['PHP_SELF'], ".php");
 
-$var['admin_config']['text'] = HDU_A30;
-$var['admin_config']['link'] = "admin_config.php";
+$var['admin_prefs']['text'] = HDU_A30;
+$var['admin_prefs']['link'] = "admin_config.php?mode=main&action=prefs";
 
 $var['admin_mail']['text'] = HDU_A106;
-$var['admin_mail']['link'] = "admin_mail.php";
+$var['admin_mail']['link'] = "admin_config.php?mode=mail&action=prefs";
 
 $var['admin_colour']['text'] = HDU_A32;
 $var['admin_colour']['link'] = "admin_colour.php";
