@@ -61,7 +61,7 @@ if (is_readable(THEME . "helpdesk.png"))
     define("HDU_LOGO", e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png");
 }
 
-require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
+//require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
 $gen = new convert;
 // *
 // set show and id to 0
@@ -330,13 +330,14 @@ $hdu_filtselect .= "</select>";
 //
 //require(HDU_THEME);
 $HDU_LISTTICKETS = e107::getTemplate('helpdesk', 'helpdesk');
-$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["header"], false, $hdu_shortcodes);
+$hdu_shortcodes = e107::getScBatch('helpdesk', TRUE);
+$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["header"], true, $hdu_shortcodes);
 // $hdu_colours = hdu_get_colours();
 // print $filter;
-var_dump($hdu_totalrecs);
+//var_dump($hdu_totalrecs);
 if (!$hdu_totalrecs)
 {
-    $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["notickets"], false, $hdu_shortcodes);
+    $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["notickets"], false, $hdu_shortcodes);
 }
 else
 {
@@ -399,7 +400,7 @@ else
         }
         if ($hdu_closed > 0) $hdu_imgtag = "<img src ='./images/closed.gif' alt ='" . HDU_86 . "' title ='" . HDU_86 . "' /> ";
 //        var_dump($HDU_LISTTICKETS_HEADER);
-        $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["detail"], false, $hdu_shortcodes);
+        $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["detail"], false, $hdu_shortcodes);
     }
 }
 // *
@@ -430,10 +431,10 @@ $hdu_npaction = "list.0." . $R1;
 
 $hdu_npparms = $hdu_totalrecs . "," . $helpdesk_obj->hduprefs_rows . "," . $from . "," . e_SELF . '?' . "[FROM]." . $hdu_npaction;
 $hdu_nextprev = $tp->parseTemplate("{NEXTPREV={$hdu_npparms}}");
-$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["footer"], false, $hdu_shortcodes);
+$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["footer"], false, $hdu_shortcodes);
 
 $hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
 $hdu_text .= "
 </form>";
-$helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title, $hdu_text, 'hdu_main');
+$helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title.$tp->parseTemplate($HDU_LISTTICKETS["caption"], false, $hdu_shortcodes), $hdu_text, 'hdu_main');
 require_once(FOOTERF);
