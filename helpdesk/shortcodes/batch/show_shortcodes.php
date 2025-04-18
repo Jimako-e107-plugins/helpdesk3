@@ -117,7 +117,7 @@ if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj
 {
     // If edit rights
     $retval .= "
-    <select name='hdu_priority' class='tbox' onchange=\"changed()\">" .
+    <select name='hdu_priority' class='tbox form-control' onchange=\"changed()\">" .
     ($hdu_priority == "1"?"<option selected='selected' value='1'>" . HDU_137 . "</option>":"<option value='1'>" . HDU_137 . "</option>") .
     ($hdu_priority == "2"?"<option selected='selected' value='2'>" . HDU_138 . "</option>":"<option value='2'>" . HDU_138 . "</option>") .
     ($hdu_priority == "3"?"<option selected='selected' value='3'>" . HDU_139 . "</option>":"<option value='3'>" . HDU_139 . "</option>") .
@@ -142,7 +142,7 @@ return $retval;
 global $tp, $helpdesk_obj, $hdu_summary;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
-    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_summary' class='tbox' value=\"" . $tp->toFORM($hdu_summary) . "\" style='width:90%;' maxlength='50' />";
+    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_summary' class='tbox form-control' value=\"" . $tp->toFORM($hdu_summary) . "\"   maxlength='50' />";
 }
 else
 {
@@ -157,7 +157,7 @@ global $tp, $sql, $helpdesk_obj, $hdu_category;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
     // If editing display select
-    $retval = "<select class='tbox'  onchange=\"changed()\" name='hdu_category'><option value='0'>" . HDU_136 . "</option>";
+    $retval = "<select class='tbox form-control'  onchange=\"changed()\" name='hdu_category'><option value='0'>" . HDU_136 . "</option>";
     if ($sql->db_Select("hdu_categories", "hducat_id,hducat_category", " order by hducat_category", "nowhere"))
     {
         while ($hdu_catrow = $sql->db_Fetch())
@@ -194,7 +194,7 @@ return $retval;
 global $tp, $hdu_tagno, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
-    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_tagno' class='tbox' size='20' maxlength='20' value='" . $tp->toFORM($hdu_tagno) . "' />";
+    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_tagno' class='tbox form-control' size='20' maxlength='20' value='" . $tp->toFORM($hdu_tagno) . "' />";
 }
 else
 {
@@ -208,7 +208,7 @@ return $retval;
 global $tp, $hdu_description, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print &&($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
-    $retval = "<textarea rows='7'  onkeyup=\"changed()\" cols='40' style='width:97%;'  class='tbox' name='hdu_description'>" . $tp->toFORM($hdu_description) . "</textarea>";
+    $retval = "<textarea rows='7'  onkeyup=\"changed()\" cols='40'    class='tbox form-control' name='hdu_description'>" . $tp->toFORM($hdu_description) . "</textarea>";
 }
 else
 {
