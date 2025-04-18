@@ -3,30 +3,30 @@
 // *
 // * FAQs list. This part is the front opening screen of the FAQ Plugin
 // *
-if (!isset($HDU_LISTTICKETS_HEADER))
+if (!isset($HELPDESK_TEMPLATE["list"]["header"]))
 {
-    $HDU_LISTTICKETS_HEADER = "
+    $HELPDESK_TEMPLATE["list"]["header"] = "
 <table style ='" . USER_WIDTH . "' class ='fborder'>
 	<tr>
 		<td class ='fcaption' colspan='8' style='text-align:left;' >{HDU_TITLE}&nbsp;</td>
 	</tr>";
     if (defined('HDU_LOGO'))
     {
-        $HDU_LISTTICKETS_HEADER .= "
+        $HELPDESK_TEMPLATE["list"]["header"] .= "
 	<tr>
 		<td class ='forumheader2' colspan='8' style='text-align:center;' >
 			<img src='".HDU_LOGO."' style='border:0;' alt='helpdesk logo' />
 		</td>
 	</tr>";
     }
-    $HDU_LISTTICKETS_HEADER .= "
+    $HELPDESK_TEMPLATE["list"]["header"] .= "
 	<tr>
 		<td style='vertical-align:top;'  colspan='8' class ='forumheader3'><b>{HDU_MESSAGE}</b>&nbsp;</td>
 	</tr>";
-    if (!empty($HELPDESK_PREF['hduprefs_messagetop']))
-    {
+    //if (!empty($HELPDESK_PREF['hduprefs_messagetop']))
+    //{
         // If there is a message at the top of the helpdesk to display then display it
-        $HDU_LISTTICKETS_HEADER .= "
+        $HELPDESK_TEMPLATE["list"]["header"] .= "
 	<tr>
 		<td style='vertical-align:top;'  colspan='8' class ='forumheader3'>{HDU_MESSAGETOP}&nbsp;</td>
 	</tr>
@@ -55,12 +55,12 @@ if (!isset($HDU_LISTTICKETS_HEADER))
 		<td style ='width:15%; text-align:center' class ='forumheader'><span class ='defaulttext'>" . HDU_4 . "</span></td>
 		<td style ='width:15%; text-align:center' class ='forumheader'><span class ='defaulttext'>" . HDU_25 . "</span></td>
 	</tr>";
-    }
+//    }
 }
 
-if (!isset($HDU_LISTTICKETS_DETAIL))
+if (!isset($HELPDESK_TEMPLATE["list"]["detail"]))
 {
-    $HDU_LISTTICKETS_DETAIL = "
+    $HELPDESK_TEMPLATE["list"]["detail"] = "
 	<tr>
 		<td style ='padding:3px; width:3%; border: #C3BDBD 1px solid; background-color:{HDU_PRIORITYCOLOUR}; text-align:center'>{HDU_TICKET_STATUS}</td>
 		<td class ='forumheader3' style ='text-align:center'><span class='smalltext'>{HDU_TICKET_ID}</span></td>
@@ -72,16 +72,16 @@ if (!isset($HDU_LISTTICKETS_DETAIL))
 		<td class ='forumheader3' style ='text-align:center'><span class='smalltext'>{HDU_TICKET_HELPDESK}&nbsp;</span></td>
 	</tr>";
 }
-if (!isset($HDU_LISTTICKETS_NOTICKETS))
+if (!isset($HELPDESK_TEMPLATE["list"]["notickets"]))
 {
-    $HDU_LISTTICKETS_NOTICKETS = "
+    $HELPDESK_TEMPLATE["list"]["notickets"] = "
 	<tr>
 		<td class ='forumheader3' style='vertical-align:top;text-align:center;' colspan ='8'>" . HDU_29 . "</td>
 	</tr>";
 }
-if (!isset($HDU_LISTTICKETS_FOOTER))
+if (!isset($HELPDESK_TEMPLATE["list"]["footer"]))
 {
-    $HDU_LISTTICKETS_FOOTER = "
+    $HELPDESK_TEMPLATE["list"]["footer"] = "
 	<tr>
 		<td style ='vertical-align:top;' colspan ='8' class ='forumheader3' >{HDU_MESSAGEBOTTOM}&nbsp;</td>
 	</tr>
@@ -91,13 +91,15 @@ if (!isset($HDU_LISTTICKETS_FOOTER))
 </table>";
 }
 
-if (!isset($HDU_SHOWTICKET_HEADER))
+// Old $HDU_SHOWTICKET_HEADER
+if (!isset($HELPDESK_TEMPLATE["show"]["header"]))
 {
-    $HDU_SHOWTICKET_HEADER = "";
+    $HELPDESK_TEMPLATE["show"]["header"] = "";
 }
-if (!isset($HDU_SHOWTICKET))
+// Old $HDU_SHOWTICKET
+if (!isset($HELPDESK_TEMPLATE["show"]))
 {
-    $HDU_SHOWTICKET = "
+    $HELPDESK_TEMPLATE["show"]["main"] = "
 <table style='" . USER_WIDTH . "' class='fborder'>
 	<tr>
 		<td class='fcaption' >" . HDU_1 . " {HDU_SHOW_ACTION}</td>
@@ -111,10 +113,10 @@ if (!isset($HDU_SHOWTICKET))
 	<tr>
 		<td >";
 }
-
-if (!isset($HDU_SHOWTICKET_TICKET))
+// Old $HDU_SHOWTICKET_TICKET
+if (!isset($HELPDESK_TEMPLATE["show"]["ticket"]))
 {
-    $HDU_SHOWTICKET_TICKET = "
+    $HELPDESK_TEMPLATE["show"]["ticket"] = "
 <table style='display:;width:100%;' id='hduTableTicket'>
 	<tr>
 		<td style='width:30%; vertical-align:top;'  class='forumheader3'>" . HDU_3 . "</td>
@@ -138,14 +140,14 @@ if (!isset($HDU_SHOWTICKET_TICKET))
 	</tr>";
     if ($helpdesk_obj->hduprefs_showassettag)
     {
-        $HDU_SHOWTICKET_TICKET .= "
+        $HELPDESK_TEMPLATE["show"]["ticket"] .= "
 	<tr>
 		<td style='width:30%; vertical-align:top;' class='forumheader3' > " . HDU_39 . " </td>
 		<td style='width:70%; vertical-align:top;' class='forumheader3' >{HDU_SHOW_ASSET}</td>
 	</tr>";
         // If we show the asset tag
     }
-    $HDU_SHOWTICKET_TICKET .= "
+    $HELPDESK_TEMPLATE["show"]["ticket"] .= "
 	<tr>
 		<td style='width:30%;vertical-align:top;'  class='forumheader3'>" . HDU_12 . " *</td>
 		<td style='width:70%;vertical-align:top;'  class='forumheader3'>{HDU_SHOW_DESCRIPTION}</td>
@@ -156,9 +158,10 @@ if (!isset($HDU_SHOWTICKET_TICKET))
 	</tr>
 </table>	";
 }
-if (!isset($HDU_SHOWTICKET_DETAILS))
+//Old $HDU_SHOWTICKET_DETAILS
+if (!isset($HELPDESK_TEMPLATE["show"]["details"]))
 {
-    $HDU_SHOWTICKET_DETAILS = "
+    $HELPDESK_TEMPLATE["show"]["details"] = "
 <table style='display:none;width:100%;' id='hduTableDetails' >
 	<tr>
 		<td style='width:30%; vertical-align:top;' class='forumheader3' > " . HDU_154 . " </td>
@@ -182,9 +185,10 @@ if (!isset($HDU_SHOWTICKET_DETAILS))
 	</tr>
 </table>	";
 }
-if (!isset($HDU_SHOWTICKET_FINANCE))
+//OLd $HDU_SHOWTICKET_FINANCE
+if (!isset($HELPDESK_TEMPLATE["show"]["finance"]))
 {
-    $HDU_SHOWTICKET_FINANCE = "
+    $HELPDESK_TEMPLATE["show"]["finance"] = "
 <table style='width:100%;display:none;' id='hduTableFinance'>
 	<tr>
 		<td style='width:30%;vertical-align:top;' class='forumheader3'><b>" . HDU_144 . "</b></td>
@@ -228,9 +232,10 @@ if (!isset($HDU_SHOWTICKET_FINANCE))
 	</tr>
 </table>" ;
 }
-if (!isset($HDU_SHOWTICKET_COMMENT_HEADER))
+//Old $HDU_SHOWTICKET_COMMENT_HEADER
+if (!isset($HELPDESK_TEMPLATE["show"]["comment_header"]))
 {
-    $HDU_SHOWTICKET_COMMENT_HEADER = "
+    $HELPDESK_TEMPLATE["show"]["comment_header"] = "
 <table  style='width:100%;display:none;' id='hduTableComment'>
 	<tr>
 		<td style='vertical-align:top;' colspan='3' class='forumheader3'>{HDU_SHOW_NEWCOMMENT}</td>
@@ -241,27 +246,27 @@ if (!isset($HDU_SHOWTICKET_COMMENT_HEADER))
 		<td class='forumheader2' style='width:70%; vertical-align:top;' >" . HDU_100 . "</td>
 	</tr>	";
 }
-
-if (!isset($HDU_SHOWTICKET_COMMENT_DETAIL))
+// Old $HDU_SHOWTICKET_COMMENT_DETAIL
+if (!isset($HELPDESK_TEMPLATE["show"]["comment_detail"]))
 {
-    $HDU_SHOWTICKET_COMMENT_DETAIL = "
+    $HELPDESK_TEMPLATE["show"]["comment_detail"] = "
 	<tr>
 		<td class='forumheader3' style='width:10%; vertical-align:top;' >{HDU_SHOW_COMMENTDATE}</td>
 		<td class='forumheader3' style='width:20%; vertical-align:top;' >{HDU_SHOW_COMMENTPOSTER}</td>
 		<td class='forumheader3' style='width:70%; vertical-align:top;' >{HDU_SHOW_COMMENT}</td>
 	</tr>";
 }
-
-if (!isset($HDU_SHOWTICKET_COMMENT_FOOTER))
+//Old $HDU_SHOWTICKET_COMMENT_FOOTER
+if (!isset($HELPDESK_TEMPLATE["show"]["comment_footer"]))
 {
-    $HDU_SHOWTICKET_COMMENT_FOOTER = "
+    $HELPDESK_TEMPLATE["show"]["comment_footer"] = "
 </table>";
 }
 
-
-if (!isset($HDU_SHOWTICKET_FOOTER))
+// Old $HDU_SHOWTICKET_FOOTER
+if (!isset($HELPDESK_TEMPLATE["show"]["footer"]))
 {
-    $HDU_SHOWTICKET_FOOTER = "
+    $HELPDESK_TEMPLATE["show"]["footer"] = "
 		</td>
 	</tr>
 	<tr>
@@ -272,9 +277,10 @@ if (!isset($HDU_SHOWTICKET_FOOTER))
 	</tr>
 </table>";
 }
-if (!isset($HDU_DELETE_OK))
+//Old $HDU_DELETE_OK
+if (!isset($HELPDESK_TEMPLATE["delete"]["ok"]))
 {
-    $HDU_DELETE_OK = "
+    $HELPDESK_TEMPLATE["delete"]["ok"] = "
 <table style='".USER_WIDTH."' class='fborder'>
 	<tr>
 		<td class ='fcaption'  style='text-align:left;' >{HDU_TITLE}&nbsp;</td>
@@ -291,9 +297,10 @@ if (!isset($HDU_DELETE_OK))
 	</tr>
 </table>";
 }
-if (!isset($HDU_DELETE_NOTOK))
+//Old $HDU_DELETE_NOTOK
+if (!isset($HELPDESK_TEMPLATE["delete"]["notok"]))
 {
-    $HDU_DELETE_NOTOK = "
+    $HELPDESK_TEMPLATE["delete"]["notok"] = "
 <table style='".USER_WIDTH."' class='fborder'>
 	<tr>
 		<td class ='fcaption'  style='text-align:left;' >{HDU_TITLE}&nbsp;</td>
@@ -309,4 +316,3 @@ if (!isset($HDU_DELETE_NOTOK))
 	</tr>
 </table>";
 }
-?>

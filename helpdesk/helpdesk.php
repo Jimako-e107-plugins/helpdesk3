@@ -42,6 +42,7 @@ if (!$helpdesk_obj->hdu_read)
 $eplug_js[] = e_PLUGIN . HELPDESK_FOLDER . "/includes/plain/hdu_pop.js";
 $eplug_css[] = e_PLUGIN . HELPDESK_FOLDER . "/includes/plain/hdu_pop.css";
 // get the template  from themes, if not then use default
+/*
 if (is_readable(THEME . "helpdesk_template.php"))
 {
     define("HDU_THEME", THEME . "helpdesk_template.php");
@@ -50,6 +51,7 @@ else
 {
     define("HDU_THEME", e_PLUGIN . HELPDESK_FOLDER . "/templates/helpdesk_template.php");
 }
+*/
 // get logo from theme, if not see if there is a default, if not then not using logo
 if (is_readable(THEME . "helpdesk.png"))
 {
@@ -58,6 +60,7 @@ if (is_readable(THEME . "helpdesk.png"))
 {
     define("HDU_LOGO", e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png");
 }
+
 require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
 $gen = new convert;
 // *
@@ -136,7 +139,7 @@ switch ($hdu_aaction)
         // confirmed the delete and we are the supervisor
         if ($helpdesk_obj->hdu_super)
         {
-            $sql->db_Delete("hdunit", "hdu_id=$id", false);
+            $sql->delete("hdunit", "hdu_id=$id", false);
             $hdu_savemsg .= HDU_234;
             $hdu_aaction = "list";
         }
@@ -230,8 +233,8 @@ if (isset($_POST['hdu_delrec']))
         if ($hdu_super)
         {
             // only supervisor can delete tickets
-            $sql->db_Delete("hdunit", "hdu_id='$id'");
-            $sql->db_Delete("hdu_comments", "hduc_ticketid ='$id'");
+            $sql->delete("hdunit", "hdu_id='$id'");
+            $sql->delete("hdu_comments", "hduc_ticketid ='$id'");
             $sqlmsg .= HDU_160;
         }
         else
@@ -302,7 +305,7 @@ if ($hdu_goto > 0)
 {
     $filter = "where hdu_id ='" . $hdu_goto . "' ";
 }
-$hdu_totalrecs = $sql->db_Count("hdunit", "(*)", $filter, false);
+$hdu_totalrecs = $sql->count("hdunit", "(*)", $filter, false);
 // *
 // * Display table with tickets in
 // *
@@ -324,14 +327,16 @@ if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk
     $hdu_filtselect .= "<option value='mine'" . ($R1 == "mine"?" selected ='selected'":"") . " >" . HDU_208 . "</option>";
 }
 $hdu_filtselect .= "</select>";
-
-require(HDU_THEME);
-$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS_HEADER, false, $hdu_shortcodes);
+//
+//require(HDU_THEME);
+$HDU_LISTTICKETS = e107::getTemplate('helpdesk', 'helpdesk');
+$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["header"], false, $hdu_shortcodes);
 // $hdu_colours = hdu_get_colours();
 // print $filter;
+var_dump($hdu_totalrecs);
 if (!$hdu_totalrecs)
 {
-    $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS_NOTICKETS, false, $hdu_shortcodes);
+    $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["notickets"], false, $hdu_shortcodes);
 }
 else
 {
@@ -342,10 +347,11 @@ else
 			left join #hdu_resolve on hdu_resolution =hdures_id
 			left join #hdu_helpdesk on hdu_tech = hdudesk_id
 			$filter ORDER BY hdu_id DESC LIMIT $from, " . $helpdesk_obj->hduprefs_rows ;
-    $sql->db_Select_gen($hdu_args, false);
-    while ($hdurow = $sql->db_Fetch())
+    $sql->gen($hdu_args);
+    while ($hdurow = $sql->fetch())
     {
-        extract($hdurow);
+  //      var_dump($hdurow);
+        extract($hdurow); // why extract? why not fetch vars from array?
         // $hdu_postdate = $hdu_datestamp;
         // $hdu_datestamp = $gen->convert_date($hdu_datestamp, "short");
         $hdu_tmp = explode(".", $hdu_poster, 2);
@@ -392,7 +398,8 @@ else
                 break;
         }
         if ($hdu_closed > 0) $hdu_imgtag = "<img src ='./images/closed.gif' alt ='" . HDU_86 . "' title ='" . HDU_86 . "' /> ";
-        $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS_DETAIL, false, $hdu_shortcodes);
+//        var_dump($HDU_LISTTICKETS_HEADER);
+        $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["detail"], false, $hdu_shortcodes);
     }
 }
 // *
@@ -423,7 +430,7 @@ $hdu_npaction = "list.0." . $R1;
 
 $hdu_npparms = $hdu_totalrecs . "," . $helpdesk_obj->hduprefs_rows . "," . $from . "," . e_SELF . '?' . "[FROM]." . $hdu_npaction;
 $hdu_nextprev = $tp->parseTemplate("{NEXTPREV={$hdu_npparms}}");
-$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS_FOOTER, false, $hdu_shortcodes);
+$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["list"]["footer"], false, $hdu_shortcodes);
 
 $hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
 $hdu_text .= "
