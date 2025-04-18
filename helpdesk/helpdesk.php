@@ -440,5 +440,5 @@ $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["footer"], false, $hdu_shortcod
 $hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
 $hdu_text .= "
 </form>";
-$helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title.$tp->parseTemplate($HDU_LISTTICKETS["caption"], false, $hdu_shortcodes), $hdu_text, 'hdu_main');
+$helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title.$tp->parseTemplate($HDU_LISTTICKETS["caption"], true, $hdu_shortcodes), $hdu_text, 'hdu_main');
 require_once(FOOTERF);
