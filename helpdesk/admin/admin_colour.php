@@ -96,6 +96,10 @@ $hdu_text .= "
 	</tr>
 </table>
 </form>";
-$hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
+//$hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
+$HDU_LISTTICKETS = e107::getTemplate('helpdesk', 'helpdesk');
+$hdu_shortcodes = e107::getScBatch('helpdesk', TRUE);
+$hdu_text .= e107::getParser()->parseTemplate($HDU_LISTTICKETS["priority"], true, $hdu_shortcodes);
+
 $ns->tablerender(HDU_A2, $hdu_text);
 require_once(e_ADMIN . "footer.php");

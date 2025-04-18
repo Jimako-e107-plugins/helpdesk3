@@ -437,8 +437,8 @@ $hdu_npparms = $hdu_totalrecs . "," . $helpdesk_obj->hduprefs_rows . "," . $from
 $hdu_nextprev = $tp->parseTemplate("{NEXTPREV={$hdu_npparms}}");
 $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["footer"], false, $hdu_shortcodes);
 
-$hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
-$hdu_text .= "
-</form>";
-$helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title.$tp->parseTemplate($HDU_LISTTICKETS["caption"], true, $hdu_shortcodes), $hdu_text, 'hdu_main');
+//$hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
+$hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["priority"], true, $hdu_shortcodes);
+$hdu_text .= "</form>";
+$helpdesk_obj->tablerender($tp->parseTemplate($HDU_LISTTICKETS["caption"], true, $hdu_shortcodes), $hdu_text, 'hdu_main');
 require_once(FOOTERF);
