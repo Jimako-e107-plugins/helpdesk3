@@ -8,7 +8,7 @@ $var['admin_prefs']['text'] = HDU_A30;
 $var['admin_prefs']['link'] = "admin_config.php?mode=main&action=prefs";
 
 $var['admin_mail']['text'] = HDU_A106;
-$var['admin_mail']['link'] = "admin_mail.php";
+$var['admin_mail']['link'] = "admin_config.php?mode=mail&action=prefs";
 
 $var['admin_colour']['text'] = HDU_A32;
 $var['admin_colour']['link'] = "admin_colour.php";

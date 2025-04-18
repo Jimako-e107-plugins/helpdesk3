@@ -124,7 +124,7 @@ class helpdesk
         $this->hduprefs_autoassign = $this->pluginPrefs['hduprefs_autoassign'] == 1;
        // $this->hduprefs_statcloses = $HELPDESK_PREF['hduprefs_statcloses'] == 1;
         $this->hduprefs_reopen = $this->pluginPrefs['hduprefs_reopen'] == 1;
-        $this->hduprefs_mailpdf = $HELPDESK_PREF['hduprefs_mailpdf'] == 1;
+        $this->hduprefs_mailpdf = $this->pluginPrefs['hduprefs_mailpdf'] == 1;
         $this->hduprefs_allread = $this->pluginPrefs['hduprefs_allread'] == 1;
         $this->hduconvert_date = new convert;
         // if show finance and supervisor or technician
@@ -133,35 +133,34 @@ class helpdesk
         {
             $this->hduprefs_showfinance = true;
         }
-        $this->hduprefs_defaultres = $this->pluginPrefs['hduprefs_defaultres'];
-        $this->hduprefs_mailuser = $HELPDESK_PREF['hduprefs_mailuser'];
-        $this->hduprefs_helpdeskemail = $HELPDESK_PREF['hduprefs_helpdeskemail'];
-        $this->hduprefs_emailfrom = $HELPDESK_PREF['hduprefs_emailfrom'];
-        $this->hduprefs_usersubject = $HELPDESK_PREF['hduprefs_usersubject'];
-        $this->hduprefs_userupsubject = $HELPDESK_PREF['hduprefs_userupsubject'];
-        $this->hduprefs_usertext = $HELPDESK_PREF['hduprefs_usertext'];
-
-        $this->hduprefs_updateuser = $HELPDESK_PREF['hduprefs_updateuser'];
-        $this->hduprefs_mailhelpdesk = $HELPDESK_PREF['hduprefs_mailhelpdesk'];
-        $this->hduprefs_helpupsubject = $HELPDESK_PREF['hduprefs_helpupsubject'];
-        $this->hduprefs_techniciansubject = $HELPDESK_PREF['hduprefs_techniciansubject'];
-        $this->hduprefs_helpdesktext = $HELPDESK_PREF['hduprefs_helpdesktext'];
-        $this->hduprefs_updatehelpdesk = $HELPDESK_PREF['hduprefs_updatehelpdesk'];
-        $this->hduprefs_helpdesksubject = $HELPDESK_PREF['hduprefs_helpdesksubject'];
-        $this->hduprefs_updatetechnician = $HELPDESK_PREF['hduprefs_updatetechnician'];
-        $this->hduprefs_techniciantext = $HELPDESK_PREF['hduprefs_techniciantext'];
-        $this->hduprefs_sendas = $HELPDESK_PREF['hduprefs_sendas'];
-        $this->hduprefs_pmfrom = $HELPDESK_PREF['hduprefs_pmfrom'];
-        $this->hduprefs_title = $this->pluginPrefs['hduprefs_title'];
-        $this->hduprefs_callout = $this->pluginPrefs['hduprefs_callout'];
-        $this->hduprefs_distancerate = $this->pluginPrefs['hduprefs_distancerate'];
-        $this->hduprefs_hourlyrate = $this->pluginPrefs['hduprefs_hourlyrate'];
-        $this->hduprefs_menutitle = $this->pluginPrefs['hduprefs_menutitle'];
-        $this->hduprefs_closestat = $this->pluginPrefs['hduprefs_closestat'];
-        $this->hduprefs_assignto = $this->pluginPrefs['hduprefs_assignto'];
-        $this->hduprefs_assigned = $this->pluginPrefs['hduprefs_assigned'];
-        $this->hduprefs_escalatedays = $this->pluginPrefs['hduprefs_escalatedays'];
-        $this->hduprefs_escalateon = $this->pluginPrefs['hduprefs_escalateon'];
+		$this->hduprefs_defaultres = $this->pluginPrefs['hduprefs_defaultres'];
+		$this->hduprefs_mailuser         = $this->pluginPrefs['hduprefs_mailuser'];
+		$this->hduprefs_helpdeskemail    = $this->pluginPrefs['hduprefs_helpdeskemail'];
+		$this->hduprefs_emailfrom        = $this->pluginPrefs['hduprefs_emailfrom'];
+		$this->hduprefs_usersubject      = $this->pluginPrefs['hduprefs_usersubject'];
+		$this->hduprefs_userupsubject    = $this->pluginPrefs['hduprefs_userupsubject'];
+		$this->hduprefs_usertext         = $this->pluginPrefs['hduprefs_usertext'];
+		$this->hduprefs_updateuser       = $this->pluginPrefs['hduprefs_updateuser'];
+		$this->hduprefs_mailhelpdesk     = $this->pluginPrefs['hduprefs_mailhelpdesk'];
+		$this->hduprefs_helpupsubject    = $this->pluginPrefs['hduprefs_helpupsubject'];
+		$this->hduprefs_techniciansubject = $this->pluginPrefs['hduprefs_techniciansubject'];
+		$this->hduprefs_helpdesktext     = $this->pluginPrefs['hduprefs_helpdesktext'];
+		$this->hduprefs_updatehelpdesk   = $this->pluginPrefs['hduprefs_updatehelpdesk'];
+		$this->hduprefs_helpdesksubject  = $this->pluginPrefs['hduprefs_helpdesksubject'];
+		$this->hduprefs_updatetechnician = $this->pluginPrefs['hduprefs_updatetechnician'];
+		$this->hduprefs_techniciantext   = $this->pluginPrefs['hduprefs_techniciantext'];
+		$this->hduprefs_sendas           = $this->pluginPrefs['hduprefs_sendas'];
+		$this->hduprefs_pmfrom           = $this->pluginPrefs['hduprefs_pmfrom'];
+		$this->hduprefs_title = $this->pluginPrefs['hduprefs_title'];
+		$this->hduprefs_callout = $this->pluginPrefs['hduprefs_callout'];
+		$this->hduprefs_distancerate = $this->pluginPrefs['hduprefs_distancerate'];
+		$this->hduprefs_hourlyrate = $this->pluginPrefs['hduprefs_hourlyrate'];
+		$this->hduprefs_menutitle = $this->pluginPrefs['hduprefs_menutitle'];
+		$this->hduprefs_closestat = $this->pluginPrefs['hduprefs_closestat'];
+		$this->hduprefs_assignto = $this->pluginPrefs['hduprefs_assignto'];
+		$this->hduprefs_assigned = $this->pluginPrefs['hduprefs_assigned'];
+		$this->hduprefs_escalatedays = $this->pluginPrefs['hduprefs_escalatedays'];
+		$this->hduprefs_escalateon = $this->pluginPrefs['hduprefs_escalateon'];
 
 
 
@@ -177,42 +176,14 @@ class helpdesk
         global $HELPDESK_PREF, $sql;
 
 
-        // otherwise create new default prefs
-        $HELPDESK_PREF = array( 
-
-    
-         
-            "hduprefs_assignto" => 0,
-            "hduprefs_restech" => 0,
-    
-            "hduprefs_p1col" => "#00CC00",
-            "hduprefs_p2col" => "#99CC00",
-            "hduprefs_p3col" => "#FFFF33",
-            "hduprefs_p4col" => "#FF9933",
-            "hduprefs_p5col" => "#FF0000",
-            "hduprefs_mailhelpdesk" => 0,
-            "hduprefs_mailtechnician" => 0,
-            "hduprefs_mailuser" => 0,
-            "hduprefs_helpdeskemail" => "helpdesk@example.com",
-            "hduprefs_usersubject" => "Helpdesk Ticket",
-            "hduprefs_techniciansubject" => "Helpdesk Ticket",
-            "hduprefs_helpupsubject" => "Helpdesk Ticket",
-            "hduprefs_technicianupsubject" => "Updated Helpdesk Ticket",
-            "hduprefs_userupsubject" => "Updated Helpdesk Ticket",
-            "hduprefs_emailfrom" => "Helpdesk for ",
-            "hduprefs_sendas" => "",
-            "hduprefs_usertext" => "Text",
-            "hduprefs_techniciantext" => "Text",
-            "hduprefs_helpdesktext" => "Text",
-            "hduprefs_updateuser" => "Update Text",
-            "hduprefs_updatetechnician" => "Update Text",
-            "hduprefs_updatehelpdesk" => "Update Text",
-            "hduprefs_helpdesksubject" => "Update Text",
-            "hduprefs_pmfrom" => 0,
-            "hduprefs_mailpdf" => 0,
- 
-            "hduprefs_menutitle" => "HelpDesk"
-            );
+		// otherwise create new default prefs
+		$HELPDESK_PREF = array(
+			"hduprefs_p1col" => "#00CC00",
+			"hduprefs_p2col" => "#99CC00",
+			"hduprefs_p3col" => "#FFFF33",
+			"hduprefs_p4col" => "#FF9933",
+			"hduprefs_p5col" => "#FF0000",
+		);
 
     }
     function save_prefs()
