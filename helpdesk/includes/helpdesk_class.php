@@ -156,7 +156,7 @@ class helpdesk
         $this->hduprefs_callout = $this->pluginPrefs['hduprefs_callout'];
         $this->hduprefs_distancerate = $this->pluginPrefs['hduprefs_distancerate'];
         $this->hduprefs_hourlyrate = $this->pluginPrefs['hduprefs_hourlyrate'];
-        $this->hduprefs_menutitle = $this->pluginPrefsF['hduprefs_menutitle'];
+        $this->hduprefs_menutitle = $this->pluginPrefs['hduprefs_menutitle'];
         $this->hduprefs_closestat = $this->pluginPrefs['hduprefs_closestat'];
         $this->hduprefs_assignto = $this->pluginPrefs['hduprefs_assignto'];
         $this->hduprefs_assigned = $this->pluginPrefs['hduprefs_assigned'];
