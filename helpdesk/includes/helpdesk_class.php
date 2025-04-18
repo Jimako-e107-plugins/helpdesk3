@@ -749,7 +749,7 @@ class helpdesk
     // **********************************************************************************************
     function delete_ticket($id)
     {
-        global $sql, $tp, $hdu_shortcodes, $hdu_id;
+        global $sql, $tp, $hdu_id;
 //        require(HDU_THEME);
         $hdu_id = $id;
         $hdu_retval = "
@@ -760,6 +760,7 @@ class helpdesk
 			<input type='hidden' name='hdu_aaction' value='list' />
 		</div>";
         $HDU_DELETE = e107::getTemplate('helpdesk', 'helpdesk_delete');
+        $hdu_shortcodes = e107::getScBatch('delete', 'helpdesk');
         if ($this->hdu_super)
         {
             $hdu_retval .= $tp->parseTemplate($HDU_DELETE['ok'], false, $hdu_shortcodes);
@@ -789,8 +790,7 @@ class helpdesk
         // TO DO
         // Check if user is technicial for this ticket - if not then don't allow to do things to it.
         // *
-        global $sql, $tp, $helpdesk_obj, $HDU_SHOWTICKET_TICKET, $HDU_SHOWTICKET, $HDU_SHOWTICKET_DETAILS, $HDU_SHOWTICKET_FINANCE, $hdu_shortcodes,
-        $HDU_SHOWTICKET_COMMENT_HEADER, $HDU_SHOWTICKET_COMMENT_FOOTER, $HDU_SHOWTICKET_COMMENT_DETAIL, $hdu_posterid, $hdu_sel_users,
+        global $sql, $tp, $helpdesk_obj, $hdu_posterid, $hdu_sel_users,
         $hdupostername, $hdu_datestamp, $hdu_category, $hdu_summary, $hdu_tagno, $hdu_email, $hdu_resolution, $hdures_resolution, $hdu_description,
         $hdu_tech, $hdu_allocated, $hdu_closed, $hdu_hours, $hdu_fixcost, $hdu_hrate, $hdu_hcost, $hdu_distance, $hdu_fixother, $hdu_fix,
         $hdu_drate, $hdu_dcost, $hdu_eqptcost, $hdu_callout, $hduc_date, $hduc_postername, $hduc_comment, $hdu_priority, $hdu_savemsg, $hdu_totalcost;
@@ -949,7 +949,8 @@ function changed()
             // <div id='titlecaption' style='text-align:center'>";
 //            require(HDU_THEME);
             $HDU_SHOWTICKET = e107::getTemplate('helpdesk', 'helpdesk_show');
-
+            $hdu_shortcodes = e107::getScBatch('show','helpdesk');
+//            var_dump($hdu_shortcodes);
 //            var_dump($HDU_SHOWTICKET);
             $hdu_retval .= $tp->parseTemplate($HDU_SHOWTICKET["main"], false, $hdu_shortcodes);
             // $hdu_retval .= "

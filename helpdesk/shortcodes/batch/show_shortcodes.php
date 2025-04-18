@@ -1,156 +1,12 @@
 <?php
-include_once(e_HANDLER . 'shortcode_handler.php');
-$hdu_shortcodes = $tp->e_sc->parse_scbatch(__FILE__);
-/*
-SC_BEGIN HDU_TITLE
-global $tp, $HELPDESK_PREF;
-return $tp->toHTML($HELPDESK_PREF['hduprefs_title'], false, "no_make_clickable emotes_off");
-SC_END
+//include_once(e_HANDLER . 'shortcode_handler.php');
+//$hdu_shortcodes = $tp->e_sc->parse_scbatch(__FILE__);
+if (!defined('e107_INIT')) { exit; }
 
-SC_BEGIN HDU_MESSAGETOP
-global $tp, $HELPDESK_PREF;
-return $tp->toHTML($HELPDESK_PREF['hduprefs_messagetop'], true, 'no_make_clickable emotes_off');
-SC_END
-
-SC_BEGIN HDU_MESSAGE
-global $hdu_savemsg;
-return $hdu_savemsg;
-SC_END
-
-SC_BEGIN HDU_PHONE
-global $tp, $HELPDESK_PREF;
-if(!empty($HELPDESK_PREF['hduprefs_phone']))
+class plugin_helpdesk_show_shortcodes extends e_shortcode
 {
-	return HDU_102 . ' ' . $tp->toHTML($HELPDESK_PREF['hduprefs_phone'], false, 'no_make_clickable emotes_off');
-}
-else
-{
-	return '&nbsp;';
-}
-SC_END
-
-SC_BEGIN HDU_FAQ
-global $tp, $HELPDESK_PREF;
-if(!empty($HELPDESK_PREF['hduprefs_faq']))
-{
-return "<a href='" . $tp->toHTML($HELPDESK_PREF['hduprefs_faq']) . "' >" . HDU_207 . "</a>";
-}
-else
-{
-	return '&nbsp;';
-}
-SC_END
-
-SC_BEGIN HDU_NEWTICKET
-global $helpdesk_obj,$show;
-if ($helpdesk_obj->hdu_poster)
-{
-	return "<a href ='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
-}
-else
-{
-	return;
-}
-SC_END
-
-SC_BEGIN HDU_REPORTS
-global $helpdesk_obj,$from,$id;
-if ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
-{
-    return "<a href ='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.repmenu.$id' ><img src='".e_PLUGIN.HELPDESK_FOLDER . "/images/print.gif' style='border:0;' alt='' title='" . HDU_101 . "' /></a>";
-}
-SC_END
-
-SC_BEGIN HDU_FILTER
-global $hdu_filtselect;
-return $hdu_filtselect;
-SC_END
-
-SC_BEGIN HDU_GOTOREC
-global $hdu_goto;
-return "<input type ='text' name ='goto' maxlength ='5' value ='" . $hdu_goto . "' size ='10' class ='tbox' />";
-SC_END
-
-SC_BEGIN HDU_DOFILTER
-return "<input type ='submit' class='button' style='border:0;' name ='filterit' value ='" . HDU_74 . "' alt='" . HDU_74 . "' title='" . HDU_74 . "' />";
-SC_END
-
-SC_BEGIN HDU_TICKET_STATUS
-global $hdu_imgtag;
-return $hdu_imgtag;
-SC_END
-
-SC_BEGIN HDU_TICKET_ID
-global $hdu_id;
-return $hdu_id;
-SC_END
-
-SC_BEGIN HDU_TICKET_ID
-global $hdu_id;
-return $hdu_id;
-SC_END
-
-SC_BEGIN HDU_TICKET_SUMMARY
-global $tp, $hdu_id, $hdu_summary,$from;
-return "<a href ='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.show." . $hdu_id  . "' > " . $tp->toFORM($hdu_summary) . "</a>";
-SC_END
-
-SC_BEGIN HDU_TICKET_POSTED
-global $helpdesk_obj, $hdu_datestamp;
-if ($hdu_datestamp>0)
-{
-	return date($parm,$hdu_datestamp);
-}
-else
-{
-	return "";
-}
-SC_END
-
-SC_BEGIN HDU_TICKET_CATEGORY
-global $hducat_category, $tp;
-return $tp->toHTML($hducat_category, false);
-SC_END
-
-SC_BEGIN HDU_TICKET_POSTER
-global $poster;
-return $poster;
-SC_END
-
-SC_BEGIN HDU_TICKET_RESOLUTION
-global $tp, $hdures_resolution,$hdures_help;
-if(!empty($hdures_help))
-{
-$text_to_pop=$tp->toFORM($hdures_help);
-return "<span style='border-bottom: 3px double;' onmouseout=\"hdu_hideTooltip()\" onmouseover=\"hdu_showTooltip(event,'" .$text_to_pop . "');return false\">".$tp->toHTML($hdures_resolution, false)."</span>";
-}
-else
-{
-return $tp->toHTML($hdures_resolution, false);
-}
-SC_END
-
-SC_BEGIN HDU_TICKET_HELPDESK
-global $tp, $hdudesk_name;
-return $tp->toHTML($hdudesk_name, false);
-SC_END
-
-SC_BEGIN HDU_MESSAGEBOTTOM
-global $tp, $HELPDESK_PREF;
-return $tp->toHTML($HELPDESK_PREF['hduprefs_messagebottom'], false);
-SC_END
-
-SC_BEGIN HDU_RIGHTS
-global $hdu_rights;
-return $hdu_rights;
-SC_END
-
-SC_BEGIN HDU_NEXTPREV
-global $hdu_nextprev;
-return $hdu_nextprev;
-SC_END
-
-SC_BEGIN HDU_SHOW_ACTION
+	function sc_hdu_show_action()
+  {
 global $helpdesk_obj;
 if ($helpdesk_obj->hdu_new)
 {
@@ -160,43 +16,39 @@ else
 {
 	return "Edit ticket";
 }
-SC_END
+}
 
-SC_BEGIN HDU_PRIORITYCOLOUR
-global $helpdesk_obj,$hdu_priority;
- return $helpdesk_obj->hduprefs_colours[$hdu_priority];
-SC_END
-
-SC_BEGIN HDU_SHOW_UPDIR
+	function sc_hdu_show_updir()
+  {
 global $id, $R1,$from;
 return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.list.$id'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a>";
-SC_END
+}
 
-
-
-SC_BEGIN HDU_SHOW_PRINT
+	function sc_hdu_show_print()
+  {
 global $helpdesk_obj, $id, $R1,$from;
+//var_dump(defined("IMODE")?IMODE:"");
 if (!$helpdesk_obj->hdu_new)
 {
-    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . IMODE . "/printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
+    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE:"") . "/printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
 }
-SC_END
+}
 
-
-SC_BEGIN HDU_SHOW_EMAILLINK
+	function sc_hdu_show_emaillink()
+  {
 global $helpdesk_obj, $id;
 if (!$helpdesk_obj->hdu_new && (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super))
 {
-    return "<a href='../../email.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . IMODE . "/email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
+    return "<a href='../../email.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE:"") . "/email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
 }
 else
 {
 	return "";
 }
-SC_END
+}
 
-
-SC_BEGIN HDU_SHOW_PDF
+	function sc_hdu_show_pdf()
+  {
 global $helpdesk_obj, $id, $R1,$from;
 if (!$helpdesk_obj->hdu_new )
 {
@@ -206,9 +58,10 @@ else
 {
 	return "";
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_TABLIST
+	function sc_hdu_show_tablist()
+  {
 global $helpdesk_obj,$hdu_posterid;
 
 $hdu_show=($helpdesk_obj->hduprefs_showfinance?1:0);
@@ -227,9 +80,10 @@ if (!$helpdesk_obj->hdu_new && (USERID==$hdu_posterid || $helpdesk_obj->hduprefs
 	$retval .= "<input type='button' class='button' onclick=\"hdu_show('comment',$hdu_show,$hdu_comm);\" value='".HDU_244."' name='hdu_c' id='hdu_c' />";
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_USER
+	function sc_hdu_show_user()
+  {
 global $helpdesk_obj, $tp, $hdu_sel_users, $hdupostername;
 
 if ($helpdesk_obj->hdu_new && ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
@@ -241,9 +95,10 @@ else
     return $tp->toHTML($hdupostername);
 }
 
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_DATEPOSTED
+	function sc_hdu_show_dateposted()
+  {
 global $helpdesk_obj, $hdu_datestamp;
 if ($hdu_datestamp>0)
 {
@@ -253,9 +108,10 @@ else
 {
 	return "";
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_PRIORITY
+	function sc_hdu_show_priority()
+  {
 global $helpdesk_obj, $hdu_priority;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -279,9 +135,10 @@ else
     ($hdu_priority == "5"?HDU_141:"") ;
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_SUMMARY
+	function sc_hdu_show_summary()
+  {
 global $tp, $helpdesk_obj, $hdu_summary;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -292,9 +149,10 @@ else
     $retval = $tp->toHTML($hdu_summary, false);
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_CATEGORY
+	function sc_hdu_show_category()
+  {
 global $tp, $sql, $helpdesk_obj, $hdu_category;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -329,9 +187,10 @@ else
     }
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_ASSET
+	function sc_hdu_show_asset()
+  { 
 global $tp, $hdu_tagno, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -342,9 +201,10 @@ else
     $retval = $tp->toHTML($hdu_tagno, false);
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_DESCRIPTION
+	function sc_hdu_show_description()
+  {
 global $tp, $hdu_description, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print &&($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -355,9 +215,10 @@ else
     $retval = $tp->toHTML($hdu_description, false);
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_EMAIL
+	function sc_hdu_show_email()
+  {
 global $tp, $helpdesk_obj, $hdu_email;
 
     if ($helpdesk_obj->hdu_showemail)
@@ -372,9 +233,10 @@ global $tp, $helpdesk_obj, $hdu_email;
         $retval = $tp->toHTML($hdu_email, false);
     }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_DELETE
+	function sc_hdu_show_delete()
+  {
 global $helpdesk_obj,$id,$from;
 if (!$helpdesk_obj->hdu_new && $helpdesk_obj->hdu_super)
 {
@@ -384,10 +246,10 @@ else
 {
 	return "";
 }
-SC_END
+}
 
-
-SC_BEGIN HDU_SHOW_STATUS
+	function sc_hdu_show_status()
+  {
 global $tp, $hdures_resolution, $hdu_resolution, $helpdesk_obj;
 
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super))
@@ -403,9 +265,10 @@ else
     $retval = $tp->toHTML($hdures_resolution, false);
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_ASSIGNEDTO
+	function sc_hdu_show_assignedto()
+  { 
 global $tp, $sql, $hdu_tech, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && $helpdesk_obj->hdu_super)
 {
@@ -432,16 +295,18 @@ if (!$helpdesk_obj->hdu_print && $helpdesk_obj->hdu_super)
 else
 {
     // get the name of the help desk
-    $sql->db_Select("hdu_helpdesk", "hdudesk_id,hdudesk_name", "hdudesk_id='$hdu_tech'");
-    $hdu_row = $sql->db_Fetch();
-    extract($hdu_row);
-    $retval = $tp->toHTML($hdudesk_name, false);
+    $sql->select("hdu_helpdesk", "hdudesk_id, hdudesk_name", "hdudesk_id='$hdu_tech'");
+    $hdu_row = $sql->fetch();
+//    var_dump ($hdu_row);
+//    extract($hdu_row);
+    $retval = $tp->toHTML($hdu_row["hdudesk_name"], false);
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_ALLOCATE_TIME
-global $tp, $hdu_allocated, $helpdesk_obj;
+	function sc_hdu_show_allocate_time()
+  { 
+    global $tp, $hdu_allocated, $helpdesk_obj;
 if ($hdu_allocated == 0)
 {
     // Not yet allocated so can't display assigned date
@@ -452,9 +317,10 @@ else
     $retval = $helpdesk_obj->hduconvert_date->convert_date($hdu_allocated);
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_CLOSED
+	function sc_hdu_show_closed()
+  { 
 
 global $tp, $hdu_closed, $helpdesk_obj;
 if ($hdu_closed == 0)
@@ -468,9 +334,10 @@ else
     $retval = $helpdesk_obj->hduconvert_date->convert_date($hdu_closed);
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_FIX
+	function sc_hdu_show_fix()
+  { 
 global $tp, $sql, $helpdesk_obj, $hdu_fix,$hdu_fixother;
 if ($helpdesk_obj->hduprefs_showfixes)
 {
@@ -519,9 +386,10 @@ else
     }
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_FIXCOST
+	function sc_hdu_show_fixcost()
+  { 
 global $hdu_fixcost,$helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -531,9 +399,10 @@ else
 {
 	return $hdu_fixcost;
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_HOURS
+	function sc_hdu_show_hours()
+  {
 global $hdu_hours,$helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -543,9 +412,10 @@ else
 {
 	return $hdu_hours;
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_RATE
+	function sc_hdu_show_rate()
+  { 
 global $hdu_hrate,$helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super))
 {
@@ -555,14 +425,16 @@ else
 {
 	return $hdu_hrate;
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_COST
+	function sc_hdu_show_cost()
+  { 
 global $hdu_hcost;
 return $hdu_hcost;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_TRAVEL
+	function sc_hdu_show_travel()
+  { 
 global $hdu_distance,$helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -572,9 +444,10 @@ else
 {
 	return $hdu_distance;
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_DISTANCERATE
+	function sc_hdu_show_distancerate()
+  { 
 global $hdu_drate,$helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -584,14 +457,16 @@ else
 {
 	return $hdu_drate;
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_DISTANCECOST
+	function sc_hdu_show_distancecost()
+  { 
 global $hdu_dcost;
 return $hdu_dcost;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_EQUPTCOST
+	function sc_hdu_show_equptcost()
+  { 
 global $hdu_eqptcost,$helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -601,9 +476,10 @@ else
 {
 	return $hdu_eqptcost;
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_CALLOUT
+	function sc_hdu_show_callout()
+  { 
 global $helpdesk_obj,$hdu_callout;
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
@@ -613,14 +489,16 @@ else
 {
 	return $hdu_callout;
 }
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_TOTALCOST
+	function sc_hdu_show_totalcost()
+  { 
 global $hdu_totalcost;
 return $hdu_totalcost;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_SUBMIT
+	function sc_hdu_show_submit()
+  { 
 global $helpdesk_obj,$hdu_closed,$hdu_posterid;
 if ($hdu_closed == 0 || ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician || (USERID == $hdu_posterid && $helpdesk_obj->hduprefs_reopen)))
 {
@@ -632,24 +510,28 @@ else
     $retval= "";
 }
 return $retval;
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_COMMENTDATE
+	function sc_hdu_show_commentdate()
+  {
 global $helpdesk_obj,$hduc_date;
 return  $helpdesk_obj->hduconvert_date->convert_date($hduc_date, "short");
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_COMMENTPOSTER
+	function sc_hdu_show_commentposter()
+  { 
 global $tp,$hduc_postername;
 return $tp->toHTML($hduc_postername,false);
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_COMMENT
+	function sc_hdu_show_comment()
+  { 
 global $tp,$hduc_comment;
 return $tp->toHTML($hduc_comment,false);
-SC_END
+}
 
-SC_BEGIN HDU_SHOW_NEWCOMMENT
+	function sc_hdu_show_newcomment()
+  { 
 global $helpdesk_obj,$hdu_closed,$hdu_posterid;
 
 if ($hdu_closed == 0 || ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician || (USERID == $hdu_posterid && $helpdesk_obj->hduprefs_reopen)))
@@ -657,21 +539,6 @@ if ($hdu_closed == 0 || ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technici
 	return "<textarea cols='40' onkeyup=\"changed()\"  rows='4' style='width:99%' name='hduc_comment'></textarea>";
 }
 
-SC_END
+}
 
-SC_BEGIN HDU_DELETE_CONFIRM
-return "<input type='submit' class='button' name='hdu_confirm' value='".HDU_231."' />";
-SC_END
-
-SC_BEGIN HDU_DELETE_CANCEL
-return "<input type='submit' class='button' name='hdu_cancel' value='".HDU_232."' />";
-SC_END
-
-
-
-
-
-
-*/
-
-?>
+}
