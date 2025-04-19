@@ -62,7 +62,7 @@ if (is_readable(THEME . "helpdesk.png"))
 }
 
 //require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
-$gen = new convert;
+ 
 // *
 // set show and id to 0
 // *
@@ -161,7 +161,7 @@ switch ($hdu_aaction)
         {
             $helpdesk_obj->hdu_new = true;
             $hdu_text = $helpdesk_obj->show($id);
-            $helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title, $hdu_text);
+            $helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title, $hdu_text, "newticket");
             require_once(FOOTERF);
             exit();
         }
@@ -358,7 +358,7 @@ else
   //      var_dump($hdurow);
         extract($hdurow); // why extract? why not fetch vars from array?
         // $hdu_postdate = $hdu_datestamp;
-        // $hdu_datestamp = $gen->convert_date($hdu_datestamp, "short");
+        // $hdu_datestamp = e107::getDate()->convert_date($hdu_datestamp, "short");
         $hdu_tmp = explode(".", $hdu_poster, 2);
         $post_author_id = $hdu_tmp[0];
         $post_author_name = $hdu_tmp[1];
@@ -440,5 +440,5 @@ $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["footer"], false, $hdu_shortcod
 $hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
 $hdu_text .= "
 </form>";
-$helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title.$tp->parseTemplate($HDU_LISTTICKETS["caption"], true, $hdu_shortcodes), $hdu_text, 'hdu_main');
+$helpdesk_obj->tablerender($helpdesk_obj->hduprefs_title.$tp->parseTemplate($HDU_LISTTICKETS["caption"], false, $hdu_shortcodes), $hdu_text, 'hdu_main');
 require_once(FOOTERF);

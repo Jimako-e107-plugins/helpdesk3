@@ -55,8 +55,8 @@ class HDU_PDF extends UFPDF
     }
 }
 // ####################### get the data ############################
-$hdu_conv = new convert;
-$hdu_now = $hdu_conv->convert_date(time());
+ 
+$hdu_now = e107::getDate()->convert_date(time());
 $hdu_siteurl = SITEURL . "index.php";
 
 $hdu_udb = new DB;
@@ -130,16 +130,16 @@ while ($hdu_row = $hdu_udb->db_Fetch())
 
     if ($hdu_allocated > 0)
     {
-        $hdu_pdf->Cell(22, 6, $hdu_conv->convert_date($hdu_allocated, "short"), 0, 0);
+        $hdu_pdf->Cell(22, 6, e107::getDate()->convert_date($hdu_allocated, "short"), 0, 0);
     }
     else
     {
         $hdu_pdf->Cell(22, 6, "", 0, 0);
     }
-    $hdu_pdf->Cell(22, 6, $hdu_conv->convert_date($hdu_datestamp, "short"), 0, 0);
+    $hdu_pdf->Cell(22, 6, e107::getDate()->convert_date($hdu_datestamp, "short"), 0, 0);
     if ($hdu_closed > 0)
     {
-        $hdu_pdf->Cell(22, 6, $hdu_conv->convert_date($hdu_closed, "short"), 0, 0);
+        $hdu_pdf->Cell(22, 6, e107::getDate()->convert_date($hdu_closed, "short"), 0, 0);
     }
     else
     {

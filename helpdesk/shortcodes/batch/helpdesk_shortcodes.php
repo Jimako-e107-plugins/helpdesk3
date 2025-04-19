@@ -121,7 +121,7 @@ class helpdesk_shortcodes extends e_shortcode
 
 	function sc_hdu_ticket_posted($parm = null)
 	{
-		global $helpdesk_obj, $hdu_datestamp;
+		global $hdu_datestamp;
 		if ($hdu_datestamp > 0)
 		{
 			return date($parm, $hdu_datestamp);

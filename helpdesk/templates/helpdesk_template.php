@@ -23,7 +23,7 @@ if (!isset($HELPDESK_TEMPLATE["header"]))
 	<tr>
 		<td style='vertical-align:top;'  colspan='8' class ='forumheader3'><b>{HDU_MESSAGE}</b>&nbsp;</td>
 	</tr>";
-    //if (!empty($HELPDESK_PREF['hduprefs_messagetop']))
+    //if (!empty($HELPDESKx_PREF['hduprefs_messagetop']))
     //{
         // If there is a message at the top of the helpdesk to display then display it
         $HELPDESK_TEMPLATE["header"] .= "

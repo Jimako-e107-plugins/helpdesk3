@@ -99,10 +99,10 @@ else
 
 	function sc_hdu_show_dateposted()
   {
-global $helpdesk_obj, $hdu_datestamp;
+global   $hdu_datestamp;
 if ($hdu_datestamp>0)
 {
-	return $helpdesk_obj->hduconvert_date->convert_date($hdu_datestamp);
+	return e107::getDate()->convert_date($hdu_datestamp);
 }
 else
 {
@@ -306,7 +306,7 @@ return $retval;
 
 	function sc_hdu_show_allocate_time()
   { 
-    global $tp, $hdu_allocated, $helpdesk_obj;
+    global $hdu_allocated ;
 if ($hdu_allocated == 0)
 {
     // Not yet allocated so can't display assigned date
@@ -314,7 +314,7 @@ if ($hdu_allocated == 0)
 }
 else
 {
-    $retval = $helpdesk_obj->hduconvert_date->convert_date($hdu_allocated);
+    $retval = e107::getDate()->convert_date($hdu_allocated);
 }
 return $retval;
 }
@@ -322,7 +322,7 @@ return $retval;
 	function sc_hdu_show_closed()
   { 
 
-global $tp, $hdu_closed, $helpdesk_obj;
+global $hdu_closed;
 if ($hdu_closed == 0)
 {
     // Not closed
@@ -331,7 +331,7 @@ if ($hdu_closed == 0)
 else
 {
     // Display date ticket was closed
-    $retval = $helpdesk_obj->hduconvert_date->convert_date($hdu_closed);
+    $retval = e107::getDate()->convert_date($hdu_closed);
 }
 return $retval;
 }
@@ -514,8 +514,8 @@ return $retval;
 
 	function sc_hdu_show_commentdate()
   {
-global $helpdesk_obj,$hduc_date;
-return  $helpdesk_obj->hduconvert_date->convert_date($hduc_date, "short");
+global $hduc_date;
+return  e107::getDate()->convert_date($hduc_date, "short");
 }
 
 	function sc_hdu_show_commentposter()

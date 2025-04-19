@@ -10,7 +10,7 @@ require_once(e_HANDLER . "calendar/calendar_class.php");
 $hdu_cal = new DHTML_Calendar(true);
 
 $hdu_caltext .= $hdu_cal->load_files();
-switch ($HELPDESK_PREF['hdu_dateformat'])
+switch (e107::pref('helpdesk', 'hdu_dateformat'))
 {
     case 1:
         $hdu_calformat = "m-d-Y";

@@ -30,10 +30,7 @@ function print_item($id)
     {
         define(HDU_TEMPLATE, e_PLUGIN . HELPDESK_FOLDER . "/templates/helpdesk_print_template.php");
     }
-    if (!isset($gen))
-    {
-        $gen = new convert;
-    }
+ 
     $hdu_arg = "
 select * from #hdunit
 		left join #hdu_categories on hdu_category=hducat_id

@@ -69,7 +69,7 @@ function pdfit($hdu_pdf_id = 0, $hdu_pdf_dest = "f", $hdu_pdf_name = "Helpdesk.p
 
     global $helpdesk_obj, $sql, $hdu_assto,$tp;
     // Create objects
-    $hdu_conv = new convert;
+ 
     $hdushow = new DB;
     $hdu_udb = new DB;
     // Get the ticket record
@@ -132,13 +132,13 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     $hdu_tit = HDU_120 . " " . $hdu_pdf_id;
     $hdu_pdf->Cell(40, 6, $hdu_tit, 0, 1);
     $hdu_pdf->SetFont('Times', 'b', 12);
-    $hdu_tit = HDU_121 . $hdu_conv->convert_date(time());
+    $hdu_tit = HDU_121 . e107::getDate()->convert_date(time());
     $hdu_pdf->Cell(40, 6, $hdu_tit, 0, 1);
     $hdu_pdf->SetFont('Times', '', 10);
     $hdu_pdf->Cell(40, 6, HDU_3, 0, 0);
     $hdu_pdf->MultiCell(140, 6, $hdupostername, 0, 1);
     $hdu_pdf->Cell(40, 6, HDU_36, 0, 0);
-    $hdu_pdf->Cell(40, 6, $hdu_conv->convert_date($hdu_datestamp), 0, 1);
+    $hdu_pdf->Cell(40, 6, e107::getDate()->convert_date($hdu_datestamp), 0, 1);
     $hdu_pdf->Cell(40, 6, HDU_6, 0, 0);
     switch ($hdu_priority)
     {
@@ -197,7 +197,7 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     else
     {
         $hdu_pdf->Cell(40, 6, HDU_26, 0, 0);
-        $hdu_pdf->Cell(40, 6, $hdu_conv->convert_date($hdu_allocated), 0, 1);
+        $hdu_pdf->Cell(40, 6, e107::getDate()->convert_date($hdu_allocated), 0, 1);
         $hdu_pdf->Cell(40, 6, HDU_25, 0, 0);
         $hdu_pdf->Cell(40, 6, $hdutechname, 0, 1);
     }
@@ -222,10 +222,10 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     else
     {
         $hdu_pdf->Cell(40, 6, HDU_37, 0, 0);
-        $hdu_pdf->Cell(40, 6, $hdu_conv->convert_date($hdu_closed), 0, 1);
+        $hdu_pdf->Cell(40, 6, e107::getDate()->convert_date($hdu_closed), 0, 1);
     }
     $hdu_pdf->Cell(40, 6, HDU_91, 0, 0);
-    $hdu_pdf->Cell(40, 6, $hdu_conv->convert_date($hdu_lastchanged), 0, 1);
+    $hdu_pdf->Cell(40, 6, e107::getDate()->convert_date($hdu_lastchanged), 0, 1);
 
     if ($hduprefs_showfixes == 1)
     {
@@ -317,7 +317,7 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
                 $hduc_poster = explode(".", $hduc_poster);
                 $hduc_posterid = $hduc_poster[0];
                 $hduc_postername = $hduc_poster[1];
-                $hdu_pdf->Cell(40, 6, $hdu_conv->convert_date($hduc_date, "short"), 0, 0);
+                $hdu_pdf->Cell(40, 6, e107::getDate()->convert_date($hduc_date, "short"), 0, 0);
                 $hdu_pdf->Cell(40, 6, $hduc_postername, 0, 0);
                 $hdu_pdf->MultiCell(100, 6, $hduc_comment, 0, 1);
             }

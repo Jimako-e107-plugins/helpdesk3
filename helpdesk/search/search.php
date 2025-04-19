@@ -17,8 +17,8 @@ $results = $ps['results'];
 
 function search_helpdesk($row)
 {
-    global $con;
-    $datestamp = $con->convert_date($row['hdu_datestamp'], "long");
+ 
+    $datestamp = e107::getDate()->convert_date($row['hdu_datestamp'], "long");
     $title = $row['hdu_id'];
 
     $link_id = $row['hdu_id'];

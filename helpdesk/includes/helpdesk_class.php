@@ -42,7 +42,7 @@ class helpdesk
     var $hduprefs_rows = 10;
     var $hduprefs_memberof = "";
     var $hduprefs_posteronly = false;
-    var $hduconvert_date = "";
+ 
     var $hdu_new = false;
     var $hdu_edit = false;
     var $hdu_quick = false;
@@ -127,7 +127,7 @@ class helpdesk
         $this->hduprefs_reopen = $this->pluginPrefs['hduprefs_reopen'] == 1;
         $this->hduprefs_mailpdf = $this->pluginPrefs['hduprefs_mailpdf'] == 1;
         $this->hduprefs_allread = $this->pluginPrefs['hduprefs_allread'] == 1;
-        $this->hduconvert_date = new convert;
+ 
         // if show finance and supervisor or technician
         // or show finance and show to users
         if (($this->pluginPrefs['hduprefs_showfinance'] == 1 && ($this->hdu_super || $this->hdu_technician)) || ($this->pluginPrefs['hduprefs_showfinance'] == 1 && $this->pluginPrefs['hduprefs_showfinusers'] == 1))
@@ -209,7 +209,7 @@ class helpdesk
 		e107::getCache()->clear("nq_helpdesk");
   
     }
-	
+
     // **********************************************************************************************
     // *
     // *	Function	:	hdu_makedate($hdu_cal_date)
