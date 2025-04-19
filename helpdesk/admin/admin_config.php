@@ -41,27 +41,27 @@ class helpdesk_prefs_ui extends e_admin_ui
 		'hduprefs_supervisorclass' => array(
 			'title'      => HDU_A9,
 			'type'       => 'userclass',
-			'data'       => 'userclass',
+			'data'       => 'str',
 			'help'       => HDU_A301,
-			'writeParms' => array('classlist' => 'nobody,main,admin,classes')
+		 
 		),
 
 		// Post class
 		'hduprefs_postclass' => array(
 			'title'      => HDU_A203,
 			'type'       => 'userclass',
-			'data'       => 'userclass',
+			'data'       => 'str',
 			'help'       => HDU_A204,
-			'writeParms' => array('classlist' => 'nobody,member,main,admin,classes')
+		 
 		),
 
 		// User class
 		'hduprefs_userclass' => array(
 			'title'      => HDU_A11,
 			'type'       => 'userclass',
-			'data'       => 'userclass',
+			'data'       => 'str',
 			'help'       => HDU_A302,
-			'writeParms' => array('classlist' => 'public,nobody,member,main,admin,classes')
+			 
 		),
 
 		// Message top
