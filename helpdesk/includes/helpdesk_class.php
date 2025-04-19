@@ -929,6 +929,7 @@ function changed()
         global $sql, $sql2, $id;
         unset($hdu_up_closed);
         unset($hdu_args);
+ 
         $this->hdu_new = intval($_POST['hdu_new']) == 1;
         if ($_POST['hdu_changed'] == "yes")
         {
@@ -1002,6 +1003,14 @@ function changed()
             }
             $hdu_a_dcost = $hdu_distance * $hdu_drate ;
             $hdu_a_hcost = $hdu_hours * $hdu_hrate;
+
+			$hdu_fixcost    = (float) ($hdu_fixcost ?? 0);
+			$hdu_callout    = (float) ($hdu_callout ?? 0);
+			$hdu_a_fcost    = (float) ($hdu_a_fcost ?? 0);
+			$hdu_eqptcost   = (float) ($hdu_eqptcost ?? 0);
+			$hdu_a_dcost    = (float) ($hdu_a_dcost ?? 0);
+			$hdu_a_hcost    = (float) ($hdu_a_hcost ?? 0);
+
             $hdu_a_totalcost = $hdu_fixcost + $hdu_callout + $hdu_a_fcost + $hdu_eqptcost + $hdu_a_dcost + $hdu_a_hcost;
             // if the ticket has been allocated to a helpdesk then set the time
             // print $_POST['hdu_tech']."hdu_tech";
