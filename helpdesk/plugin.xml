@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="Help Desk" lan="" version="1.0" date="2024-12-20" compatibility="2.0" installRequired="true" >
+<e107Plugin name="Help Desk" lan="" version="2.0" date="2025-04-19" compatibility="2.0" installRequired="true" >
 	<author name="Father Barry" url="http://www.keal.me.uk" />
 	<summary lan="">Helpdesk plugin allows users of your system to post help requests and track their progress. (updated by Jimako / rica-carv)</summary>
 	<description lan="">Helpdesk plugin allows users of your system to post help requests and track their progress. (updated by Jimako / rica-carv)</description>
@@ -15,7 +15,11 @@
 	</adminLinks>
     <siteLinks>
 		<link url="{e_PLUGIN}helpdesk/helpdesk.php" perm='everyone' lan=''>Helpdesk</link>
-	</siteLinks>	
+	</siteLinks>
+    <dependencies>
+        <plugin name='bootstrap_colorpicker'/>
+        <PHP name='core' min_version='8.0.0' />
+    </dependencies>	
     <pluginPrefs>
         <pref name='hduprefs_seo'>0</pref>
         <pref name='hduprefs_supervisorclass'>255</pref>
