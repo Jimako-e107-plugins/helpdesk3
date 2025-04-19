@@ -1,6 +1,6 @@
 <?php
 
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
+e107::lan("helpdesk", true, true );
 
 class helpdesk_adminArea extends e_admin_dispatcher
 {

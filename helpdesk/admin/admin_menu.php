@@ -1,6 +1,6 @@
 <?php
 
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
+e107::lan("helpdesk", true, true);
 
 $action = basename($_SERVER['PHP_SELF'], ".php");
 

@@ -95,7 +95,7 @@ define("HDU_A87", "Unable to create status");
 define("HDU_A88", "Unable to save status");
 define("HDU_A89", "Edit status");
 define("HDU_A90", "Create status");
-define("HDU_A91", "Deletion must be confirmed");
+//define("HDU_A91", "Deletion must be confirmed");
 define("HDU_A92", "Status name");
 define("HDU_A93", "Saved");
 define("HDU_A94", "Administer Statuses");

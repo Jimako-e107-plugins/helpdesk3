@@ -9,7 +9,8 @@ if (!getperms("P"))
 	header("location:" . e_BASE . "index.php");
 	exit;
 }
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
+
+ 
  
 
 include_once(e_PLUGIN .  HELPDESK_FOLDER .  "/admin/left_menu.php");

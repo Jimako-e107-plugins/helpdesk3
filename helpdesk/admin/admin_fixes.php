@@ -9,7 +9,7 @@ if (!getperms("P"))
     header("location:" . e_BASE . "index.php");
     exit;
 }
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
+e107::lan("helpdesk", true, true);
 if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {
 	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
