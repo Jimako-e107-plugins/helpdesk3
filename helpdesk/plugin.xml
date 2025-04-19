@@ -46,5 +46,24 @@
         <pref name='hduprefs_callout'>10</pref>
         <pref name='hduprefs_autoassign'>0</pref>
         <pref name='hduprefs_showfinusers'>0</pref>
+        <pref name='hduprefs_mailuser'>0</pref>
+        <pref name='hduprefs_mailhelpdesk'>0</pref>
+        <pref name='hduprefs_mailtechnician'>0</pref>
+        <pref name='hduprefs_pmfrom'>0</pref>
+        <pref name='hduprefs_emailfrom'>Helpdesk for </pref>
+        <pref name='hduprefs_mailpdf'>0</pref>
+        <pref name='hduprefs_usersubject'>Helpdesk Ticket</pref>
+        <pref name='hduprefs_helpdesksubject'>Update Text</pref>
+        <pref name='hduprefs_userupsubject'>Updated Helpdesk Ticket</pref>
+        <pref name='hduprefs_helpupsubject'>Helpdesk Ticket</pref>
+        <pref name='hduprefs_usertext'>Text</pref>
+        <pref name='hduprefs_helpdesktext'>Text</pref>
+        <pref name='hduprefs_updateuser'>Update Text</pref>
+        <pref name='hduprefs_updatehelpdesk'>Update Text</pref>
+        <pref name='hduprefs_p1col'>#00CC00</pref>
+        <pref name='hduprefs_p2col'>#99CC00</pref>
+        <pref name='hduprefs_p3col'>#FFFF33</pref>
+        <pref name='hduprefs_p4col'>#FF9933</pref>
+        <pref name='hduprefs_p5col'>#FF0000</pref>
     </pluginPrefs>
 </e107Plugin>

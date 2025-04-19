@@ -29,6 +29,8 @@ if (!defined("ADMIN_WIDTH"))
     define(ADMIN_WIDTH, "width:100%;");
 }
 
+$pluginPrefs = e107::pref('helpdesk');
+
 $hdu_ac_action = $_POST['hdu_ac_action'] ?? null;;
 // * If we are updating then update or insert the record
 if ($hdu_ac_action == 'update')
@@ -122,7 +124,7 @@ if ($hdu_ac_action == 'dothings')
                 if ($_POST['hdu_ac_okdel'] == '1')
                 {
                     // We are going to delete this record
-                    if (($sql->db_Count("hdunit", "(*)", "where hdu_resolution='$hdu_ac_id'") > 0) || $HELPDESK_PREF['hduprefs_defaultres'] == $hdu_ac_id || $HELPDESK_PREF['hduprefs_autocloseres'] == $hdu_ac_id)
+                    if (($sql->db_Count("hdunit", "(*)", "where hdu_resolution='$hdu_ac_id'") > 0) || $pluginPrefs['hduprefs_defaultres'] == $hdu_ac_id || $pluginPrefs['hduprefs_autocloseres'] == $hdu_ac_id)
                     {
                         // Record in use
                         $hdu_msg .= HDU_A104 ;

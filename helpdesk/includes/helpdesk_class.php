@@ -86,24 +86,25 @@ class helpdesk
     var $hduprefs_showfixes = false;
     var $hduprefs_escalateon = 0;
 
+	var $hdu_memberof = ""; //php 8 warning
+
 
 	private $pluginPrefs = array();
 	private $tp;
 
     function __construct()
     {
-        global $sql, $HELPDESK_PREF;
+        global $sql;
 
 		$this->pluginPrefs = e107::pref('helpdesk');
 		$this->tp = e107::getParser();
-
-        $this->load_prefs();
+ 
         $this->hduprefs_posteronly = ($this->pluginPrefs['hduprefs_posteronly'] == 1);
-        $this->hduprefs_colours = array("1" => $HELPDESK_PREF['hduprefs_p1col'],
-            "2" => $HELPDESK_PREF['hduprefs_p2col'],
-            "3" => $HELPDESK_PREF['hduprefs_p3col'],
-            "4" => $HELPDESK_PREF['hduprefs_p4col'],
-            "5" => $HELPDESK_PREF['hduprefs_p5col']);
+        $this->hduprefs_colours = array("1" => $this->pluginPrefs['hduprefs_p1col'],
+            "2" => $this->pluginPrefs['hduprefs_p2col'],
+            "3" => $this->pluginPrefs['hduprefs_p3col'],
+            "4" => $this->pluginPrefs['hduprefs_p4col'],
+            "5" => $this->pluginPrefs['hduprefs_p5col']);
         // is this person a technician in any helpdesk
         $sql->db_Select("hdu_helpdesk", "hdudesk_id", "where find_in_set(hdudesk_class,'" . USERCLASS_LIST . "')", "nowhere", false);
         while ($hdu_row = $sql->db_Fetch())
@@ -122,14 +123,14 @@ class helpdesk
         $this->hduprefs_showassettag = $this->pluginPrefs['hduprefs_showassettag'] == 1;
         $this->hduprefs_showfixes = $this->pluginPrefs['hduprefs_showfixes'] == 1;
         $this->hduprefs_autoassign = $this->pluginPrefs['hduprefs_autoassign'] == 1;
-       // $this->hduprefs_statcloses = $HELPDESK_PREF['hduprefs_statcloses'] == 1;
+ 
         $this->hduprefs_reopen = $this->pluginPrefs['hduprefs_reopen'] == 1;
         $this->hduprefs_mailpdf = $this->pluginPrefs['hduprefs_mailpdf'] == 1;
         $this->hduprefs_allread = $this->pluginPrefs['hduprefs_allread'] == 1;
         $this->hduconvert_date = new convert;
         // if show finance and supervisor or technician
         // or show finance and show to users
-        if (($HELPDESK_PREF['hduprefs_showfinance'] == 1 && ($this->hdu_super || $this->hdu_technician)) || ($this->pluginPrefs['hduprefs_showfinance'] == 1 && $this->pluginPrefs['hduprefs_showfinusers'] == 1))
+        if (($this->pluginPrefs['hduprefs_showfinance'] == 1 && ($this->hdu_super || $this->hdu_technician)) || ($this->pluginPrefs['hduprefs_showfinance'] == 1 && $this->pluginPrefs['hduprefs_showfinusers'] == 1))
         {
             $this->hduprefs_showfinance = true;
         }
@@ -166,62 +167,7 @@ class helpdesk
 
 
     }
-    // ********************************************************************************************
-    // *
-    // * Helpdesk load and Save prefs
-    // *
-    // ********************************************************************************************
-    function getdefaultprefs()
-    {
-        global $HELPDESK_PREF, $sql;
-
-
-		// otherwise create new default prefs
-		$HELPDESK_PREF = array(
-			"hduprefs_p1col" => "#00CC00",
-			"hduprefs_p2col" => "#99CC00",
-			"hduprefs_p3col" => "#FFFF33",
-			"hduprefs_p4col" => "#FF9933",
-			"hduprefs_p5col" => "#FF0000",
-		);
-
-    }
-    function save_prefs()
-    {
-        global $sql, $eArrayStorage, $HELPDESK_PREF;
-        // save preferences to database
-        if (!is_object($sql))
-        {
-            $sql = new db;
-        }
-        $tmp = $eArrayStorage->WriteArray($HELPDESK_PREF);
-        $sql->db_Update("core", "e107_value='$tmp' where e107_name='helpdesk'", false);
-        return ;
-    }
-    function load_prefs()
-    {
-        global $sql, $eArrayStorage, $HELPDESK_PREF;
-        // get preferences from database
-        if (!is_object($sql))
-        {
-            $sql = new db;
-        }
-        $num_rows = $sql->db_Select("core", "*", "e107_name='helpdesk' ");
-        $row = $sql->db_Fetch();
-        if (empty($row['e107_value']))
-        {
-            // insert default preferences if none exist
-            $this->getDefaultPrefs();
-            $tmp = $eArrayStorage->WriteArray($HELPDESK_PREF);
-            $sql->db_Insert("core", "'helpdesk', '$tmp' ");
-            $sql->db_Select("core", "*", "e107_name='helpdesk' ");
-        }
-        else
-        {
-            $HELPDESK_PREF = $eArrayStorage->ReadArray($row['e107_value']);
-        }
-        return;
-    }
+   
     // **********************************************************************************************
     // *
     // *	Function	:	auto_close()
@@ -1333,7 +1279,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
     // **********************************************************************************************
     function hdu_notify($hdu_notifyid = 0, $hdu_notifyaction = NULL)
     {
-        global $sql, $sql2, $PLUGINS_DIRECTORY, $pref, $sysprefs, $pm_prefs, $HELPDESK_PREF,
+        global $sql, $sql2, $PLUGINS_DIRECTORY, $pref, $sysprefs, $pm_prefs ,
         $hdu_up_db, $hdu_msg, $hdu_recno,
         $hdu_newing,
         $hdu_email,
@@ -1437,10 +1383,10 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
             }
         }
         // Check if we notify the supervisor class and supervisor class is active
-        if ($this->hduprefs_mailhelpdesk > 0 && $HELPDESK_PREF['hduprefs_supervisorclass'] < 255)
+        if ($this->hduprefs_mailhelpdesk > 0 && $this->pluginPrefs['hduprefs_supervisorclass'] < 255)
         {
             // get a list of supervisors
-            $hdusclist = $HELPDESK_PREF['hduprefs_supervisorclass'];
+            $hdusclist = $this->pluginPrefs['hduprefs_supervisorclass'];
             if ($hdusclist == 254)
             {
                 // admin
@@ -1750,10 +1696,10 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
 
     function tablerender($caption, $text, $mode = "default", $return = false)
     {
-        global $ns, $HELPDESK_PREF;
+        global $ns ;
         // do the mod rewrite steps if installed
         // $modules = apache_get_modules();
-        if ($HELPDESK_PREF['hduprefs_seo'] == 1)
+        if ($this->pluginPrefs['hduprefs_seo'] == 1)
         {
             $patterns[0] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+).([0-9]+)/';
             $patterns[1] = '/' . $PLUGINS_DIRECTORY . '\/helpdesk\/helpdesk\.php\?([0-9]+).([a-z]+).([0-9]+)/';

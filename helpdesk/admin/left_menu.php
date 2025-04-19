@@ -18,6 +18,12 @@ class helpdesk_adminArea extends e_admin_dispatcher
 			'ui' 			=> 'helpdesk_prefs_form_ui',
 			'uipath' 		=> null
 		),
+		'colors'	=> array(
+			'controller' 	=> 'helpdesk_colors_ui',
+			'path' 			=> null,
+			'ui' 			=> 'helpdesk_prefs_form_ui',
+			'uipath' 		=> null
+		),
 
 		'desk'	=> array(
 			'controller' 	=> 'hdu_helpdesk_ui',
@@ -40,6 +46,8 @@ class helpdesk_adminArea extends e_admin_dispatcher
 		'main/prefs'		=> array('caption' => HDU_A30, 'perm' => 'P'),
 
 		'mail/prefs'		=> array('caption' => HDU_A106, 'perm' => 'P'),
+
+		'colors/prefs'		=> array('caption' => HDU_A34 , 'perm' => 'P'),
 
 		'desk/list'			=> array('caption' => LAN_MANAGE, 'perm' => 'P'),
 		'desk/create'		=> array('caption' => LAN_CREATE, 'perm' => 'P'),

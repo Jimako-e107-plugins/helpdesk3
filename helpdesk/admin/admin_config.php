@@ -10,11 +10,7 @@ if (!getperms("P"))
 	exit;
 }
 include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
-if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
-{
-	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
-	$helpdesk_obj = new helpdesk;
-}
+ 
 
 include_once(e_PLUGIN .  HELPDESK_FOLDER .  "/admin/left_menu.php");
 
@@ -499,6 +495,68 @@ class helpdesk_mail_ui extends e_admin_ui
 		],
 
 	);
+}
+
+class helpdesk_colors_ui extends e_admin_ui
+{
+
+	protected $pluginTitle		= HDU_A2;
+	protected $pluginName		= HELPDESK_FOLDER;
+
+	protected $prefs = array(
+		'hduprefs_p1col' => [
+			'title' => HDU_A37,
+			'type' => 'text',
+			'data' => 'str',
+		],
+		'hduprefs_p2col' => [
+			'title' => HDU_A38,
+			'type' => 'text',
+			'data' => 'str'
+		],
+		'hduprefs_p3col' => [
+			'title' => HDU_A39,
+			'type' => 'text',
+			'data' => 'str',
+
+		],
+		'hduprefs_p4col' => [
+			'title' => HDU_A40,
+			'type' => 'text',
+			'data' => 'str',
+	
+		],
+		'hduprefs_p5col' => [
+			'title' => HDU_A41,
+			'type' => 'text',
+			'data' => 'str',
+	
+		],
+
+	);
+
+	function init() {
+
+		$this->prefs['hduprefs_p1col']['writeParms']['pre'] = '<div class="col-md-2 ecp input-group colorpicker-component colorpicker-element">';
+		$this->prefs['hduprefs_p2col']['writeParms']['pre'] = '<div class="col-md-2 ecp input-group colorpicker-component colorpicker-element">';
+		$this->prefs['hduprefs_p3col']['writeParms']['pre'] = '<div class="col-md-2 ecp input-group colorpicker-component colorpicker-element">';
+		$this->prefs['hduprefs_p4col']['writeParms']['pre'] = '<div class="col-md-2 ecp input-group colorpicker-component colorpicker-element">';
+		$this->prefs['hduprefs_p5col']['writeParms']['pre'] = '<div class="col-md-2 ecp input-group colorpicker-component colorpicker-element">';
+
+		$this->prefs['hduprefs_p1col']['writeParms']['post'] = '<span class="input-group-addon"><i></i></span></div>';
+		$this->prefs['hduprefs_p2col']['writeParms']['post'] = '<span class="input-group-addon"><i></i></span></div>';
+		$this->prefs['hduprefs_p3col']['writeParms']['post'] = '<span class="input-group-addon"><i></i></span></div>';
+		$this->prefs['hduprefs_p4col']['writeParms']['post'] = '<span class="input-group-addon"><i></i></span></div>';
+		$this->prefs['hduprefs_p5col']['writeParms']['post'] = '<span class="input-group-addon"><i></i></span></div>';
+
+		$this->prefs['hduprefs_p1col']['writeParms']['default'] = '#00CC00';
+		$this->prefs['hduprefs_p2col']['writeParms']['default'] = '#99CC00';
+		$this->prefs['hduprefs_p3col']['writeParms']['default'] = '#FFFF33';
+		$this->prefs['hduprefs_p4col']['writeParms']['default'] = '#FF9933';
+		$this->prefs['hduprefs_p5col']['writeParms']['default'] = '#FF0000';
+
+	}
+
 }
 
 class hhelpdesk_prefs_form_ui extends e_admin_form_ui
