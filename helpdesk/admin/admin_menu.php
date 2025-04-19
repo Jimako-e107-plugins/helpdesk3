@@ -20,7 +20,7 @@ $var['admin_cat']['text'] = HDU_A31;
 $var['admin_cat']['link'] = "admin_cat.php?mode=cat&action=list";
 
 $var['admin_res']['text'] = HDU_A43;
-$var['admin_res']['link'] = "admin_res.php";
+$var['admin_res']['link'] = "admin_res.php?mode=res&action=list";
 
 $var['admin_fixes']['text'] = HDU_A44;
 $var['admin_fixes']['link'] = "admin_fixes.php";

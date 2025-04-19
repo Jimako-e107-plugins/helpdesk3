@@ -38,6 +38,13 @@ class helpdesk_adminArea extends e_admin_dispatcher
 			'uipath' 		=> null
 		),
 
+		'res'	=> array(
+			'controller' 	=> 'hdu_resolve_ui',
+			'path' 			=> null,
+			'ui' 			=> 'hdu_resolve_form_ui',
+			'uipath' 		=> null
+		),
+
 	);
 
 
@@ -54,6 +61,9 @@ class helpdesk_adminArea extends e_admin_dispatcher
 
 		'cat/list'			=> array('caption' => LAN_MANAGE, 'perm' => 'P'),
 		'cat/create'		=> array('caption' => LAN_CREATE, 'perm' => 'P'),
+
+		'res/list'			=> array('caption' => LAN_MANAGE, 'perm' => 'P'),
+		'res/create'		=> array('caption' => LAN_CREATE, 'perm' => 'P'),
 
 	);
 
