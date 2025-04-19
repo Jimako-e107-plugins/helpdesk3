@@ -187,4 +187,20 @@ class helpdesk_shortcodes extends e_shortcode
 		global $helpdesk_obj, $hdu_priority;
 		return $helpdesk_obj->hduprefs_colours[$hdu_priority];
 	}
+
+	
+	function sc_hdu_prefscolours($parm = null)
+	{
+        global $HELPDESK_PREF;
+//		var_dump($HELPDESK_PREF);
+/*		var_dump((int) $parm);
+		var_dump($this->pluginPrefs['hduprefs_colours']);
+		$this->hduprefs_colours = array("1" => $HELPDESK_PREF['hduprefs_p1col'],
+		"2" => $HELPDESK_PREF['hduprefs_p2col'],
+		"3" => $HELPDESK_PREF['hduprefs_p3col'],
+		"4" => $HELPDESK_PREF['hduprefs_p4col'],
+		"5" => $HELPDESK_PREF['hduprefs_p5col']);
+*/		
+		return $this->tp->toHTML($HELPDESK_PREF['hduprefs_p'.$parm.'col'], false, "no_make_clickable emotes_off");
+	}
 }

@@ -283,6 +283,7 @@ class helpdesk
     // *
     // *
     // **********************************************************************************************
+    /*
     function display_priority() // To be removed after templatization of this output....
     {
         $retval = "
@@ -304,6 +305,7 @@ class helpdesk
 
         return $retval;
     }
+    */
     // **********************************************************************************************
     // *
     // *	Function	:	hdu_getstatussel($hdu_res = 0)
