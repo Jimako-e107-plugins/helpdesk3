@@ -30,7 +30,7 @@ global $helpdesk_obj, $id, $R1,$from;
 //var_dump(defined("IMODE")?IMODE:"");
 if (!$helpdesk_obj->hdu_new)
 {
-    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE:"") . "/printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
+    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE."/":"lite/") . "printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
 }
 }
 
@@ -39,7 +39,7 @@ if (!$helpdesk_obj->hdu_new)
 global $helpdesk_obj, $id;
 if (!$helpdesk_obj->hdu_new && (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super))
 {
-    return "<a href='../../email.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE:"") . "/email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
+    return "<a href='../../email.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE."/":"lite/") . "email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
 }
 else
 {
