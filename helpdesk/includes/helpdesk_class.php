@@ -206,11 +206,10 @@ class helpdesk
     // **********************************************************************************************
     function helpdesk_cache_clear()
     {
-        global $e107cache;
-        // $e107cache->clear("nq_helpdesktop_menu");
-        $e107cache->clear("nq_helpdesk");
-        // $e107cache->clear("nq_helpdesknew_menu");
+		e107::getCache()->clear("nq_helpdesk");
+  
     }
+	
     // **********************************************************************************************
     // *
     // *	Function	:	hdu_makedate($hdu_cal_date)
