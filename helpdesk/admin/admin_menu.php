@@ -14,7 +14,7 @@ $var['admin_colour']['text'] = HDU_A32;
 $var['admin_colour']['link'] = "admin_config.php?mode=colors&action=prefs";
 
 $var['admin_desk']['text'] = HDU_A140;
-$var['admin_desk']['link'] = "admin_desk.php";
+$var['admin_desk']['link'] = "admin_desk.php?mode=desk&action=list";
 
 $var['admin_cat']['text'] = HDU_A31;
 $var['admin_cat']['link'] = "admin_cat.php?mode=cat&action=list";
