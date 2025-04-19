@@ -187,4 +187,10 @@ class helpdesk_shortcodes extends e_shortcode
 		global $helpdesk_obj, $hdu_priority;
 		return $helpdesk_obj->hduprefs_colours[$hdu_priority];
 	}
+
+	
+	function sc_hdu_prefscolours($parm = null)
+	{
+		return $this->tp->toHTML($this->pluginPrefs['hduprefs_p'.$parm.'col'], false, "no_make_clickable emotes_off");
+	}
 }

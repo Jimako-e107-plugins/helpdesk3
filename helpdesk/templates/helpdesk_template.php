@@ -90,3 +90,20 @@ if (!isset($HELPDESK_TEMPLATE["footer"]))
 	</tr>
 </table>";
 }
+
+$HELPDESK_TEMPLATE["priority"] = "
+<table style='" . USER_WIDTH . "' >
+	<tr>
+		<td style='text-align:Left;'>" . HDU_190 . "&nbsp;
+" . HDU_191 . " <img src='" . e_PLUGIN . HELPDESK_FOLDER . "/images/green.gif' style='border:0;' alt='" . HDU_191 . "' title='" . HDU_191 . "' />&nbsp;
+" . HDU_192 . " <img src='" . e_PLUGIN . HELPDESK_FOLDER . "/images/yellow.gif' style='border:0;' alt='" . HDU_192 . "' title='" . HDU_192 . "' />&nbsp;
+" . HDU_193 . " <img src='" . e_PLUGIN . HELPDESK_FOLDER . "/images/red.gif' style='border:0;' alt='" . HDU_193 . "' title='" . HDU_193 . "' />
+		</td>
+		<td style='text-align:right;'>" . HDU_189 . "&nbsp; </td>		
+		<td style='text-align:center; width:20px; border: #C3BDBD 1px solid; background-color: {HDU_PREFSCOLOURS=1}'>1</td>
+		<td style='text-align:center; width:20px; border: #C3BDBD 1px solid; background-color: {HDU_PREFSCOLOURS=2}'>2</td>
+		<td style='text-align:center; width:20px; border: #C3BDBD 1px solid; background-color: {HDU_PREFSCOLOURS=3}'>3</td>
+		<td style='text-align:center; width:20px; border: #C3BDBD 1px solid; background-color: {HDU_PREFSCOLOURS=4}'>4</td>
+		<td style='text-align:center; width:20px; border: #C3BDBD 1px solid; background-color: {HDU_PREFSCOLOURS=5}'>5</td>
+	</tr>
+</table>";
