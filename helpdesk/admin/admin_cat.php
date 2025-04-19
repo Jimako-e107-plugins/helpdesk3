@@ -10,7 +10,6 @@ if (!getperms("P"))
     exit;
 }
  
- 
 include_once(e_PLUGIN .  HELPDESK_FOLDER .  "/admin/left_menu.php");
 
 class hdu_categories_ui extends e_admin_ui
@@ -55,7 +54,7 @@ class hdu_categories_ui extends e_admin_ui
 
 	//	protected $preftabs        = array('General', 'Other' );
 	protected $prefs = array();
-
+	protected $helpdesk_obj;
 
 	public function init()
 	{
@@ -66,9 +65,9 @@ class hdu_categories_ui extends e_admin_ui
 		$this->postFilterMarkup = $this->AddButton();
 
 		// Set drop-down values (if any). 
- 		$cats = e107::getDb()->retrieve('hdu_helpdesk', "hdudesk_id, hdudesk_name", true,  true,  'hdudesk_id'); 
-		 
-	 	
+ 		$cats = e107::getDb()->retrieve('hdu_helpdesk', "hdudesk_id, hdudesk_name", true,  true,  'hdudesk_id');
+
+		$this->helpdesk_obj = e107::getSingleton('helpdesk', e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
  
 		// Check if the PHP version is 7.4 or newer
 		if (version_compare(PHP_VERSION, '7.4.0', '>='))
@@ -117,45 +116,34 @@ class hdu_categories_ui extends e_admin_ui
 		return $new_data;
 	}
 
-	public function afterCreate($new_data, $old_data, $id)
-	{
-		// do something
-	}
-
-	public function onCreateError($new_data, $old_data)
-	{
-		// do something		
-	}
-
-
-	// ------- Customize Update --------
-
 	public function beforeUpdate($new_data, $old_data, $id)
 	{
 		$new_data['hducat_lastupdate'] = time();
 		return $new_data;
 	}
 
+	// // left-panel help menu area. (replaces e_help.php used in old plugins)
+	// public function renderHelp()
+	// {
+	// 	$caption = LAN_HELP;
+	// 	$text = 'Some help text';
+
+	// 	return array('caption' => $caption, 'text' => $text);
+	// }
+
+	public function afterCreate($new_data, $old_data, $id)
+	{
+
+		$this->helpdesk_obj->helpdesk_cache_clear();
+		return true;
+	}
+
 	public function afterUpdate($new_data, $old_data, $id)
 	{
-		// do something	
+
+		$this->helpdesk_obj->helpdesk_cache_clear();
+		return true;
 	}
-
-	public function onUpdateError($new_data, $old_data, $id)
-	{
-		// do something		
-	}
-
-	// left-panel help menu area. (replaces e_help.php used in old plugins)
-	public function renderHelp()
-	{
-		$caption = LAN_HELP;
-		$text = 'Some help text';
-
-		return array('caption' => $caption, 'text' => $text);
-	}
-
- 
 }
 
 

@@ -9,13 +9,7 @@ if (!getperms("P"))
 	header("location:" . e_BASE . "index.php");
 	exit;
 }
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
-
  
-$hdu_msg = "";
-$hdu_text = "";
-$hdu_ac_catopt = "";
-$hdu_ac_text = "";
 
 include_once(e_PLUGIN . HELPDESK_FOLDER .  "/admin/left_menu.php");
 
@@ -58,6 +52,7 @@ class hdu_helpdesk_ui extends e_admin_ui
 
 	//	protected $preftabs        = array('General', 'Other' );
 	protected $prefs = array();
+	protected $helpdesk_obj;
 
 	//large, xlarge, xxlarge, block-level
 	public function init()
@@ -68,6 +63,8 @@ class hdu_helpdesk_ui extends e_admin_ui
 		$this->fields['hdudesk_name']['writeParms']['size'] = 'xlarge';
 
 		$this->postFilterMarkup = $this->AddButton();
+
+		$this->helpdesk_obj = e107::getSingleton('helpdesk', e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
 	}
 
 	function AddButton()
@@ -92,13 +89,13 @@ class hdu_helpdesk_ui extends e_admin_ui
 
 
 	// left-panel help menu area. (replaces e_help.php used in old plugins)
-	public function renderHelp()
-	{
-		$caption = LAN_HELP;
-		$text = 'Some help text';
+	// public function renderHelp()
+	// {
+	// 	$caption = LAN_HELP;
+	// 	$text = 'Some help text';
 
-		return array('caption' => $caption, 'text' => $text);
-	}
+	// 	return array('caption' => $caption, 'text' => $text);
+	// }
 
 	public function beforeCreate($new_data, $old_data)
 	{
@@ -111,6 +108,21 @@ class hdu_helpdesk_ui extends e_admin_ui
 		$new_data['hdudesk_lastupdate'] = time();
 		return $new_data;
 	}
+
+	public function afterCreate($new_data, $old_data, $id)
+	{
+
+		$this->helpdesk_obj->helpdesk_cache_clear();
+		return true;
+	}
+
+	public function afterUpdate($new_data, $old_data, $id)
+	{
+
+		$this->helpdesk_obj->helpdesk_cache_clear();
+		return true;
+	}
+
 }
 
 
