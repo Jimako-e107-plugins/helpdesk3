@@ -558,6 +558,17 @@ class helpdesk_colors_ui extends e_admin_ui
 
 	}
 
+		// left-panel help menu area. (replaces e_help.php used in old plugins)
+		public function renderHelp()
+		{
+			$caption = LAN_HELP;
+			$text = 'Colors rendering example';
+			require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+			$helpdesk_obj = new helpdesk;
+			$text .= $helpdesk_obj->display_priority();
+	
+			return array('caption' => $caption, 'text' => $text);
+		}
 }
 
 class hhelpdesk_prefs_form_ui extends e_admin_form_ui

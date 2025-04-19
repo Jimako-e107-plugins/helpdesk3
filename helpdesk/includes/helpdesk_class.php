@@ -283,7 +283,7 @@ class helpdesk
     // *
     // *
     // **********************************************************************************************
-    function display_priority()
+    function display_priority() // To be removed after templatization of this output....
     {
         $retval = "
 	<table style='" . USER_WIDTH . "' >
