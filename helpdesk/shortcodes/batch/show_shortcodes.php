@@ -5,7 +5,22 @@ if (!defined('e107_INIT')) { exit; }
 
 class plugin_helpdesk_show_shortcodes extends e_shortcode
 {
-	function sc_hdu_show_action()
+
+	private $sql;
+  private $tp;
+
+  function __construct()
+  {
+
+//  $this->pluginPrefs = e107::pref('helpdesk');
+  $this->tp = e107::getParser();
+
+  $this->sql = e107::getDB();
+
+  }
+
+
+  function sc_hdu_show_action()
   {
 global $helpdesk_obj;
 if ($helpdesk_obj->hdu_new)
@@ -84,7 +99,7 @@ return $retval;
 
 	function sc_hdu_show_user()
   {
-global $helpdesk_obj, $tp, $hdu_sel_users, $hdupostername;
+global $helpdesk_obj, $hdu_sel_users, $hdupostername;
 
 if ($helpdesk_obj->hdu_new && ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
 {
@@ -92,7 +107,7 @@ if ($helpdesk_obj->hdu_new && ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_te
 }
 else
 {
-    return $tp->toHTML($hdupostername);
+    return $this->tp->toHTML($hdupostername);
 }
 
 }
@@ -139,32 +154,32 @@ return $retval;
 
 	function sc_hdu_show_summary()
   {
-global $tp, $helpdesk_obj, $hdu_summary;
+global $helpdesk_obj, $hdu_summary;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
-    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_summary' class='tbox form-control' value=\"" . $tp->toFORM($hdu_summary) . "\"   maxlength='50' />";
+    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_summary' class='tbox form-control' value=\"" . $this->tp->toFORM($hdu_summary) . "\"   maxlength='50' />";
 }
 else
 {
-    $retval = $tp->toHTML($hdu_summary, false);
+    $retval = $this->tp->toHTML($hdu_summary, false);
 }
 return $retval;
 }
 
 	function sc_hdu_show_category()
   {
-global $tp, $sql, $helpdesk_obj, $hdu_category;
+global $helpdesk_obj, $hdu_category;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
     // If editing display select
     $retval = "<select class='tbox form-control'  onchange=\"changed()\" name='hdu_category'><option value='0'>" . HDU_136 . "</option>";
-    if ($sql->db_Select("hdu_categories", "hducat_id,hducat_category", " order by hducat_category", "nowhere"))
+    if ($this->sql->select("hdu_categories", "hducat_id,hducat_category", " order by hducat_category", true))
     {
-        while ($hdu_catrow = $sql->db_Fetch())
+        while ($hdu_catrow = $this->sql->fetch())
         {
             extract($hdu_catrow);
             $retval .= "<option value='$hducat_id' " .
-            ($hducat_id == $hdu_category?"selected='selected'":"") . ">" . $tp->toFORM($hducat_category) . "</option>";
+            ($hducat_id == $hdu_category?"selected='selected'":"") . ">" . $this->tp->toFORM($hducat_category) . "</option>";
         } // while
     }
     $retval .= "</select>";
@@ -172,9 +187,9 @@ if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj
 else
 {
     // otherwise just show the category (if any)
-    if ($sql->db_Select("hdu_categories", "hducat_id,hducat_category", "hducat_id='hdu_category'"))
+    if ($this->sql->select("hdu_categories", "hducat_id,hducat_category", "hducat_id='hdu_category'"))
     {
-        $hdu_catrow = $sql->db_Fetch();
+        $hdu_catrow = $this->sql->fetch();
         {
             extract($hdu_catrow);
             $retval = $hducat_category;
@@ -191,35 +206,35 @@ return $retval;
 
 	function sc_hdu_show_asset()
   { 
-global $tp, $hdu_tagno, $helpdesk_obj;
+global $hdu_tagno, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print &&( $helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
-    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_tagno' class='tbox form-control' size='20' maxlength='20' value='" . $tp->toFORM($hdu_tagno) . "' />";
+    $retval = "<input type='text'  onkeyup=\"changed()\" name='hdu_tagno' class='tbox form-control' size='20' maxlength='20' value='" . $this->tp->toFORM($hdu_tagno) . "' />";
 }
 else
 {
-    $retval = $tp->toHTML($hdu_tagno, false);
+    $retval = $this->tp->toHTML($hdu_tagno, false);
 }
 return $retval;
 }
 
 	function sc_hdu_show_description()
   {
-global $tp, $hdu_description, $helpdesk_obj;
+global $hdu_description, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print &&($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
 {
-    $retval = "<textarea rows='7'  onkeyup=\"changed()\" cols='40'    class='tbox form-control' name='hdu_description'>" . $tp->toFORM($hdu_description) . "</textarea>";
+    $retval = "<textarea rows='7'  onkeyup=\"changed()\" cols='40'    class='tbox form-control' name='hdu_description'>" . $this->tp->toFORM($hdu_description) . "</textarea>";
 }
 else
 {
-    $retval = $tp->toHTML($hdu_description, false);
+    $retval = $this->tp->toHTML($hdu_description, false);
 }
 return $retval;
 }
 
 	function sc_hdu_show_email()
   {
-global $tp, $helpdesk_obj, $hdu_email;
+global $helpdesk_obj, $hdu_email;
 
     if ($helpdesk_obj->hdu_showemail)
     {
@@ -230,7 +245,7 @@ global $tp, $helpdesk_obj, $hdu_email;
     {
         // otherwise show it using javascript to minimise spam bots
         // Put the java in some time
-        $retval = $tp->toHTML($hdu_email, false);
+        $retval = $this->tp->toHTML($hdu_email, false);
     }
 return $retval;
 }
@@ -250,7 +265,7 @@ else
 
 	function sc_hdu_show_status()
   {
-global $tp, $hdures_resolution, $hdu_resolution, $helpdesk_obj;
+global $hdures_resolution, $hdu_resolution, $helpdesk_obj;
 
 if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super))
 {
@@ -262,27 +277,27 @@ else
     {
         $hdures_resolution = HDU_136;
     }
-    $retval = $tp->toHTML($hdures_resolution, false);
+    $retval = $this->tp->toHTML($hdures_resolution, false);
 }
 return $retval;
 }
 
 	function sc_hdu_show_assignedto()
   { 
-global $tp, $sql, $hdu_tech, $helpdesk_obj;
+global $hdu_tech, $helpdesk_obj;
 if (!$helpdesk_obj->hdu_print && $helpdesk_obj->hdu_super)
 {
     $retval = HDU_25 . " " . HDU_175;
     $hdu_techsel = "<select name='hdu_tech' class='tbox' onchange=\"changed()\">";
-    if ($sql->db_Select("hdu_helpdesk", "hdudesk_id,hdudesk_name", "order by hdudesk_name", "nowhere"))
+    if ($this->sql->select("hdu_helpdesk", "hdudesk_id,hdudesk_name", "order by hdudesk_name", true))
     {
         $hdu_techsel .= "<option value='0'" .
         ($hdu_tech == 0?" selected='selected'":"") . ">" . HDU_41 . "</option>";
-        while ($hdu_techrow = $sql->db_Fetch())
+        while ($hdu_techrow = $this->sql->fetch())
         {
             extract($hdu_techrow);
             $hdu_techsel .= "<option value='$hdudesk_id'" .
-            ($hdu_tech == $hdudesk_id?" selected='selected'":"") . ">" . $tp->toFORM($hdudesk_name) . "</option>";
+            ($hdu_tech == $hdudesk_id?" selected='selected'":"") . ">" . $this->tp->toFORM($hdudesk_name) . "</option>";
         } // while
     }
     else
@@ -295,11 +310,11 @@ if (!$helpdesk_obj->hdu_print && $helpdesk_obj->hdu_super)
 else
 {
     // get the name of the help desk
-    $sql->select("hdu_helpdesk", "hdudesk_id, hdudesk_name", "hdudesk_id='$hdu_tech'");
-    $hdu_row = $sql->fetch();
+    $this->sql->select("hdu_helpdesk", "hdudesk_id, hdudesk_name", "hdudesk_id='$hdu_tech'");
+    $hdu_row = $this->sql->fetch();
 //    var_dump ($hdu_row);
 //    extract($hdu_row);
-    $retval = $tp->toHTML($hdu_row["hdudesk_name"], false);
+    $retval = $this->tp->toHTML($hdu_row["hdudesk_name"], false);
 }
 return $retval;
 }
@@ -338,19 +353,19 @@ return $retval;
 
 	function sc_hdu_show_fix()
   { 
-global $tp, $sql, $helpdesk_obj, $hdu_fix,$hdu_fixother;
+global $helpdesk_obj, $hdu_fix,$hdu_fixother;
 if ($helpdesk_obj->hduprefs_showfixes)
 {
     if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
     {
         $retval = "<select class='tbox' name='hdu_fix' onchange=\"changed()\"><option value='0'>" . HDU_153 . "</option>";
-        if ($sql->db_Select("hdu_fixes", "hdufix_id,hdufix_fix", "order by hdufix_fix", "nowhere"))
+        if ($this->sql->select("hdu_fixes", "hdufix_id,hdufix_fix", "order by hdufix_fix", true))
         {
-            while ($hdu_fixrow = $sql->db_Fetch())
+            while ($hdu_fixrow = $this->sql->fetch())
             {
                 extract($hdu_fixrow);
                 $retval .= "<option value='$hdufix_id' " .
-                ($hdufix_id == $hdu_fix?"selected='selected' ":"") . ">" . $tp->toFORM($hdufix_fix) . "</option>";
+                ($hdufix_id == $hdu_fix?"selected='selected' ":"") . ">" . $this->tp->toFORM($hdufix_fix) . "</option>";
             }
         }
         else
@@ -359,30 +374,30 @@ if ($helpdesk_obj->hduprefs_showfixes)
         }
         $retval .= "</select><br />
         <br />
-		<textarea name='hdu_fixother' onkeyup=\"changed()\" class='tbox' rows='6' cols='50' style='width:95%'>".$tp->toFORM($hdu_fixother)."</textarea>";
+		<textarea name='hdu_fixother' onkeyup=\"changed()\" class='tbox' rows='6' cols='50' style='width:95%'>".$this->tp->toFORM($hdu_fixother)."</textarea>";
     }
     else
     {
-        if ($sql->db_Select("hdu_fixes", "hdufix_id,hdufix_fix", "hdufix_id='$hdu_fix'"))
+        if ($this->sql->select("hdu_fixes", "hdufix_id,hdufix_fix", "hdufix_id='$hdu_fix'"))
         {
-            while ($hdu_fixrow = $sql->db_Fetch())
+            while ($hdu_fixrow = $this->sql->fetch())
             {
                 extract($hdu_fixrow);
-                $hdu_fixname = $tp->toHTML($hdufix_fix);
+                $hdu_fixname = $this->tp->toHTML($hdufix_fix);
             }
         }
-        $retval = $tp->toHTML($hdu_fixname, false) ;
+        $retval = $this->tp->toHTML($hdu_fixname, false) ;
     }
 }
 else
 {
     if (!$helpdesk_obj->hdu_print && ($helpdesk_obj->hdu_technician || $helpdesk_obj->hdu_super || $helpdesk_obj->quick))
     {
-        $retval .= "<textarea name='hdu_fixother'  onkeyup=\"changed()\" class='tbox' rows='4' style='width:97%;'  cols='35'>" . $tp->toFORM($hdu_fixother) . "</textarea>";
+        $retval .= "<textarea name='hdu_fixother'  onkeyup=\"changed()\" class='tbox' rows='4' style='width:97%;'  cols='35'>" . $this->tp->toFORM($hdu_fixother) . "</textarea>";
     }
     else
     {
-        $retval .= $tp->toHTML($hdu_fixother, false);
+        $retval .= $this->tp->toHTML($hdu_fixother, false);
     }
 }
 return $retval;
@@ -520,14 +535,14 @@ return  e107::getDate()->convert_date($hduc_date, "short");
 
 	function sc_hdu_show_commentposter()
   { 
-global $tp,$hduc_postername;
-return $tp->toHTML($hduc_postername,false);
+global $hduc_postername;
+return $this->tp->toHTML($hduc_postername,false);
 }
 
 	function sc_hdu_show_comment()
   { 
-global $tp,$hduc_comment;
-return $tp->toHTML($hduc_comment,false);
+global $hduc_comment;
+return $this->tp->toHTML($hduc_comment,false);
 }
 
 	function sc_hdu_show_newcomment()

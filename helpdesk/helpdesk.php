@@ -113,6 +113,7 @@ if (!empty($_POST['hdu_confirm']))
     $hdu_aaction = "dodelete";
 }
 define("PAGE_NAME", HDU_175);
+$sql = e107::getDb();
 require_once(HEADERF);
 
 switch ($hdu_aaction)
