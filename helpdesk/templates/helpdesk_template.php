@@ -3,23 +3,32 @@
 // *
 // * FAQs list. This part is the front opening screen of the FAQ Plugin
 // *
+//$HELPDESK_TEMPLATE["caption"] = "{HDU_TITLE}";
+
 if (!isset($HELPDESK_TEMPLATE["header"]))
 {
     $HELPDESK_TEMPLATE["header"] = "
 <table style ='" . USER_WIDTH . "' class ='fborder'>
-	<tr>
-		<td class ='fcaption' colspan='8' style='text-align:left;' >{HDU_TITLE}&nbsp;</td>
-	</tr>";
+";
+/*
     if (defined('HDU_LOGO'))
     {
         $HELPDESK_TEMPLATE["header"] .= "
 	<tr>
 		<td class ='forumheader2' colspan='8' style='text-align:center;' >
+			{HDU_LOGO}
 			<img src='".HDU_LOGO."' style='border:0;' alt='helpdesk logo' />
 		</td>
 	</tr>";
     }
-    $HELPDESK_TEMPLATE["header"] .= "
+*/
+$HELPDESK_TEMPLATE["header"] .= "
+<tr>
+	<td class ='forumheader2' colspan='8' style='text-align:center;' >
+		{HDU_LOGO}
+	</td>
+</tr>";
+$HELPDESK_TEMPLATE["header"] .= "
 	<tr>
 		<td style='vertical-align:top;'  colspan='8' class ='forumheader3'><b>{HDU_MESSAGE}</b>&nbsp;</td>
 	</tr>";

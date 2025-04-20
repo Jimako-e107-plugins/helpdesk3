@@ -5,7 +5,7 @@ if (!defined('e107_INIT'))
 	exit;
 }
 
-class helpdesk_shortcodes extends e_shortcode
+class plugin_helpdesk_list_shortcodes extends e_shortcode
 {
 
 	private $pluginPrefs = array();
