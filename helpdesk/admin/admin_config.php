@@ -569,7 +569,7 @@ class helpdesk_colors_ui extends e_admin_ui
 			include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php"); // To be reworked
 			include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . "_helpdesk.php"); // To be reworked
 			$HDU_LISTTICKETS = e107::getTemplate('helpdesk', 'helpdesk');
-			$hdu_shortcodes = e107::getScBatch('helpdesk', TRUE);
+			$hdu_shortcodes = e107::getScBatch('list', 'helpdesk');
 			$text .= e107::getParser()->parseTemplate($HDU_LISTTICKETS["priority"], true, $hdu_shortcodes);
 
 			return array('caption' => $caption, 'text' => $text);

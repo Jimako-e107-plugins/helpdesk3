@@ -38,7 +38,7 @@ class helpdesk
     var $hdu_poster = false; //allowed to post tickets
     var $hduprefs_autoclosedays = 0; // auto close tickets after days
     var $hduprefs_autocloseres = 0; // the resolution/status when auto closed
-    var $hduprefs_colours = array(); // colours used for priority
+  //  var $hduprefs_colours = array(); // colours used for priority
     var $hduprefs_rows = 10;
     var $hduprefs_memberof = "";
     var $hduprefs_posteronly = false;
@@ -100,11 +100,13 @@ class helpdesk
 		$this->tp = e107::getParser();
  
         $this->hduprefs_posteronly = ($this->pluginPrefs['hduprefs_posteronly'] == 1);
+/*
         $this->hduprefs_colours = array("1" => $this->pluginPrefs['hduprefs_p1col'],
             "2" => $this->pluginPrefs['hduprefs_p2col'],
             "3" => $this->pluginPrefs['hduprefs_p3col'],
             "4" => $this->pluginPrefs['hduprefs_p4col'],
             "5" => $this->pluginPrefs['hduprefs_p5col']);
+            */
         // is this person a technician in any helpdesk
         $sql->db_Select("hdu_helpdesk", "hdudesk_id", "where find_in_set(hdudesk_class,'" . USERCLASS_LIST . "')", "nowhere", false);
         while ($hdu_row = $sql->db_Fetch())
@@ -872,7 +874,7 @@ function changed()
             // $hdu_retval .= "<div id=\"sc1\" class=\"tabcontent\">";
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["ticket"], true, $hdu_shortcodes);
             // $hdu_retval .= "</div>";
-            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["details"], false, $hdu_shortcodes);
+            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["details"], true, $hdu_shortcodes);
             if ($this->hdu_new)
             {
                 // if it is a new ticket then set the default rates
@@ -889,10 +891,10 @@ function changed()
                     $hdu_callout = $this->hduprefs_callout;
                 }
             }
-            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["finance"], false, $hdu_shortcodes);
+            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["finance"], true, $hdu_shortcodes);
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
             {
-                $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_header"], false, $hdu_shortcodes);
+                $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_header"], true, $hdu_shortcodes);
 		
 				$where = " hduc_ticketid='$hdu_showid' order by hduc_date asc";
 				$hducrows = e107::getDb()->retrieve("hdu_comments", "*", $where, true);
@@ -902,11 +904,11 @@ function changed()
                     $hduc_poster = explode(".", $hduc_poster);
                     $hduc_posterid = $hduc_poster[0];
                     $hduc_postername = $hduc_poster[1];
-                    $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_detail"], false, $hdu_shortcodes);
+                    $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_detail"], true, $hdu_shortcodes);
                 }
-                $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_footer"], false, $hdu_shortcodes);
+                $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_footer"], true, $hdu_shortcodes);
             }
-            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["footer"], false, $hdu_shortcodes);
+            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["footer"], true, $hdu_shortcodes);
             $hdu_retval .= "
 	</form>";
         }

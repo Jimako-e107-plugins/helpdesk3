@@ -196,8 +196,9 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 	function sc_hdu_prioritycolour()
 	{
 		global $helpdesk_obj, $hdu_priority;
-		return $helpdesk_obj->hduprefs_colours[$hdu_priority];
-	}
+//		return $helpdesk_obj->hduprefs_colours[$hdu_priority];
+		return $this->pluginPrefs['hduprefs_p'.$hdu_priority.'col'];
+}
 
 	
 	function sc_hdu_prefscolours($parm = null)
