@@ -22,6 +22,7 @@ $hurl=e_PLUGIN. HELPDESK_FOLDER . "/helpdesk.php";
     // $hdu_totcount = $sql->db_Count("hdunit", "(*)");
     // $hdu_opencount = $sql->db_Count("hdunit", "(*)", "where hdu_closed=0");
     // $hdu_notassigned = $sql->db_Count("hdunit", "(*)", "where hdu_allocated=0");
+    $sql = e107::getdb();
     $hdu_arg1 = "select
 (select count(*)  from #hdunit ) as hdu_totcount,
 (select count(*)  from #hdunit where hdu_closed=0) as hdu_opencount,
