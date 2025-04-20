@@ -91,13 +91,14 @@ class helpdesk
 
 	private $pluginPrefs = array();
 	private $tp;
-
+	private $sql;
     function __construct()
     {
-        global $sql;
+//        global $sql;
 
 		$this->pluginPrefs = e107::pref('helpdesk');
 		$this->tp = e107::getParser();
+		$this->sql = e107::getDb();
  
         $this->hduprefs_posteronly = ($this->pluginPrefs['hduprefs_posteronly'] == 1);
 /*
@@ -108,8 +109,8 @@ class helpdesk
             "5" => $this->pluginPrefs['hduprefs_p5col']);
             */
         // is this person a technician in any helpdesk
-        $sql->db_Select("hdu_helpdesk", "hdudesk_id", "where find_in_set(hdudesk_class,'" . USERCLASS_LIST . "')", "nowhere", false);
-        while ($hdu_row = $sql->db_Fetch())
+        $this->sql->select("hdu_helpdesk", "hdudesk_id", "where find_in_set(hdudesk_class,'" . USERCLASS_LIST . "')", "nowhere", false);
+        while ($hdu_row = $this->sql->fetch())
         {
             // get the helpdesks this person belongs to
             $this->hdu_memberof .= $hdu_row['hdudesk_id'] . ",";
@@ -184,14 +185,14 @@ class helpdesk
     // **********************************************************************************************
     function auto_close()
     {
-        global $sql;
+//        global $sql;
         if ($this->hduprefs_autoclosedays > 0)
         {
             // if we do default close then check for last activity and if more than hdu_defclose days ago
             // close the ticket.  Reopening restarts the counter.
             $hdu_timecheck = time() - ($this->hduprefs_autoclosedays * 86400);
             $hdu_args = "hdu_closed='" . time() . "', hdu_resolution ='" . $this->hduprefs_autocloseres . "' where hdu_lastchanged < '$hdu_timecheck' and hdu_closed ='0' ";
-            $sql->db_Update("hdunit", $hdu_args, false);
+            $this->sql->update("hdunit", $hdu_args, false);
         }
     }
     // **********************************************************************************************
@@ -322,16 +323,16 @@ class helpdesk
     // **********************************************************************************************
     function hdu_getstatussel($hdu_res = 0)
     {
-        global $sql;
+//        global $sql;
         if ($hdu_res == 0)
         {
             $hdu_res = $this->hduprefs_defaultres;
         }
         $retval = "
 		<select class='tbox'  onchange=\"changed()\" name='hdu_resolution'>";
-        if ($sql->db_Select("hdu_resolve", "hdures_id,hdures_resolution", " order by hdures_resolution", "nowhere", false))
+        if ($this->sql->select("hdu_resolve", "hdures_id,hdures_resolution", " order by hdures_resolution", "nowhere", false))
         {
-            while ($hdu_catrow = $sql->db_Fetch())
+            while ($hdu_catrow = $this->sql->fetch())
             {
                 extract($hdu_catrow);
                 $retval .= "<option value='$hdures_id' " .
@@ -355,11 +356,11 @@ class helpdesk
     // **********************************************************************************************
     function hdu_statcloses($hdu_id = 0)
     {
-        global $sql;
+//        global $sql;
         $retval = false;
-        if ($sql->db_Select("hdu_resolve", "where hdures_closed", "hdures_id='$hdu_id'", 'nowhere', false))
+        if ($this->sql->select("hdu_resolve", "where hdures_closed", "hdures_id='$hdu_id'", 'nowhere', false))
         {
-            $$hdu_row = $sql->db_Fetch();
+            $hdu_row = $this->sql->fetch();
             if ($hdu_row['hdures_closed'] == 1)
             {
                 $retval = true;
@@ -381,11 +382,11 @@ class helpdesk
     // **********************************************************************************************
     function hdu_getfixcost($hdu_fixid = 0)
     {
-        global $sql;
+//        global $sql;
         // Get the fix cost for the fix if a fix is selected and there is no fix cost entered on the form
-        if ($sql->db_Select("hdu_fixes", "hdufix_fixcost", "where hdufix_id = '" . $hdu_fixid . "'", 'nowhere', false))
+        if ($this->sql->select("hdu_fixes", "hdufix_fixcost", "where hdufix_id = '" . $hdu_fixid . "'", 'nowhere', false))
         {
-            $hdu_row = $sql->db_Fetch() ;
+            $hdu_row = $this->sql->fetch() ;
             return $this->tp->toFORM($hdu_row['hdufix_fixcost']);
         }
         else
@@ -407,10 +408,12 @@ class helpdesk
     // **********************************************************************************************
     function hdu_getcat($hdu_id)
     {
-        $hdu_repdb = new DB;
-        if ($hdu_repdb->db_Select("hdu_categories", "where hducat_category", "hducat_id='$hdu_id'", 'nowhere', false))
+//        $hdu_repdb = new DB;
+//        if ($hdu_repdb->select("hdu_categories", "where hducat_category", "hducat_id='$hdu_id'", 'nowhere', false))
+        if ($this->sql->select("hdu_categories", "where hducat_category", "hducat_id='$hdu_id'", true, false))
         {
-            $hdu_reprow = $hdu_repdb->db_Fetch();
+//            $hdu_reprow = $hdu_repdb->fetch();
+            $hdu_reprow = $this->sql->fetch();
 
             return $hdu_reprow['hducat_category'];
         }
@@ -433,10 +436,12 @@ class helpdesk
     // **********************************************************************************************
     function hdu_getstat($hdu_id)
     {
-        $hdu_repdb = new DB;
-        if ($hdu_repdb->db_Select("hdu_resolve", " hdures_resolution", "where hdures_id='$hdu_id'", 'nowhere', false))
+//        $hdu_repdb = new DB;
+//        if ($hdu_repdb->select("hdu_resolve", " hdures_resolution", "where hdures_id='$hdu_id'", 'nowhere', false))
+        if ($this->sql->select("hdu_resolve", " hdures_resolution", "where hdures_id='$hdu_id'", true, false))
         {
-            $hdu_reprow = $hdu_repdb->db_Fetch();
+//            $hdu_reprow = $hdu_repdb->fetch();
+            $hdu_reprow = $this->sql->fetch();
             return $hdu_reprow['hdures_resolution'];
         }
         else
@@ -476,13 +481,15 @@ class helpdesk
     // **********************************************************************************************
     function hdu_gethemail($hdu_gete)
     {
-        $hdu_gete_db = new DB;
+//        $hdu_gete_db = new DB;
         // get from the category which helpdesk is using it and then get the email address:
         $hdu_gete_args = "select hdudesk_email from #hdu_helpdesk left join #hdu_categories on hducat_helpdesk=hdudesk_id
 		where hducat_id='{$hdu_gete}'";
-        if ($hdu_gete_db->db_Select_gen($hdu_gete_args, false))
+//        if ($hdu_gete_db->gen($hdu_gete_args, false))
+        if ($this->sql->gen($hdu_gete_args, false))
         {
-            $hdu_gete_row = $hdu_gete_db->db_Fetch();
+//            $hdu_gete_row = $hdu_gete_db->fetch();
+            $hdu_gete_row = $this->sql->fetch();
 
             return $hdu_gete_row['hdudesk_email'];
         }
@@ -505,11 +512,13 @@ class helpdesk
     // **********************************************************************************************
     function hdu_getuserselect($hdu_id = 0)
     {
-        $hdu_seldb = new DB;
+//        $hdu_seldb = new DB;
         $retval = "<select name='hduposterqname' class='tbox'><option value='0'>" . HDU_136 . "</option>";
-        if ($hdu_seldb->db_Select("user", "where user_id,user_name", 'nowhere', false))
+//        if ($hdu_seldb->select("user", "where user_id,user_name", 'nowhere', false))
+        if ($this->sql->select("user", "where user_id,user_name", true, false))
         {
-            while ($hdu_selrow = $hdu_seldb->db_Fetch())
+//            while ($hdu_selrow = $hdu_seldb->fetch())
+            while ($hdu_selrow = $this->sql->fetch())
             {
                 extract($hdu_selrow);
                 $retval .= "<option value='{$user_id}' " . ($hdu_id == $user_id?"selected'selected'":"") . " >{$user_name}</option>";
@@ -532,9 +541,11 @@ class helpdesk
     // **********************************************************************************************
     function hdu_getuseremail($hdu_userid = 0)
     {
-        $hdu_userdb = new DB;
-        $hdu_userdb->db_Select("user", "user_email", "where user_id='$hdu_userid'", 'nowhere', false);
-        $hdu_row = $hdu_userdb->db_Fetch();
+//        $hdu_userdb = new DB;
+//        $hdu_userdb->select("user", "user_email", "where user_id='$hdu_userid'", 'nowhere', false);
+//        $hdu_row = $hdu_userdb->fetch();
+        $this->sql->select("user", "user_email", "where user_id='$hdu_userid'", true, false);
+        $hdu_row = $this->sql->fetch();
 
         return $hdu_row['user_email'];
     }
@@ -552,10 +563,12 @@ class helpdesk
     // **********************************************************************************************
     function hdu_getposterdetails($hdu_userid = 0)
     {
-        $hdu_userdb = new DB;
-        if ($hdu_userdb->db_Select("user", "user_name", "where user_id='$hdu_userid'", 'nowhere', false))
+//        $hdu_userdb = new DB;
+//        if ($hdu_userdb->select("user", "user_name", "where user_id='$hdu_userid'", 'nowhere', false))
+        if ($this->sql->select("user", "user_name", "where user_id='$hdu_userid'", true, false))
         {
-            $hdu_row = $hdu_userdb->db_Fetch();
+//            $hdu_row = $hdu_userdb->fetch();
+            $hdu_row = $this->sql->fetch();
             extract($hdu_row);
 
             return $hdu_userid . ".$user_name";
@@ -606,7 +619,7 @@ class helpdesk
     // **********************************************************************************************
     function post_comment()
     {
-        global $sql;
+//        global $sql;
         $hdu_id = intval($_POST['id']);
 
         if (!empty($_POST['hduc_comment']))
@@ -619,11 +632,11 @@ class helpdesk
 		'" . time() . "',
 		'0',
 		'" . $this->tp->toDB($_POST['hduc_comment']) . "'";
-            $hduc = $sql->db_Insert("hdu_comments", $hduc_args);
+            $hduc = $this->sql->insert("hdu_comments", $hduc_args);
             $hduc_msg = HDU_92;
         }
-        $sql->db_Select("hdunit", "*", "where hdu_id = $hdu_id", "nowhere");
-        $hdu_row = $sql->db_Fetch();
+        $this->sql->select("hdunit", "*", "where hdu_id = $hdu_id", "nowhere");
+        $hdu_row = $this->sql->fetch();
         extract($hdu_row);
         // print $hdu_tech . "AL";
         // if ($hdu_tech > 0)
@@ -641,11 +654,11 @@ class helpdesk
         {
             // maybe also need to check helpdesk class too!!!!
             // If technician or supervisor then set return to 1 to show comment is from helpdesk and ensure closed is taken off
-            $sql->db_Update("hdunit", "hdu_return = '1',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
+            $this->sql->update("hdunit", "hdu_return = '1',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
         }
         else
         {
-            $sql->db_Update("hdunit", "hdu_return = '0',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
+            $this->sql->update("hdunit", "hdu_return = '0',hdu_lastcomment='" . time() . "',hdu_lastchanged='" . time() . "' $hdu_allocon where hdu_id = '$hdu_id'");
         }
     }
     // **********************************************************************************************
@@ -662,7 +675,7 @@ class helpdesk
     // **********************************************************************************************
     function delete_ticket($id)
     {
-        global $sql, $hdu_id;
+        global $from, $hdu_id;
 //        require(HDU_THEME);
         $hdu_id = $id;
         $hdu_retval = "
@@ -703,7 +716,7 @@ class helpdesk
         // TO DO
         // Check if user is technicial for this ticket - if not then don't allow to do things to it.
         // *
-        global $sql, $helpdesk_obj, $hdu_posterid, $hdu_sel_users,
+        global $helpdesk_obj, $hdu_posterid, $hdu_sel_users,
         $hdupostername, $hdu_datestamp, $hdu_category, $hdu_summary, $hdu_tagno, $hdu_email, $hdu_resolution, $hdures_resolution, $hdu_description,
         $hdu_tech, $hdu_allocated, $hdu_closed, $hdu_hours, $hdu_fixcost, $hdu_hrate, $hdu_hcost, $hdu_distance, $hdu_fixother, $hdu_fix,
         $hdu_drate, $hdu_dcost, $hdu_eqptcost, $hdu_callout, $hduc_date, $hduc_postername, $hduc_comment, $hdu_priority, $hdu_savemsg, $hdu_totalcost;
@@ -716,13 +729,13 @@ class helpdesk
         else
         {
             // Not creating a new one so get the record
-            $sql->db_Select_gen("
+            $this->sql->gen("
 		select * from #hdunit
 		left join #hdu_categories on hdu_category=hducat_id
 		left join #hdu_helpdesk on hducat_helpdesk=hdudesk_id
 		left join #hdu_resolve on  hdu_resolution=hdures_id
 		where hdu_id = $hdu_showid", false);
-            extract($sql->db_Fetch());
+            extract($this->sql->fetch());
         }
         $hdu_userid = USERID;
         if ($this->hdu_new && $this->hdu_poster)
@@ -766,8 +779,8 @@ class helpdesk
             if ($this->hdu_new && ($this->hdu_super || $this->hdu_technician))
             {
                 $hdu_sel_users = "<select class='tbox form-handler' name='hdu_selusers' >";
-                $sql->db_Select("user", "user_id,user_name", "order by user_name", "nowhere", false);
-                while ($hdu_urow = $sql->db_Fetch())
+                $this->sql->select("user", "user_id,user_name", "order by user_name", "nowhere", false);
+                while ($hdu_urow = $this->sql->fetch())
                 {
                     $hdu_sel_users .= "<option value='" . $hdu_urow['user_id'] . "' >" . $this->tp->toFORM($hdu_urow['user_name']) . "</option>";
                 }
@@ -790,9 +803,9 @@ class helpdesk
             // If the ticket is closed then don't allow editing
             $hdu_ticket_closed = $hdu_closed > 0;
             // See if poster allows email address to be shown
-            if ($sql->db_Select("user", "user_hideemail", "user_id='$hduposterid'"))
+            if ($this->sql->select("user", "user_hideemail", "user_id='$hduposterid'"))
             {
-                $hdu_urow = $sql->db_Fetch();
+                $hdu_urow = $this->sql->fetch();
                 $this->hdu_showemail = $hdu_urow['hdu_urow'] > 0;
             }
             // If the user is the poster supervisor or technician then show the email address anyway
@@ -929,7 +942,7 @@ function changed()
 	   // Update the fields that techy people update and only the techy people are allowed to do it
     function update_ticket($id)
     {
-        global $sql, $sql2, $id;
+        global $id;
         unset($hdu_up_closed);
         unset($hdu_args);
  
@@ -1030,10 +1043,10 @@ function changed()
                 {
                     // if we are auto assigning to helpdesk and no manual selection of assignee
                     // get the help desk associated with this category
-                    if ($sql->db_Select("hdu_categories", "hducat_helpdesk", "where hducat_id = '" . intval($_POST['hdu_category']) . "'", "nowhere", false))
+                    if ($this->sql->select("hdu_categories", "hducat_helpdesk", "where hducat_id = '" . intval($_POST['hdu_category']) . "'", "nowhere", false))
                     {
                         // Get the helpdesk to which this will be assigned if one exists
-                        extract($sql->db_Fetch());
+                        extract($this->sql->fetch());
                         $hdu_a_tech = $hducat_helpdesk;
                         // else
                         // {
@@ -1138,7 +1151,7 @@ function changed()
                 }
                 // Insert the record
                 // check if an existing identical ticket exists
-                if ($sql->db_Select("hdunit", "hdu_id", "hdu_category='" . intval($_POST['hdu_category']) . "'
+                if ($this->sql->select("hdunit", "hdu_id", "hdu_category='" . intval($_POST['hdu_category']) . "'
 and hdu_summary='" . $this->tp->toDB($_POST['hdu_summary']) . "' and hdu_description='" . $this->tp->toDB($_POST['hdu_description']) . "' and
 hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                 {
@@ -1178,7 +1191,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
 	'" . $this->tp->toDB($hdu_callout) . "',
 	'" . $this->tp->toDB($hdu_eqptcost) . "',
 	'" . $hdu_a_totalcost . "'";
-                    $id = $sql->db_Insert("hdunit", $hdu_args, false);
+                    $id = $this->sql->insert("hdunit", $hdu_args, false);
                     if ($id > 0)
                     {
                         // Ticket created
@@ -1217,17 +1230,17 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     $hdu_args .= "hdu_fixcost = '" . $this->tp->toDB($hdu_fixcost) . "',";
                     $hdu_args .= "hdu_distance = '" . $this->tp->toDB($hdu_distance) . "',";
                     $hdu_args .= "hdu_drate = '" . $this->tp->toDB($hdu_drate) . "',";
-                    $hdu_a_dcost = $hdu_a_dcost;
+//                    $hdu_a_dcost = $hdu_a_dcost;  // ????
                     $hdu_args .= "hdu_dcost = '" . $this->tp->toDB($hdu_a_dcost) . "',";
                     $hdu_args .= "hdu_hours = '" . $this->tp->toDB($hdu_hours) . "',";
-                    $hdu_a_hcost = $hdu_a_hcost;
+//                    $hdu_a_hcost = $hdu_a_hcost;  // ????
                     $hdu_args .= "hdu_hrate = '" . $this->tp->toDB($hdu_hrate) . "',";
                     $hdu_args .= "hdu_hcost = '" . $hdu_a_hcost . "',";
                     $hdu_args .= "hdu_eqptcost = '" . $this->tp->toDB($hdu_eqptcost) . "',";
                     $hdu_args .= "hdu_callout = '" . $this->tp->toDB($hdu_callout) . "',";
                     $hdu_args .= "hdu_totalcost = '" . $hdu_a_totalcost . "'";
                     $hdu_args .= " where hdu_id = '" . intval($id) . "' " ;
-                    if ($sql->db_Update("hdunit", $hdu_args, false))
+                    if ($this->sql->update("hdunit", $hdu_args, false))
                     {
                         $hdu_result = $id;
                     }
@@ -1291,20 +1304,20 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
     // **********************************************************************************************
     function hdu_notify($hdu_notifyid = 0, $hdu_notifyaction = NULL)
     {
-        global $sql, $sql2, $PLUGINS_DIRECTORY, $pref, $sysprefs, $pm_prefs ,
+        global $PLUGINS_DIRECTORY, $pref, $sysprefs, $pm_prefs ,
         $hdu_up_db, $hdu_msg, $hdu_recno,
         $hdu_newing,
         $hdu_email,
         $hdu_a_tech;
         // get the record for this particular ticket
-        $sql->db_Select_gen("
+        $this->sql->gen("
 		select * from #hdunit
 		left join #hdu_categories on hdu_category=hducat_id
 		left join #hdu_helpdesk on hducat_helpdesk=hdudesk_id
 		left join #hdu_resolve on  hdu_resolution=hdures_id
 		left join #user on hdu_posterid=user_id
 		where hdu_id = $hdu_notifyid", false);
-        extract($sql->db_Fetch());
+        extract($this->sql->fetch());
         // get the poster name
         $hduposterdet = explode(".", $hdu_poster, 2);
         $hduposterid = $hduposterdet[0];
@@ -1415,10 +1428,10 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
             }
 
             $hdu_arg = "select user_id,user_name,user_email from #user {$hdu_where} ";
-            $hdu_gotsuper = $sql->db_Select_gen($hdu_arg, false);
+            $hdu_gotsuper = $this->sql->gen($hdu_arg, false);
             if ($hdu_gotsuper)
             {
-                while ($hdu_row = $sql->db_Fetch())
+                while ($hdu_row = $this->sql->fetch())
                 {
                     $hdu_supers[] = array('user_id' => $hdu_row['user_id'], 'user_name' => $hdu_row['user_name'], 'user_email' => $hdu_row['user_email']);
                 }
@@ -1515,10 +1528,10 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
             }
             // Get all the members of the class for this helpdesk and email each one
             $hdu_arg = "select user_id,user_name,user_email from #user {$hdu_where} ";
-            $hdu_gottech = $sql->db_Select_gen($hdu_arg, false);
+            $hdu_gottech = $this->sql->gen($hdu_arg, false);
             if ($hdu_gottech)
             {
-                while ($hdu_row = $sql->db_Fetch())
+                while ($hdu_row = $this->sql->fetch())
                 {
                     $hdu_techs[] = array('user_id' => $hdu_row['user_id'], 'user_name' => $hdu_row['user_name'], 'user_email' => $hdu_row['user_email']);
                 }
@@ -1610,7 +1623,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
     }
     function add($vars)
     {
-        global $pm_prefs, $sql;
+        global $pm_prefs;
         $vars['options'] = "";
         $pmsize = 0;
         $attachlist = "";
@@ -1653,7 +1666,7 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
             foreach($tolist as $u)
             {
                 set_time_limit(30);
-                if ($pmid = $sql->db_Insert("private_msg", "0, '" . intval($vars['from_id']) . "', '" . $this->tp->toDB($u['user_id']) . "', '" . intval($sendtime) . "', '0', '{$pm_subject}', '{$pm_message}', '1', '0', '" . $this->tp->toDB($attachlist) . "', '" . $this->tp->toDB($pm_options) . "', '" . intval($pmsize) . "'"))
+                if ($pmid = $this->sql->insert("private_msg", "0, '" . intval($vars['from_id']) . "', '" . $this->tp->toDB($u['user_id']) . "', '" . intval($sendtime) . "', '0', '{$pm_subject}', '{$pm_message}', '1', '0', '" . $this->tp->toDB($attachlist) . "', '" . $this->tp->toDB($pm_options) . "', '" . intval($pmsize) . "'"))
                 {
                     if ($class == false)
                     {
@@ -1670,14 +1683,14 @@ hdu_priority='" . intval($_POST['hdu_priority']) . "'"))
                     $ret .= LAN_PM_39 . ": {$u['user_name']} <br />";
                 }
             }
-            if (!$pmid = $sql->db_Insert("private_msg", "0, '" . intval($vars['from_id']) . "', '" . $this->tp->toDB($toclass) . "', '" . intval($sendtime) . "', '1', '{$pm_subject}', '{$pm_message}', '0', '0', '" . $this->tp->toDB($attachlist) . "', '" . $this->tp->toDB($pm_options) . "', '" . intval($pmsize) . "'"))
+            if (!$pmid = $this->sql->insert("private_msg", "0, '" . intval($vars['from_id']) . "', '" . $this->tp->toDB($toclass) . "', '" . intval($sendtime) . "', '1', '{$pm_subject}', '{$pm_message}', '0', '0', '" . $this->tp->toDB($attachlist) . "', '" . $this->tp->toDB($pm_options) . "', '" . intval($pmsize) . "'"))
             {
                 $ret .= LAN_PM_41 . "<br />";
             }
         }
         else
         {
-            if ($pmid = $sql->db_Insert("private_msg", "0, '" . intval($vars['from_id']) . "', '" . $this->tp->toDB($vars['to_info']['user_id']) . "', '" . intval($sendtime) . "', '0', '{$pm_subject}', '{$pm_message}', '0', '0', '" . $this->tp->toDB($attachlist) . "', '" . $this->tp->toDB($pm_options) . "', '" . intval($pmsize) . "'"))
+            if ($pmid = $this->sql->insert("private_msg", "0, '" . intval($vars['from_id']) . "', '" . $this->tp->toDB($vars['to_info']['user_id']) . "', '" . intval($sendtime) . "', '0', '{$pm_subject}', '{$pm_message}', '0', '0', '" . $this->tp->toDB($attachlist) . "', '" . $this->tp->toDB($pm_options) . "', '" . intval($pmsize) . "'"))
             {
                 if (check_class($pm_prefs['notify_class'], $vars['to_info']['user_class']))
                 {
