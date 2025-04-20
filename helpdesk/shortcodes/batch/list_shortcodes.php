@@ -43,10 +43,10 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 		{
 			return HDU_102 . ' ' . $this->tp->toHTML($this->pluginPrefs['hduprefs_phone'], false, 'no_make_clickable emotes_off');
 		}
-		else
-		{
+//		else
+//		{
 			return '&nbsp;';
-		}
+//		}
 	}
 
 	function sc_hdu_faq()
@@ -54,25 +54,36 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 
 		if (!empty($this->pluginPrefs['hduprefs_faq']))
 		{
-			return "<a href='" . $this->tptoHTML($this->pluginPrefs['hduprefs_faq']) . "' >" . HDU_207 . "</a>";
+			return "<a href='" . $this->tp->toHTML($this->pluginPrefs['hduprefs_faq']) . "' >" . HDU_207 . "</a>";
 		}
-		else
-		{
+//		else
+//		{
 			return '&nbsp;';
-		}
+//		}
 	}
 
 	function sc_hdu_newticket()
 	{
 		global $helpdesk_obj, $show;
+/*
+		var_dump (defined('BOOTSTRAP'));
+		var_dump (deftrue('BOOTSTRAP'));
+		if (deftrue('BOOTSTRAP'))
+		{
+			$img = e107::getParser()->toGlyph('fa-download', false);
+			//	$img = '<i class="icon-download"></i>';
+		}
+*/
+
+
 		if ($helpdesk_obj->hdu_poster)
 		{
 			return "<a href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
 		}
-		else
-		{
-			return;
-		}
+//		else
+//		{
+			return false;
+//		}
 	}
 
 	function sc_hdu_reports()
@@ -126,10 +137,10 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 		{
 			return date($parm, $hdu_datestamp);
 		}
-		else
-		{
+//		else
+//		{
 			return "";
-		}
+//		}
 	}
 
 	function sc_hdu_ticket_category()
@@ -152,10 +163,10 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 			$text_to_pop = $this->tp->toFORM($hdures_help);
 			return "<span style='border-bottom: 3px double;' onmouseout=\"hdu_hideTooltip()\" onmouseover=\"hdu_showTooltip(event,'" . $text_to_pop . "');return false\">" . $this->tp->toHTML($hdures_resolution, false) . "</span>";
 		}
-		else
-		{
+//		else
+//		{
 			return $this->tp->toHTML($hdures_resolution, false);
-		}
+//		}
 	}
 
 	function sc_hdu_ticket_helpdesk()
