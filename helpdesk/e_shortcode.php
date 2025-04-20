@@ -26,7 +26,7 @@ class helpdesk_shortcodes extends e_shortcode
 		{
 		    $src= e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png";
 		}
-		return $src?"<img src='{$src}' style='border:0;' alt='helpdesk logo' />":null;
+		return $src?e107::getParser()->toImage($src, array('style'=>'border:0;', 'alt'=>'helpdesk logo')):null;
 	}
 
 }
