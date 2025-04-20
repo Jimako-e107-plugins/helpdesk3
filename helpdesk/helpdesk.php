@@ -53,6 +53,7 @@ else
 }
 */
 // get logo from theme, if not see if there is a default, if not then not using logo
+/*
 if (is_readable(THEME . "helpdesk.png"))
 {
     define("HDU_LOGO ", THEME . "helpdesk.png");
@@ -60,7 +61,7 @@ if (is_readable(THEME . "helpdesk.png"))
 {
     define("HDU_LOGO", e_PLUGIN . HELPDESK_FOLDER . "/images/helpdesk.png");
 }
-
+*/
 //require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");
  
 // *
@@ -334,7 +335,7 @@ $hdu_filtselect .= "</select>";
 //
 //require(HDU_THEME);
 $HDU_LISTTICKETS = e107::getTemplate('helpdesk', 'helpdesk');
-$hdu_shortcodes = e107::getScBatch('helpdesk', TRUE);
+$hdu_shortcodes = e107::getScBatch('list', 'helpdesk');
 $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["header"], true, $hdu_shortcodes);
 // $hdu_colours = hdu_get_colours();
 // print $filter;
@@ -441,5 +442,5 @@ $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["footer"], false, $hdu_shortcod
 $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["priority"], true, $hdu_shortcodes);
 $hdu_text .= "
 </form>";
-$helpdesk_obj->tablerender($tp->parseTemplate($HDU_LISTTICKETS["caption"], true, $hdu_shortcodes), $hdu_text, 'hdu_main');
+$helpdesk_obj->tablerender($tp->parseTemplate($HDU_LISTTICKETS["caption"]??"{HDU_TITLE}", true, $hdu_shortcodes), $hdu_text, 'hdu_main');
 require_once(FOOTERF);
