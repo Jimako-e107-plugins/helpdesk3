@@ -870,7 +870,7 @@ function changed()
             // <div id=\"tabcontentcontainer\">";
             // // Div for ticket details
             // $hdu_retval .= "<div id=\"sc1\" class=\"tabcontent\">";
-            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["ticket"], false, $hdu_shortcodes);
+            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["ticket"], true, $hdu_shortcodes);
             // $hdu_retval .= "</div>";
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["details"], false, $hdu_shortcodes);
             if ($this->hdu_new)
