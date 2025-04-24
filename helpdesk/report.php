@@ -6,10 +6,10 @@
 // ****************************************************************
 // USE GET method for form - get round bug in IE that forces download.  See docs
 // in fpdf
-require_once(e_HANDLER . "calendar/calendar_class.php");
-$hdu_cal = new DHTML_Calendar(true);
+// require_once(e_HANDLER . "calendar/calendar_class.php");
+// $hdu_cal = new DHTML_Calendar(true);
 
-$hdu_caltext .= $hdu_cal->load_files();
+//$hdu_caltext .= $hdu_cal->load_files();
 switch (e107::pref('helpdesk', 'hdu_dateformat'))
 {
     case 1:
@@ -28,7 +28,7 @@ $hdu_text .= "
 	<div>
 		<input type='hidden' name='hdu_id' value='$id' />
 	</div>
-	<table style ='" . USER_WIDTH . "' class='fborder'>
+	<table style ='" . USER_WIDTH . "' class='fborder table'>
 		<tr>
 			<td class='fcaption' colspan='2'>" . HDU_126 . "</td>
 		</tr>
@@ -73,15 +73,18 @@ $hdu_text .= $hdu_caltext;
 $hdu_dformat = str_replace("d", "%d", $hdu_calformat);
 $hdu_dformat = str_replace("m", "%m", $hdu_dformat);
 $hdu_dformat = str_replace("Y", "%Y", $hdu_dformat);
-$hdu_cal_options['firstDay'] = 1;
-$hdu_cal_options['showsTime'] = false;
-$hdu_cal_options['showOthers'] = false;
-$hdu_cal_options['weekNumbers'] = false;
-$hdu_cal_options['ifFormat'] = $hdu_dformat;
-$hdu_cal_attrib['class'] = "tbox";
-$hdu_cal_attrib['name'] = "hdu_fromd";
-$hdu_cal_attrib['value'] = "";
-$hdu_text .= $hdu_cal->make_input_field($hdu_cal_options, $hdu_cal_attrib);
+ 
+
+$opt = array(
+	'type' => 'date',
+	'format' => $hdu_dformat,
+	'firstDay' => 1, // 0 = Sunday.
+	'size' => 12,
+	'return' => 'string',
+);
+
+$hdu_text .= e107::getForm()->datepicker("hdu_fromd", "", $opt);
+ 
 // *
 $hdu_text .= "<br />To : ";
 // * Calendar bits
@@ -90,15 +93,17 @@ $hdu_text .= "<br />To : ";
 $hdu_dformat = str_replace("d", "%d", $hdu_calformat);
 $hdu_dformat = str_replace("m", "%m", $hdu_dformat);
 $hdu_dformat = str_replace("Y", "%Y", $hdu_dformat);
-$hdu_cal_options['firstDay'] = 1;
-$hdu_cal_options['showsTime'] = false;
-$hdu_cal_options['showOthers'] = false;
-$hdu_cal_options['weekNumbers'] = false;
-$hdu_cal_options['ifFormat'] = $hdu_dformat;
-$hdu_cal_attrib['class'] = "tbox";
-$hdu_cal_attrib['name'] = "hdu_tod";
-$hdu_cal_attrib['value'] = "";
-$hdu_text .= $hdu_cal->make_input_field($hdu_cal_options, $hdu_cal_attrib);
+ 
+$opt = array(
+	'type' => 'date',
+	'format' => $hdu_dformat,
+	'firstDay' => 1, // 0 = Sunday.
+	'size' => 12,
+	'return' => 'string',
+);
+
+$hdu_text .= e107::getForm()->datepicker("hdu_tod", "", $opt);
+
 // *
 $hdu_text .= "
 			</td>

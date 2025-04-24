@@ -21,7 +21,7 @@ if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {
 	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
 	$helpdesk_obj = new helpdesk;
-}
+}  
 $hdu_aaction = NULL;
 $hdu_text = "";
 $hdu_user = "";
@@ -222,10 +222,19 @@ switch ($hdu_aaction)
         break;
 
     case "repmenu":
-        require_once("report.php");
-        exit();
-        break;
 
+		if (!e107::isinstalled("pdf"))
+		{
+			echo  e107::getMessage()->addWarning("PDF plugin is not installed")->setClose(false, E_MESSAGE_WARNING)->render();
+			require_once(FOOTERF);
+			exit();
+			break;
+		}
+		else {
+			require_once("report.php");
+			exit();
+			break;
+		}
     default:
         break;
 }

@@ -1,7 +1,7 @@
 <?php
 
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . "_helpdesk.php");
+e107::lan("helpdesk", true, true);  //fix me 
+e107::lan("helpdesk", false, true); //fix me
 
 
 $admin_style_fix = '
@@ -249,31 +249,34 @@ class helpdesk
     // }
     // return $hdu_cal_retval;
     // }
-    // function hdu_indate($hdu_cal_date)
-    // {
-    // global $pref;
-    // if (!empty($hdu_cal_date))
-    // {
-    // $hdu_cal_tmp = explode("-", $hdu_cal_date);
-    // switch ($pref['eventguide_dateformat'])
-    // {
-    // case 1:
-    // $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[0], $hdu_cal_tmp[1], $hdu_cal_tmp[2]);
-    // break;
-    // case 2:
-    // $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[2], $hdu_cal_tmp[0]);
-    // break;
-    // case 0:
-    // default:
-    // $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[0], $hdu_cal_tmp[2]);
-    // } // switch
-    // }
-    // else
-    // {
-    // $hdu_cal_retval = 0;
-    // }
-    // return $hdu_cal_retval;
-    // }
+
+    function hdu_indate($hdu_cal_date)
+    {
+    global $pref;
+    if (!empty($hdu_cal_date))
+    {
+    $hdu_cal_tmp = explode("-", $hdu_cal_date);
+    switch ($pref['eventguide_dateformat'])
+    {
+    case 1:
+    $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[0], $hdu_cal_tmp[1], $hdu_cal_tmp[2]);
+    break;
+    case 2:
+    $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[2], $hdu_cal_tmp[0]);
+    break;
+    case 0:
+    default:
+    $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[0], $hdu_cal_tmp[2]);
+    } // switch
+    }
+    else
+    {
+    $hdu_cal_retval = 0;
+    }
+    return $hdu_cal_retval;
+    }
+
+
     // **********************************************************************************************
     // *
     // *	Function	:	display_priority()
@@ -633,7 +636,7 @@ class helpdesk
 		'0',
 		'" . $this->tp->toDB($_POST['hduc_comment']) . "'";
             $hduc = $this->sql->insert("hdu_comments", $hduc_args);
-            $hduc_msg = HDU_92;
+			$hduc_msg = $this->tp->lanVars(HDU_92, array($hdu_id));
         }
         $this->sql->select("hdunit", "*", "where hdu_id = $hdu_id", "nowhere");
         $hdu_row = $this->sql->fetch();

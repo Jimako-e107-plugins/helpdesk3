@@ -1,7 +1,7 @@
 <?php
 // *report*General*
 // Create a new class extending fpdf to have custom header and footer for the page
-class HDU_PDF extends UFPDF
+class HDU_PDF extends TCPDF
 {
     // Page header
     function Header()
@@ -13,8 +13,8 @@ class HDU_PDF extends UFPDF
         {
             $this->Image(e_PLUGIN . HELPDESK_FOLDER . "/images/logo_hd.png", 10, 8, 33, '', '', $hdu_siteurl);
         }
-        // Arial bold 15
-        $this->SetFont('Arial', 'B', 15);
+        // Helvetica bold 15
+        $this->SetFont('Helvetica', 'B', 15);
         // Move to the right
         #$this->Cell(80);
         // Title
@@ -23,12 +23,12 @@ class HDU_PDF extends UFPDF
         #$this->Cell(80);
         // Line break
         $this->Line(0, 33, 300, 33);
-        $this->SetFont('Arial', 'bu', 9);
+        $this->SetFont('Helvetica', 'bu', 9);
         $hdu_tit = $hdu_title . " " . HDU_121 . " " . $hdu_now;
         $this->Cell(0, 6, $hdu_tit, 0, 1,'C');
-        $this->SetFont('Arial', 'b', 9);
+        $this->SetFont('Helvetica', 'b', 9);
         $this->Cell(0, 6, $hdu_subtitle, 0, 1,'C');
-        $this->SetFont('Arial', 'b', 9);
+        $this->SetFont('Helvetica', 'b', 9);
         $this->Cell(10, 6, HDU_216, 0, 0, "R");
         $this->Cell(27, 6, HDU_217, 0, 0);
         $this->Cell(35, 6, HDU_227, 0, 0);
@@ -48,8 +48,8 @@ class HDU_PDF extends UFPDF
     {
         // Position at 1.5 cm from bottom
         $this->SetY(-15);
-        // Arial italic 8
-        $this->SetFont('Arial', 'I', 8);
+        // Helvetica italic 8
+        $this->SetFont('Helvetica', 'I', 8);
         // Page number
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
@@ -104,7 +104,7 @@ $hdu_pdf->SetTitle("Helpdesk Report");
 $hdu_pdf->SetKeywords("Help");
 $hdu_pdf->SetSubject(SITENAME . " Helpdesk Report");
 $hdu_pdf->SetAuthor(SITENAME);
-$hdu_pdf->AliasNbPages();
+//$hdu_pdf->AliasNbPages();
 $hdu_pdf->AddPage();
 
 $hdu_udb->db_Select_gen("select * from #hdunit

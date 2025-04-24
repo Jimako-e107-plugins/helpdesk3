@@ -1,7 +1,7 @@
 <?php
 
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . ".php");
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . ".php");
+e107::lan("helpdesk", true, true);  //fix me 
+e107::lan("helpdesk", false, true); //fix me
 
 if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {

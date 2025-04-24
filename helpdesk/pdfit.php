@@ -111,6 +111,8 @@ $hdu_assto = $tp->toHTML($hdudesk_name);
     // If it is the poster then
     if (USERID == $hduposterid && $hdu_return == 1 && $hdu_closed == 0)
     {
+
+		
         $hdu_text .= "<tr>
 		<td colspan='2' class='forumheader3'>" . HDU_90 . "</td>
 		</tr>";

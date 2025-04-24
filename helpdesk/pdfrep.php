@@ -32,22 +32,32 @@
 // ***************************************************************
 // Define the location of font files and get the fpdf library
 require_once("../../class2.php");
-define('FPDF_FONTPATH', e_PLUGIN.'pdf/font/');
 
-require(e_PLUGIN.'pdf/ufpdf.php');
-
-
-require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
-if (!is_object($helpdesk_obj))
+if (e107::isinstalled("pdf"))
 {
-    $helpdesk_obj = new helpdesk;
+
+	define('FPDF_FONTPATH', e_PLUGIN . 'pdf/fonts/');
+
+	require(e_PLUGIN . 'pdf/tcpdf.php');
+
+
+	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+	if (!is_object($helpdesk_obj))
+	{
+		$helpdesk_obj = new helpdesk;
+	}
+
+	switch ($_GET['hdu_repselection'])
+	{
+		case 1:
+			require_once(e_PLUGIN . HELPDESK_FOLDER . "/reports/report1.php");
+			break;
+		default:
+			require_once(e_PLUGIN . HELPDESK_FOLDER . "/reports/report0.php");
+	} // switch
+
 }
-
-switch ($_GET['hdu_repselection'])
+else
 {
-    case 1:
-        require_once(e_PLUGIN . HELPDESK_FOLDER . "/reports/report1.php");
-        break;
-    default:
-        require_once(e_PLUGIN . HELPDESK_FOLDER . "/reports/report0.php");
-} // switch
+	echo  e107::getMessage()->addWarning("PDF plugin is not installed")->setClose(false, E_MESSAGE_WARNING)->render();
+}
