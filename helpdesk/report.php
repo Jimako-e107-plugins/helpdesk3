@@ -28,7 +28,7 @@ $hdu_text .= "
 	<div>
 		<input type='hidden' name='hdu_id' value='$id' />
 	</div>
-	<table style ='" . USER_WIDTH . "' class='fborder'>
+	<table style ='" . USER_WIDTH . "' class='fborder table'>
 		<tr>
 			<td class='fcaption' colspan='2'>" . HDU_126 . "</td>
 		</tr>

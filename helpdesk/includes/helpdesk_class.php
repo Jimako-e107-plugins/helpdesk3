@@ -249,31 +249,34 @@ class helpdesk
     // }
     // return $hdu_cal_retval;
     // }
-    // function hdu_indate($hdu_cal_date)
-    // {
-    // global $pref;
-    // if (!empty($hdu_cal_date))
-    // {
-    // $hdu_cal_tmp = explode("-", $hdu_cal_date);
-    // switch ($pref['eventguide_dateformat'])
-    // {
-    // case 1:
-    // $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[0], $hdu_cal_tmp[1], $hdu_cal_tmp[2]);
-    // break;
-    // case 2:
-    // $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[2], $hdu_cal_tmp[0]);
-    // break;
-    // case 0:
-    // default:
-    // $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[0], $hdu_cal_tmp[2]);
-    // } // switch
-    // }
-    // else
-    // {
-    // $hdu_cal_retval = 0;
-    // }
-    // return $hdu_cal_retval;
-    // }
+
+    function hdu_indate($hdu_cal_date)
+    {
+    global $pref;
+    if (!empty($hdu_cal_date))
+    {
+    $hdu_cal_tmp = explode("-", $hdu_cal_date);
+    switch ($pref['eventguide_dateformat'])
+    {
+    case 1:
+    $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[0], $hdu_cal_tmp[1], $hdu_cal_tmp[2]);
+    break;
+    case 2:
+    $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[2], $hdu_cal_tmp[0]);
+    break;
+    case 0:
+    default:
+    $hdu_cal_retval = mktime(0, 0, 0, $hdu_cal_tmp[1], $hdu_cal_tmp[0], $hdu_cal_tmp[2]);
+    } // switch
+    }
+    else
+    {
+    $hdu_cal_retval = 0;
+    }
+    return $hdu_cal_retval;
+    }
+
+
     // **********************************************************************************************
     // *
     // *	Function	:	display_priority()

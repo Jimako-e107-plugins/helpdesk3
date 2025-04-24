@@ -222,10 +222,19 @@ switch ($hdu_aaction)
         break;
 
     case "repmenu":
-        require_once("report.php");
-        exit();
-        break;
 
+		if (!e107::isinstalled("pdf"))
+		{
+			echo  e107::getMessage()->addWarning("PDF plugin is not installed")->setClose(false, E_MESSAGE_WARNING)->render();
+			require_once(FOOTERF);
+			exit();
+			break;
+		}
+		else {
+			require_once("report.php");
+			exit();
+			break;
+		}
     default:
         break;
 }
