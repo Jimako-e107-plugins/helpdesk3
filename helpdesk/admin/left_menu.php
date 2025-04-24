@@ -75,7 +75,7 @@ class helpdesk_adminArea extends e_admin_dispatcher
 		'desk/edit'	=> 'desk/list'
 	);
 
-	protected $menuTitle = 'Help Desk';
+	protected $menuTitle = HDU_A33;
 
  
 }
