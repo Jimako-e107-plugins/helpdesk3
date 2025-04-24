@@ -563,11 +563,11 @@ class helpdesk_colors_ui extends e_admin_ui
 		{
 			$caption = LAN_HELP;
 			$text = 'Colors rendering example';
-//			require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
-//			$helpdesk_obj = new helpdesk;
-//			$text .= $helpdesk_obj->display_priority();
-			include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php"); // To be reworked
-			include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . "_helpdesk.php"); // To be reworked
+			//			require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+			//			$helpdesk_obj = new helpdesk;
+			//			$text .= $helpdesk_obj->display_priority();
+			//e107::lan("helpdesk", true, true);  //fix me   no needed
+			//e107::lan("helpdesk", false, true); //fix me   no needed
 			$HDU_LISTTICKETS = e107::getTemplate('helpdesk', 'helpdesk');
 			$hdu_shortcodes = e107::getScBatch('list', 'helpdesk');
 			$text .= e107::getParser()->parseTemplate($HDU_LISTTICKETS["priority"], true, $hdu_shortcodes);

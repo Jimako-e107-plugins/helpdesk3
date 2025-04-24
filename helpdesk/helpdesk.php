@@ -21,7 +21,7 @@ if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 {
 	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
 	$helpdesk_obj = new helpdesk;
-}
+}  
 $hdu_aaction = NULL;
 $hdu_text = "";
 $hdu_user = "";

@@ -1,7 +1,7 @@
 <?php
 
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . "_helpdesk_admin.php");
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . "_helpdesk.php");
+e107::lan("helpdesk", true, true);  //fix me 
+e107::lan("helpdesk", false, true); //fix me
 
 
 $admin_style_fix = '

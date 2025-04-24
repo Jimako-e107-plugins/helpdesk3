@@ -1,6 +1,7 @@
 <?php
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/admin/" . e_LANGUAGE . ".php");
-include_lan(e_PLUGIN . HELPDESK_FOLDER . "/languages/" . e_LANGUAGE . ".php");
+
+// e107::lan("helpdesk", true, true);  what is point to split files if you still need to load both? 
+e107::lan("helpdesk", false, true);
 
 $return_fields = 't.hdu_id,t.hdu_description,t.hdu_datestamp,t.hdu_poster,t.hdu_summary,x.hducat_category,y.hdures_resolution';
 $search_fields = array('t.hdu_poster', 't.hdu_description','t.hdu_summary', "x.hducat_category", "y.hdures_resolution");

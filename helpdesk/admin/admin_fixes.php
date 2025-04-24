@@ -9,8 +9,7 @@ if (!getperms("P"))
     header("location:" . e_BASE . "index.php");
     exit;
 }
-e107::lan("helpdesk", true, true);
- 
+
 include_once(e_PLUGIN .  HELPDESK_FOLDER .  "/admin/left_menu.php");
  
 class hdu_fixes_ui extends e_admin_ui
