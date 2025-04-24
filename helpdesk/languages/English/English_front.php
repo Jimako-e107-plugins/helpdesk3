@@ -1,15 +1,5 @@
 <?php
-
-if (!isset($id))
-{
-	$id = ''; // Or set a default value
-}
-
-if (!isset($hduprefs_autoclosedays))
-{
-	$hduprefs_autoclosedays = ''; // Or set a default value
-}
-
+ 
 define("HDU_REP", "Standard,Financial");
 define("HDU_REPORTTITLE", "Helpdesk Report");
 define("HDU_MONTHS", " ,January,February,March,April,May,June,July,August,September,October,November,December");
@@ -75,7 +65,8 @@ define("HDU_58", "was");
 define("HDU_59", "now");
 define("HDU_60", "Ticket closed at");
 define("HDU_61", "Ticket re-opened");
-define("HDU_62", "Your helpdesk ticket " . $id . " has been updated.");
+//define("HDU_62", "Your helpdesk ticket " . $id . " has been updated."); Fix me
+define("HDU_62", "Your helpdesk ticket [x] has been updated.");
 define("HDU_63", "has been updated");
 define("HDU_64", "Open tickets:");
 define("HDU_65", "Total tickets:");
@@ -103,10 +94,12 @@ define("HDU_86", "Ticket closed - no panic");
 define("HDU_87", "Anonymous");
 define("HDU_88", "Underlined fields are mandatory.");
 define("HDU_89", "Only tickets posted by you are displayed.");
-define("HDU_90", "<b>If there is no response from you within " . $hduprefs_autoclosedays . " days this ticket will automatically close.</b>");
+//define("HDU_90", "<b>If there is no response from you within " . $hduprefs_autoclosedays . " days this ticket will automatically close.</b>"); FIX ME
+define("HDU_90", "<b>If there is no response from you within [x] days this ticket will automatically close.</b>");
 define("HDU_91", "Last activity on this ticket");
-define("HDU_92", "Your helpdesk ticket $id has been returned.");
-define("HDU_93", "Helpdesk ticket $id has been updated.");
+define("HDU_92", "Your helpdesk ticket [x] has been returned.");
+//define("HDU_93", "Helpdesk ticket $id has been updated."); FIX ME
+define("HDU_93", "Helpdesk ticket [x] has been updated.");
 define("HDU_94", "If this is now resolved then please close the ticket.");
 define("HDU_95", "Add your comment");
 define("HDU_96", "Reopen ticket");

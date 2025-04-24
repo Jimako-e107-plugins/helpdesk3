@@ -1,7 +1,5 @@
 <?php
-
-if (!isset($id)) { $id = ''; }
-if (!isset($hduprefs_autoclosedays)) { $hduprefs_autoclosedays = ''; }
+ 
 
 define("HDU_REP", "Padrão,Financeiro");
 define("HDU_REPORTTITLE", "Relatório do Helpdesk");
@@ -68,7 +66,7 @@ define("HDU_58", "foi");
 define("HDU_59", "agora");
 define("HDU_60", "Pedido fechado às");
 define("HDU_61", "Pedido reaberto");
-define("HDU_62", "O seu pedido de suporte " . $id . " foi atualizado.");
+define("HDU_62", "O seu pedido de suporte [x] foi atualizado.");
 define("HDU_63", "foi atualizado");
 define("HDU_64", "Pedidos abertos:");
 define("HDU_65", "Total de pedidos:");
@@ -96,10 +94,10 @@ define("HDU_86", "Pedido fechado - sem pânico");
 define("HDU_87", "Anónimo");
 define("HDU_88", "Campos sublinhados são obrigatórios.");
 define("HDU_89", "Apenas pedidos submetidos por si são exibidos.");
-define("HDU_90", "<b>Se não houver resposta da sua parte dentro de " . $hduprefs_autoclosedays . " dias, este pedido será fechado automaticamente.</b>");
+define("HDU_90", "<b>Se não houver resposta da sua parte dentro de [x] dias, este pedido será fechado automaticamente.</b>");
 define("HDU_91", "Última atividade neste pedido");
-define("HDU_92", "O seu pedido de suporte $id foi devolvido.");
-define("HDU_93", "O pedido de suporte $id foi atualizado.");
+define("HDU_92", "O seu pedido de suporte [x] foi devolvido.");
+define("HDU_93", "O pedido de suporte [x] foi atualizado.");
 define("HDU_94", "Se este pedido já estiver resolvido, por favor, feche o pedido.");
 define("HDU_95", "Adicionar o seu comentário");
 define("HDU_96", "Reabrir pedido");

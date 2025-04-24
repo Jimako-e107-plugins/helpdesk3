@@ -633,7 +633,7 @@ class helpdesk
 		'0',
 		'" . $this->tp->toDB($_POST['hduc_comment']) . "'";
             $hduc = $this->sql->insert("hdu_comments", $hduc_args);
-            $hduc_msg = HDU_92;
+			$hduc_msg = $this->tp->lanVars(HDU_92, array($hdu_id));
         }
         $this->sql->select("hdunit", "*", "where hdu_id = $hdu_id", "nowhere");
         $hdu_row = $this->sql->fetch();
