@@ -49,8 +49,8 @@ $HELPDESK_TEMPLATE["header"] .= "
 	</tr>
 	<tr>
 		<td style='text-align:left' colspan ='4' class='forumheader3' >{HDU_NEWTICKET} {HDU_REPORTS}&nbsp;</td>
-		<td  class='forumheader3' colspan ='4' style='width:50%; vertical-align:top;' >" . HDU_77 . "{HDU_FILTER}<br />
-		" . HDU_78 . " {HDU_GOTOREC} {HDU_DOFILTER}</td>
+		<td  class='forumheader3' colspan ='4' style='width:50%; vertical-align:top;' >{HDU_FILTER}<br />
+		{HDU_GOTOREC} {HDU_DOFILTER}</td>
 	</tr>
 </table>
 <table style ='" . USER_WIDTH . "' class ='fborder' >

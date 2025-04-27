@@ -22,10 +22,6 @@ if (!isset($helpdesk_obj) || !is_object($helpdesk_obj))
 	require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
 	$helpdesk_obj = new helpdesk;
 }  
-$hdu_aaction = NULL;
-$hdu_text = "";
-$hdu_user = "";
-$hdu_colours = "";
 
 // Check if the user is allowed to use the helpdesk system.  If not display an error message
 // and exit.  helpdesk technicians, supervisors and admin automatically allowed in.
@@ -33,11 +29,18 @@ if (!$helpdesk_obj->hdu_read)
 {
     // tell them they're not permitted to use the helpdesk
     require_once(HEADERF);
-    $hdu_text = HDU_76;
-    $helpdesk_obj->tablerender(HDU_21, $hdu_text, 'hdu_not');
+//    $hdu_text = HDU_76;
+//    $helpdesk_obj->tablerender(HDU_21, $hdu_text, 'hdu_not');
+    echo  e107::getMessage()->addWarning(HDU_76)->setClose(false, E_MESSAGE_WARNING)->render();
     require_once(FOOTERF);
     exit();
 }
+
+$hdu_aaction = NULL;
+$hdu_text = "";
+$hdu_user = "";
+$hdu_colours = "";
+
 // for tooltip popup
 $eplug_js[] = e_PLUGIN . HELPDESK_FOLDER . "/includes/plain/hdu_pop.js";
 $eplug_css[] = e_PLUGIN . HELPDESK_FOLDER . "/includes/plain/hdu_pop.css";
@@ -329,6 +332,7 @@ $hdu_text .= "
 	<div>
 		<input type='hidden' name='from' value='$from' />
 	</div>";
+/*
 $hdu_filtselect = "
 	<select name ='R1' class ='tbox' onchange='this.form.from.value=0;this.form.submit()'>
 		<option value='all'" . ($R1 == "all"?" selected ='selected'":"") . " >" . HDU_187 . "</option>
@@ -342,6 +346,7 @@ if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk
     $hdu_filtselect .= "<option value='mine'" . ($R1 == "mine"?" selected ='selected'":"") . " >" . HDU_208 . "</option>";
 }
 $hdu_filtselect .= "</select>";
+*/
 //
 //require(HDU_THEME);
 $HDU_LISTTICKETS = e107::getTemplate('helpdesk', 'helpdesk');
