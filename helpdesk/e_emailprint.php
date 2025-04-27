@@ -5,11 +5,14 @@ if (!defined('e107_INIT'))
 }
 function print_item($id)
 {
-    global $sql, $tp, $helpdesk_obj, $hdu_shortcodes,
+    global $helpdesk_obj, $hdu_shortcodes,
     $hdupostername, $hdu_datestamp, $hdu_category, $hdu_summary, $hdu_tagno, $hdu_email, $hdu_resolution, $hdures_resolution, $hdu_description,
     $hdu_tech, $hdu_allocated, $hdu_closed, $hdu_hours, $hdu_fixcost, $hdu_hrate, $hdu_hcost, $hdu_distance, $hdu_fixother,
     $hdu_drate, $hdu_dcost, $hdu_eqptcost, $hdu_callout, $hduc_date, $hduc_postername, $hduc_comment, $hdu_priority, $hdu_savemsg, $hdu_totalcost,
     $hdupostername;
+    
+    $sql = e107::getdb();
+    $tp = e107::getParser();
 
     require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
     require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_shortcodes.php");

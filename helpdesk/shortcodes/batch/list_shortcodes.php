@@ -78,7 +78,9 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 
 		if ($helpdesk_obj->hdu_poster)
 		{
-			return "<a href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
+			return "<a class='btn btn-primary' href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' >".HDU_52."</a>";
+			
+//			return "<a href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
 		}
 //		else
 //		{
@@ -97,14 +99,62 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 
 	function sc_hdu_filter()
 	{
-		global $hdu_filtselect;
+//		global $hdu_filtselect;
+global $helpdesk_obj, $R1;
+/*
+		$hdu_filtselect = "
+		<select name ='R1' class ='tbox' onchange='this.form.from.value=0;this.form.submit()'>
+			<option value='all'" . ($R1 == "all"?" selected ='selected'":"") . " >" . HDU_187 . "</option>
+			<option value='open'" . ($R1 == "open"?" selected ='selected'":"") . " >" . HDU_182 . "</option>
+			<option value='closed'" . ($R1 == "closed"?" selected ='selected'":"") . " >" . HDU_183 . "</option>
+			<option value='allocated'" . ($R1 == "allocated"?" selected ='selected'":"") . " >" . HDU_184 . "</option>
+			<option value='unallocated'" . ($R1 == "unallocated"?" selected ='selected'":"") . " >" . HDU_185 . "</option>
+			<option value='escalate'" . ($R1 == "escalate"?" selected ='selected'":"") . " >" . HDU_186 . "</option>";
+	if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
+	{
+		$hdu_filtselect .= "<option value='mine'" . ($R1 == "mine"?" selected ='selected'":"") . " >" . HDU_208 . "</option>";
+	}
+	$hdu_filtselect .= "</select>";
+
+*/
+
+$hdu_filtselect = '<label for="R1">'.HDU_77.'</label>';
+
+	$array["all"]=HDU_187;
+	$array["open"]=HDU_182;
+	$array["closed"]=HDU_183;
+	$array["allocated"]=HDU_184;
+	$array["unallocated"]=HDU_185;
+	$array["escalate"]=HDU_186;
+	if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
+	{
+		$array["mine"]=HDU_208;
+	}
+
+	$hdu_filtselect .= e107::getForm()->select('R1', $array, $R1, array("class"=>"tbox form-select w-25"));
+
+//e107::js("inline", '$(".r1").on("change", function () {    this.form.from.value=0;this.form.submit();});');
+
+$hdu_filtselect .= '
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var select = document.getElementById("r1");
+    if (select) {
+      select.addEventListener("change", function() {
+        this.form.from.value=0;
+		this.form.submit();
+      });
+    }
+  });
+</script>
+';
 		return $hdu_filtselect;
 	}
 
 	function sc_hdu_gotorec()
 	{
 		global $hdu_goto;
-		return "<input type ='text' name ='goto' maxlength ='5' value ='" . $hdu_goto . "' size ='10' class ='tbox' />";
+		return '<label for="goto">'.HDU_78."</label><input type ='text' name ='goto' id ='goto' maxlength ='5' value ='" . $hdu_goto . "' size ='10' class ='tbox' />";
 	}
 
 	function sc_hdu_dofilter()
