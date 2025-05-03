@@ -22,13 +22,16 @@ if (!isset($HELPDESK_TEMPLATE["header"]))
 	</tr>";
     }
 */
+$HELPDESK_TEMPLATE["form"] .= "
+{HDU_GOTOREC} {HDU_DOFILTER}
+";
+
 $HELPDESK_TEMPLATE["header"] .= "
 <tr>
 	<td class ='forumheader2' colspan='8' style='text-align:center;' >
 		{HDU_LOGO}
 	</td>
-</tr>";
-$HELPDESK_TEMPLATE["header"] .= "
+</tr>
 	<tr>
 		<td style='vertical-align:top;'  colspan='8' class ='forumheader3'><b>{HDU_MESSAGE}</b>&nbsp;</td>
 	</tr>";
@@ -50,7 +53,7 @@ $HELPDESK_TEMPLATE["header"] .= "
 	<tr>
 		<td style='text-align:left' colspan ='4' class='forumheader3' >{HDU_NEWTICKET} {HDU_REPORTS}&nbsp;</td>
 		<td  class='forumheader3' colspan ='4' style='width:50%; vertical-align:top;' >{HDU_FILTER}<br />
-		{HDU_GOTOREC} {HDU_DOFILTER}</td>
+		{HDU_DOFORM}</td>
 	</tr>
 </table>
 <table style ='" . USER_WIDTH . "' class ='fborder' >

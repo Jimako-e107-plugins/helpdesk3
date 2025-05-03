@@ -327,11 +327,13 @@ $hdu_totalrecs = $sql->count("hdunit", "(*)", $filter, false);
 // *
 // * Display table with tickets in
 // *
+/*
 $hdu_text .= "
 <form method='post' action='" . e_SELF . "' id='viewopt'>
 	<div>
 		<input type='hidden' name='from' value='$from' />
 	</div>";
+*/
 /*
 $hdu_filtselect = "
 	<select name ='R1' class ='tbox' onchange='this.form.from.value=0;this.form.submit()'>
@@ -455,7 +457,9 @@ $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["footer"], false, $hdu_shortcod
 
 //$hdu_text .= $helpdesk_obj->display_priority($hdu_colours);
 $hdu_text .= $tp->parseTemplate($HDU_LISTTICKETS["priority"], true, $hdu_shortcodes);
+/*
 $hdu_text .= "
 </form>";
+*/
 $helpdesk_obj->tablerender($tp->parseTemplate($HDU_LISTTICKETS["caption"]??"{HDU_TITLE}", true, $hdu_shortcodes), $hdu_text, 'hdu_main');
 require_once(FOOTERF);
