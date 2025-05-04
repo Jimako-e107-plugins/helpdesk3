@@ -10,11 +10,13 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 
 	private $pluginPrefs = array();
 	private $tp;
+	private $form;
 
 	function __construct()
 	{
 		$this->pluginPrefs = e107::pref('helpdesk');
 		$this->tp = e107::getParser();
+		$this->form = e107::getForm();
 	}
 
 	function sc_hdu_title()
@@ -62,7 +64,7 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 //		}
 	}
 
-	function sc_hdu_newticket()
+	function sc_hdu_newticket($parms = null)
 	{
 		global $helpdesk_obj, $show;
 /*
@@ -74,11 +76,21 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 			//	$img = '<i class="icon-download"></i>';
 		}
 */
-
-
-		if ($helpdesk_obj->hdu_poster)
+/*
+var_dump($parms['icon']);
+var_dump(isset($parms['icon']));
+var_dump(!$parms['icon']);
+*/
+	if ($helpdesk_obj->hdu_poster)
 		{
-			return "<a class='btn btn-primary' href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' >".HDU_52."</a>";
+			if (isset($parms['icon']) && !$parms['icon']) { // To be modified to accept glyphs inside the button text
+				$text = HDU_52;
+			} else {
+				$text = "<img src='./images/new.gif' style='border:0;' alt='' title='".HDU_52."' />";
+			}
+//			return "<a class='btn btn-primary' href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' >".HDU_52."</a>";
+//			return $this->form->renderLink(HDU_52, array('link' => e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0",'target'=>'blank'));
+			return "<a class='btn btn-success' href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' >{$text}</a>";
 			
 //			return "<a href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
 		}
@@ -131,7 +143,7 @@ $hdu_filtselect = '<label for="R1">'.HDU_77.'</label>';
 		$array["mine"]=HDU_208;
 	}
 
-	$hdu_filtselect .= e107::getForm()->select('R1', $array, $R1, array("class"=>"tbox form-select w-25"));
+	$hdu_filtselect .= $this->form->select('R1', $array, $R1, array("class"=>"tbox form-select w-25"));
 
 //e107::js("inline", '$(".r1").on("change", function () {    this.form.from.value=0;this.form.submit();});');
 
@@ -159,7 +171,27 @@ $hdu_filtselect .= '
 
 	function sc_hdu_dofilter()
 	{
-		return "<input type ='submit' class='button' style='border:0;' name ='filterit' value ='" . HDU_74 . "' alt='" . HDU_74 . "' title='" . HDU_74 . "' />";
+//		var_dump(e107::getTheme()->getLibVersion('bootstrap'));
+		
+//		return "<input type='submit' class='btn btn-default' name ='filterit' value ='" . HDU_74 . "' alt='" . HDU_74 . "' title='" . HDU_74 . "' />";
+		return $this->form->submit('filterit', HDU_74);
+//		"<input type='submit' class='btn btn-default' name ='filterit' value ='" . HDU_74 . "' alt='" . HDU_74 . "' title='" . HDU_74 . "' />";
+	}
+
+	function sc_hdu_doform()
+	{
+		global $HDU_LISTTICKETS, $from;
+//		var_dump(e107::getTheme()->getLibVersion('bootstrap'));
+$hdu_text = "
+<form method='post' action='" . e_SELF . "' id='viewopt'>
+	<div>
+		<input type='hidden' name='from' value='$from' />
+	</div>";
+	$hdu_text .= $this->tp->parseTemplate($HDU_LISTTICKETS["form"], true, $this);
+	$hdu_text .= "</form>";
+//		return "<input type='submit' class='btn btn-default' name ='filterit' value ='" . HDU_74 . "' alt='" . HDU_74 . "' title='" . HDU_74 . "' />";
+		return $hdu_text;
+//		"<input type='submit' class='btn btn-default' name ='filterit' value ='" . HDU_74 . "' alt='" . HDU_74 . "' title='" . HDU_74 . "' />";
 	}
 
 	function sc_hdu_ticket_status()
