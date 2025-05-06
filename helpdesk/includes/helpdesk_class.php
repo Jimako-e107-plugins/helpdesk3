@@ -814,8 +814,7 @@ class helpdesk
             }
             
             // Display top table containing back or print record // Not needed in normal view, only when editing or new, right?
-            if ($this->hdu_new) {
-            $hdu_retval = "
+            $hdu_retval = $this->hdu_new?"
 <script type='text/javascript'>
 <!--
 function checkform(theform)
@@ -857,18 +856,20 @@ function changed()
 		<input type='hidden' name='hduposterid' value='" . $hduposterid . "' />
 		<input type='hidden' name='hdu_ctech' value='" . $hdu_tech . "' />
 		<input type='hidden' id='hdu_changed' name='hdu_changed' value='no' />
-		<input type='hidden' id='hdu_lasttime' name='hdu_lasttime' value='" . $hdu_lastchanged . "' />";
-            }
+		<input type='hidden' id='hdu_lasttime' name='hdu_lasttime' value='" . $hdu_lastchanged . "' />":"";
+            /*
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread) && !$helpdesk_obj->hdu_super && !$helpdesk_obj->hdu_technician)
             {
-                $hdu_retval .= "	<input type='hidden' name='hdu_commentonly' value='yes' />";
+                $hdu_retval .= "<input type='hidden' name='hdu_commentonly' value='yes'>";
             }
             else
             {
-                $hdu_retval .= "	<input type='hidden' name='hdu_commentonly' value='no' />";
+                $hdu_retval .= "<input type='hidden' name='hdu_commentonly' value='no'>";
             }
-            $hdu_retval .= "
-    	</div>";
+            */
+            $hdu_retval .= "<input type='hidden' name='hdu_commentonly' value=".((!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread) && !$helpdesk_obj->hdu_super && !$helpdesk_obj->hdu_technician)?'yes':'no').">";
+
+            $hdu_retval .= $this->hdu_new?"</div>":"";
             // *
             // * Top page header
             // *
@@ -909,6 +910,7 @@ function changed()
             }
             $hdu_retval .= $this->hdu_new?"":'</div><div id="tab2" class="tab-pane fade" role="tabpanel" aria-labelledby="tab2" tabindex="0">';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["finance"], true, $hdu_shortcodes);
+
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
             {
                 $hdu_retval .= $this->hdu_new?"":'</div><div id="tab3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab3" tabindex="0">';
@@ -926,15 +928,19 @@ function changed()
                 }
                 $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_footer"], true, $hdu_shortcodes);
             }
+
             $hdu_retval .= $this->hdu_new?"":'</div></div>';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["footer"], true, $hdu_shortcodes);
-            if ($this->hdu_new) {
-            $hdu_retval .= "
-	</form>";
+            $hdu_retval .= $this->hdu_new?"</form>":"";
         }
-        }
-        return $hdu_retval;
-    }
+/*
+        echo "<pre>";
+        print_r($hdu_retval);
+        echo "</pre>";
+*/
+                return $hdu_retval;
+//        return "test";
+}
     
     // **********************************************************************************************
     // *

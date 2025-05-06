@@ -17,7 +17,7 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["main"]))
 		<td style='vertical-align:top;' class='forumheader3'>{HDU_SHOW_UPDIR}&nbsp;{HDU_SHOW_PRINT}&nbsp;{HDU_SHOW_EMAILLINK}&nbsp;{HDU_SHOW_PDF}&nbsp;{HDU_SHOW_DELETE}</td>
 	</tr>
 	<tr>
-		<td >{HDU_SHOW_TABLIST}";
+		<td>{HDU_SHOW_TABLIST}";
 }
 
     $HELPDESK_SHOW_TEMPLATE["edit_main"] = "
@@ -29,7 +29,7 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["main"]))
 		<td style='vertical-align:top;' class='forumheader3'>{HDU_SHOW_UPDIR}&nbsp;{HDU_SHOW_PRINT}&nbsp;{HDU_SHOW_EMAILLINK}&nbsp;{HDU_SHOW_PDF}&nbsp;{HDU_SHOW_DELETE}</td>
 	</tr>
 	<tr>
-		<td >";
+		<td>";
 
 
 // Old $HDU_SHOWTICKET_TICKET
@@ -75,7 +75,7 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["ticket"]))
 		<td style='width:30%;vertical-align:top;vertical-align:top' class='forumheader3'>" . HDU_28 . "</td>
 		<td style='width:70%;vertical-align:top;'  class='forumheader3'>{HDU_SHOW_EMAIL}</td>
 	</tr>
-</table>	";
+</table>";
 }
 //Old $HDU_SHOWTICKET_DETAILS
 if (!isset($HELPDESK_SHOW_TEMPLATE["details"]))
@@ -102,7 +102,7 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["details"]))
 		<td style='width:30%;vertical-align:top;' class='forumheader3'>" . HDU_143 . "</td>
 		<td style='width:70%;vertical-align:top;' class='forumheader3'>{HDU_SHOW_FIX}</td>
 	</tr>
-</table>	";
+</table>";
 }
 
     $HELPDESK_SHOW_TEMPLATE["edit"] = "
@@ -174,7 +174,7 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["finance"]))
 		<td style='width:30%;vertical-align:top;' class='forumheader3'><b>" . HDU_152 . "</b></td>
 		<td style='width:70%;vertical-align:top;' class='forumheader3'>{HDU_SHOW_TOTALCOST}</td>
 	</tr>
-</table>" ;
+</table>";
 }
 //Old $HDU_SHOWTICKET_COMMENT_HEADER
 if (!isset($HELPDESK_SHOW_TEMPLATE["comment_header"]))
@@ -188,7 +188,7 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["comment_header"]))
 		<td class='forumheader2' style='width:10%; vertical-align:top;' >" . HDU_98 . "</td>
 		<td class='forumheader2' style='width:20%; vertical-align:top;' >" . HDU_99 . "</td>
 		<td class='forumheader2' style='width:70%; vertical-align:top;' >" . HDU_100 . "</td>
-	</tr>	";
+	</tr>";
 }
 // Old $HDU_SHOWTICKET_COMMENT_DETAIL
 if (!isset($HELPDESK_SHOW_TEMPLATE["comment_detail"]))
