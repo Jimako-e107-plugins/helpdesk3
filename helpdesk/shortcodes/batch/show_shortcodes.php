@@ -35,18 +35,23 @@ else
 
 	function sc_hdu_show_updir()
   {
-global $id, $R1,$from;
-return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.list.$id'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a>";
+//global $id, $R1,$from;
+global $id, $from;
+//return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.list.$id'><img src='./images/updir.png' alt='" . HDU_73 . "' title='" . HDU_73 . "' style='border:0;' /></a>";
+return "<a class='btn' href='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?{$from}.list.{$id}'>".LAN_BACK."</a>";
 }
 
 	function sc_hdu_show_print()
   {
-global $helpdesk_obj, $id, $R1,$from;
+//global $helpdesk_obj, $id, $R1,$from;
+global $helpdesk_obj, $id;
 //var_dump(defined("IMODE")?IMODE:"");
 if (!$helpdesk_obj->hdu_new)
 {
-    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE."/":"lite/") . "printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
+//    return "<a href='../../print.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE."/":"lite/") . "printer.png' alt='" . HDU_104 . "' title='" . HDU_104 . "' style='border:0;' /></a>";
+    return "<a class='btn' href='../../print.php?plugin:helpdesk_menu.$id'>".HDU_104."</a>";
 }
+return null;
 }
 
 	function sc_hdu_show_emaillink()
@@ -54,12 +59,14 @@ if (!$helpdesk_obj->hdu_new)
 global $helpdesk_obj, $id;
 if (!$helpdesk_obj->hdu_new && (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super))
 {
-    return "<a href='../../email.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE."/":"lite/") . "email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
+//    return "<a href='../../email.php?plugin:helpdesk_menu.$id'><img src='" . HELPDESK_IMAGES_PATH . "generic/" . (defined("IMODE")?IMODE."/":"lite/") . "email.png' alt='" . HDU_255 . "' title='" . HDU_255 . "' style='border:0;' /></a>";
+    return "<a class='btn' href='../../email.php?plugin:helpdesk_menu.$id'>".HDU_255."</a>";
 }
-else
-{
-	return "";
-}
+//else
+//{
+//	return "";
+  return null;
+//}
 }
 
 	function sc_hdu_show_pdf()
@@ -67,12 +74,14 @@ else
 global $helpdesk_obj, $id, $R1,$from;
 if (!$helpdesk_obj->hdu_new )
 {
-    return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.print.$id'><img src='" . e_PLUGIN.HELPDESK_FOLDER . "/images/pdf_16.png' alt='" . HDU_229 . "' title='" . HDU_229 . "' style='border:0;' /></a>";
+//    return "<a href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.print.$id'><img src='" . e_PLUGIN.HELPDESK_FOLDER . "/images/pdf_16.png' alt='" . HDU_229 . "' title='" . HDU_229 . "' style='border:0;' /></a>";
+    return "<a class='btn' href='".e_PLUGIN.HELPDESK_FOLDER . "/helpdesk.php?$from.print.$id'>".HDU_229."</a>";
 }
-else
-{
-	return "";
-}
+//else
+//{
+//	return "";
+return null;
+//}
 }
 
 // Should tabs be hard rendered in the shortcode like this or leave it for the template designer to do it freely like in euser plugin???
