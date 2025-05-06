@@ -8,28 +8,30 @@ if (!defined('e107_INIT'))
 class plugin_helpdesk_list_shortcodes extends e_shortcode
 {
 
-	private $pluginPrefs = array();
+//	private $pluginPrefs = array();
 	private $tp;
 	private $form;
+	private $helpdesk_obj;
 
 	function __construct()
 	{
-		$this->pluginPrefs = e107::pref('helpdesk');
+		require_once(e_PLUGIN . HELPDESK_FOLDER . "/includes/helpdesk_class.php");
+		$this->helpdesk_obj = new helpdesk;
+
+//		$this->helpdesk_obj->pluginPrefs = e107::pref('helpdesk');
 		$this->tp = e107::getParser();
 		$this->form = e107::getForm();
 	}
 
 	function sc_hdu_title()
 	{
-
-		return $this->tp->toHTML($this->pluginPrefs['hduprefs_title'], false, "no_make_clickable emotes_off");
+		return $this->tp->toHTML($this->helpdesk_obj->pluginPrefs['hduprefs_title'], false, "no_make_clickable emotes_off");
 	}
 
 
 	function sc_hdu_messagetop()
 	{
-
-		return $this->tp->toHTML($this->pluginPrefs['hduprefs_messagetop'], true, 'no_make_clickable emotes_off');
+		return $this->tp->toHTML($this->helpdesk_obj->pluginPrefs['hduprefs_messagetop'], true, 'no_make_clickable emotes_off');
 	}
 
 	function sc_hdu_message()
@@ -41,9 +43,9 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 	function sc_hdu_phone()
 	{
  
-		if (!empty($this->pluginPrefs['hduprefs_phone']))
+		if (!empty($this->helpdesk_obj->pluginPrefs['hduprefs_phone']))
 		{
-			return HDU_102 . ' ' . $this->tp->toHTML($this->pluginPrefs['hduprefs_phone'], false, 'no_make_clickable emotes_off');
+			return HDU_102 . ' ' . $this->tp->toHTML($this->helpdesk_obj->pluginPrefs['hduprefs_phone'], false, 'no_make_clickable emotes_off');
 		}
 //		else
 //		{
@@ -54,9 +56,9 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 	function sc_hdu_faq()
 	{
 
-		if (!empty($this->pluginPrefs['hduprefs_faq']))
+		if (!empty($this->helpdesk_obj->pluginPrefs['hduprefs_faq']))
 		{
-			return "<a href='" . $this->tp->toHTML($this->pluginPrefs['hduprefs_faq']) . "' >" . HDU_207 . "</a>";
+			return "<a href='" . $this->tp->toHTML($this->helpdesk_obj->pluginPrefs['hduprefs_faq']) . "' >" . HDU_207 . "</a>";
 		}
 //		else
 //		{
@@ -66,7 +68,12 @@ class plugin_helpdesk_list_shortcodes extends e_shortcode
 
 	function sc_hdu_newticket($parms = null)
 	{
-		global $helpdesk_obj, $show;
+//		global $helpdesk_obj, $show;
+
+//		var_dump($this->helpdesk_obj->pluginPrefs);
+//		var_dump($this->helpdesk_obj->pluginPrefs);
+//		var_dump($this->helpdesk_obj->pluginPrefs);
+
 /*
 		var_dump (defined('BOOTSTRAP'));
 		var_dump (deftrue('BOOTSTRAP'));
@@ -81,16 +88,18 @@ var_dump($parms['icon']);
 var_dump(isset($parms['icon']));
 var_dump(!$parms['icon']);
 */
-	if ($helpdesk_obj->hdu_poster)
+	if ($this->helpdesk_obj->hdu_poster)
 		{
+/*
 			if (isset($parms['icon']) && !$parms['icon']) { // To be modified to accept glyphs inside the button text
 				$text = HDU_52;
 			} else {
 				$text = "<img src='./images/new.gif' style='border:0;' alt='' title='".HDU_52."' />";
 			}
+*/
 //			return "<a class='btn btn-primary' href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' >".HDU_52."</a>";
 //			return $this->form->renderLink(HDU_52, array('link' => e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0",'target'=>'blank'));
-			return "<a class='btn btn-success' href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' >{$text}</a>";
+			return "<a class='btn btn-success' href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' >".HDU_52."</a>";
 			
 //			return "<a href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?0.newticket.0' ><img src='./images/new.gif' style='border:0;' alt='' title='" . HDU_52 . "' /></a>";
 		}
@@ -102,8 +111,9 @@ var_dump(!$parms['icon']);
 
 	function sc_hdu_reports()
 	{
-		global $helpdesk_obj, $from, $id;
-		if ($helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
+//		global $helpdesk_obj, $from, $id;
+		global $from, $id;
+		if ($this->helpdesk_obj->hdu_super || $this->helpdesk_obj->hdu_technician)
 		{
 			return "<a href ='" . e_PLUGIN . HELPDESK_FOLDER . "/helpdesk.php?$from.repmenu.$id' ><img src='" . e_PLUGIN . HELPDESK_FOLDER . "/images/print.gif' style='border:0;' alt='' title='" . HDU_101 . "' /></a>";
 		}
@@ -112,7 +122,8 @@ var_dump(!$parms['icon']);
 	function sc_hdu_filter()
 	{
 //		global $hdu_filtselect;
-global $helpdesk_obj, $R1;
+//global $helpdesk_obj, $R1;
+global $R1;
 /*
 		$hdu_filtselect = "
 		<select name ='R1' class ='tbox' onchange='this.form.from.value=0;this.form.submit()'>
@@ -122,7 +133,7 @@ global $helpdesk_obj, $R1;
 			<option value='allocated'" . ($R1 == "allocated"?" selected ='selected'":"") . " >" . HDU_184 . "</option>
 			<option value='unallocated'" . ($R1 == "unallocated"?" selected ='selected'":"") . " >" . HDU_185 . "</option>
 			<option value='escalate'" . ($R1 == "escalate"?" selected ='selected'":"") . " >" . HDU_186 . "</option>";
-	if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
+	if (!$this->helpdesk_obj->hduprefs_posteronly || $this->helpdesk_obj->hdu_super || $this->helpdesk_obj->hdu_technician)
 	{
 		$hdu_filtselect .= "<option value='mine'" . ($R1 == "mine"?" selected ='selected'":"") . " >" . HDU_208 . "</option>";
 	}
@@ -138,7 +149,7 @@ $hdu_filtselect = '<label for="R1">'.HDU_77.'</label>';
 	$array["allocated"]=HDU_184;
 	$array["unallocated"]=HDU_185;
 	$array["escalate"]=HDU_186;
-	if (!$helpdesk_obj->hduprefs_posteronly || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
+	if (!$this->helpdesk_obj->hduprefs_posteronly || $this->helpdesk_obj->hdu_super || $this->helpdesk_obj->hdu_technician)
 	{
 		$array["mine"]=HDU_208;
 	}
@@ -260,7 +271,7 @@ $hdu_text = "
 	function sc_hdu_messagebottom()
 	{
 
-		return $this->tp->toHTML($this->pluginPrefs['hduprefs_messagebottom'], false);
+		return $this->tp->toHTML($this->helpdesk_obj->pluginPrefs['hduprefs_messagebottom'], false);
 	}
 
 	function sc_hdu_rights()
@@ -277,14 +288,15 @@ $hdu_text = "
 
 	function sc_hdu_prioritycolour()
 	{
-		global $helpdesk_obj, $hdu_priority;
-//		return $helpdesk_obj->hduprefs_colours[$hdu_priority];
-		return $this->pluginPrefs['hduprefs_p'.$hdu_priority.'col'];
+//		global $helpdesk_obj, $hdu_priority;
+		global $hdu_priority;
+//		return $this->helpdesk_obj->hduprefs_colours[$hdu_priority];
+		return $this->helpdesk_obj->pluginPrefs['hduprefs_p'.$hdu_priority.'col'];
 }
 
 	
 	function sc_hdu_prefscolours($parm = null)
 	{
-		return $this->tp->toHTML($this->pluginPrefs['hduprefs_p'.$parm.'col'], false, "no_make_clickable emotes_off");
+		return $this->tp->toHTML($this->helpdesk_obj->pluginPrefs['hduprefs_p'.$parm.'col'], false, "no_make_clickable emotes_off");
 	}
 }

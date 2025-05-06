@@ -75,25 +75,40 @@ else
 }
 }
 
-	function sc_hdu_show_tablist()
+// Should tabs be hard rendered in the shortcode like this or leave it for the template designer to do it freely like in euser plugin???
+	function sc_hdu_show_tablist() 
   {
 global $helpdesk_obj,$hdu_posterid;
 
 $hdu_show=($helpdesk_obj->hduprefs_showfinance?1:0);
 $hdu_comm=(!$helpdesk_obj->hdu_new && (USERID==$hdu_posterid || $helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)?1:0);
-$retval = "<input type='button' disabled='disabled' class='button' onclick=\"hdu_show('ticket',$hdu_show,$hdu_comm);\" value='".HDU_247."' id='hdu_t' name='hdu_t' />&nbsp;";
+$retval = '<ul class="nav nav-tabs" role="tablist" id="HDU_tabs">';
+//$retval = "<input type='button' disabled='disabled' class='button' onclick=\"hdu_show('ticket',$hdu_show,$hdu_comm);\" value='".HDU_247."' id='hdu_t' name='hdu_t' />&nbsp;";
+$retval .= '<li class="nav-item" role="presentation">
+<button class="nav-link active" id="hdu_tab0" data-bs-toggle="tab" data-bs-target="#tab0" type="button" role="tab" aria-controls="tab0" aria-selected="true">'.HDU_247.'</button>
+</li>';
 if(!$helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)
 {
-	$retval .= "<input type='button' class='button' onclick=\"hdu_show('details',$hdu_show,$hdu_comm);\" value='".HDU_246."' name='hdu_d' id='hdu_d'/>&nbsp;";
+//	$retval .= "<input type='button' class='button' onclick=\"hdu_show('details',$hdu_show,$hdu_comm);\" value='".HDU_246."' name='hdu_d' id='hdu_d'/>&nbsp;";
+	$retval .= '<li class="nav-item" role="presentation">
+<button class="nav-link" id="hdu_tab1" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="false">'.HDU_246.'</button>
+</li>';
 }
 if ((!$helpdesk_obj->hdu_new || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician)&& $helpdesk_obj->hduprefs_showfinance)
 {
-	$retval.="<input type='button' class='button' onclick=\"hdu_show('finance',$hdu_show,$hdu_comm);\" value='".HDU_245."' id='hdu_f' name='hdu_f' />&nbsp;";
+//	$retval.="<input type='button' class='button' onclick=\"hdu_show('finance',$hdu_show,$hdu_comm);\" value='".HDU_245."' id='hdu_f' name='hdu_f' />&nbsp;";
+$retval .= '<li class="nav-item" role="presentation">
+<button class="nav-link" id="hdu_tab2" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">'.HDU_245.'</button>
+</li>';
 }
 if (!$helpdesk_obj->hdu_new && (USERID==$hdu_posterid || $helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
 {
-	$retval .= "<input type='button' class='button' onclick=\"hdu_show('comment',$hdu_show,$hdu_comm);\" value='".HDU_244."' name='hdu_c' id='hdu_c' />";
+//	$retval .= "<input type='button' class='button' onclick=\"hdu_show('comment',$hdu_show,$hdu_comm);\" value='".HDU_244."' name='hdu_c' id='hdu_c' />";
+$retval .= '<li class="nav-item" role="presentation">
+<button class="nav-link" id="hdu_tab3" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">'.HDU_244.'</button>
+</li>';
 }
+$retval .= '</ul>';
 return $retval;
 }
 

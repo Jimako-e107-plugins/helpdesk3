@@ -17,16 +17,26 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["main"]))
 		<td style='vertical-align:top;' class='forumheader3'>{HDU_SHOW_UPDIR}&nbsp;{HDU_SHOW_PRINT}&nbsp;{HDU_SHOW_EMAILLINK}&nbsp;{HDU_SHOW_PDF}&nbsp;{HDU_SHOW_DELETE}</td>
 	</tr>
 	<tr>
-		<td class='forumheader2' >{HDU_SHOW_TABLIST}</td>
+		<td>{HDU_SHOW_TABLIST}";
+}
+
+    $HELPDESK_SHOW_TEMPLATE["edit_main"] = "
+<table style='" . USER_WIDTH . "' class='fborder'>
+	<tr>
+		<td class='fcaption' >" . HDU_1 . " {HDU_SHOW_ACTION}</td>
 	</tr>
 	<tr>
-		<td >";
-}
+		<td style='vertical-align:top;' class='forumheader3'>{HDU_SHOW_UPDIR}&nbsp;{HDU_SHOW_PRINT}&nbsp;{HDU_SHOW_EMAILLINK}&nbsp;{HDU_SHOW_PDF}&nbsp;{HDU_SHOW_DELETE}</td>
+	</tr>
+	<tr>
+		<td>";
+
+
 // Old $HDU_SHOWTICKET_TICKET
 if (!isset($HELPDESK_SHOW_TEMPLATE["ticket"]))
 {
     $HELPDESK_SHOW_TEMPLATE["ticket"] = "
-<table style='display:;width:100%;' id='hduTableTicket'>
+<table style='width:100%;' id='hduTableTicket'>
 	<tr>
 		<td style='width:30%; vertical-align:top;'  class='forumheader3'>" . HDU_3 . "</td>
 		<td style='width:70%; vertical-align:top;'  class='forumheader3'>{HDU_SHOW_USER}&nbsp;</td>
@@ -65,13 +75,13 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["ticket"]))
 		<td style='width:30%;vertical-align:top;vertical-align:top' class='forumheader3'>" . HDU_28 . "</td>
 		<td style='width:70%;vertical-align:top;'  class='forumheader3'>{HDU_SHOW_EMAIL}</td>
 	</tr>
-</table>	";
+</table>";
 }
 //Old $HDU_SHOWTICKET_DETAILS
 if (!isset($HELPDESK_SHOW_TEMPLATE["details"]))
 {
     $HELPDESK_SHOW_TEMPLATE["details"] = "
-<table style='display:none;width:100%;' id='hduTableDetails' >
+<table style='width:100%;' id='hduTableDetails' >
 	<tr>
 		<td style='width:30%; vertical-align:top;' class='forumheader3' > " . HDU_154 . " </td>
 		<td style='width:70%; vertical-align:top;' class='forumheader3' >{HDU_SHOW_STATUS}</td>
@@ -92,13 +102,38 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["details"]))
 		<td style='width:30%;vertical-align:top;' class='forumheader3'>" . HDU_143 . "</td>
 		<td style='width:70%;vertical-align:top;' class='forumheader3'>{HDU_SHOW_FIX}</td>
 	</tr>
-</table>	";
+</table>";
 }
+
+    $HELPDESK_SHOW_TEMPLATE["edit"] = "
+<table style='width:100%;' id='hduTableTicket'>
+	<tr>
+		<td style='width:30%; vertical-align:top;'  class='forumheader3'>" . HDU_3 . "</td>
+		<td style='width:70%; vertical-align:top;'  class='forumheader3'>{HDU_SHOW_USER}&nbsp;</td>
+	</tr>
+	<tr>
+		<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_6 . "</td>
+		<td style='width:70%; vertical-align:top;' class='forumheader3'>{HDU_SHOW_PRIORITY}</td>
+	</tr>
+	<tr>
+		<td style='width:30%; vertical-align:top;' class='forumheader3'>" . HDU_31 . " *</td>
+		<td style='width:70%; vertical-align:top;' class='forumheader3'>{HDU_SHOW_SUMMARY}</td>
+	</tr>
+	<tr>
+		<td style='width:30%; vertical-align:top;' class='forumheader3' > " . HDU_10 . " *</td>
+		<td style='width:70%; vertical-align:top;' class='forumheader3' >{HDU_SHOW_CATEGORY}</td>
+	</tr>
+	<tr>
+		<td style='width:30%;vertical-align:top;'  class='forumheader3'>" . HDU_12 . " *</td>
+		<td style='width:70%;vertical-align:top;'  class='forumheader3'>{HDU_SHOW_DESCRIPTION}</td>
+	</tr>
+</table>";
+
 //OLd $HDU_SHOWTICKET_FINANCE
 if (!isset($HELPDESK_SHOW_TEMPLATE["finance"]))
 {
     $HELPDESK_SHOW_TEMPLATE["finance"] = "
-<table style='width:100%;display:none;' id='hduTableFinance'>
+<table style='width:100%;' id='hduTableFinance'>
 	<tr>
 		<td style='width:30%;vertical-align:top;' class='forumheader3'><b>" . HDU_144 . "</b></td>
 		<td style='width:70%;vertical-align:top;' class='forumheader3'>{HDU_SHOW_FIXCOST}</td>
@@ -139,13 +174,13 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["finance"]))
 		<td style='width:30%;vertical-align:top;' class='forumheader3'><b>" . HDU_152 . "</b></td>
 		<td style='width:70%;vertical-align:top;' class='forumheader3'>{HDU_SHOW_TOTALCOST}</td>
 	</tr>
-</table>" ;
+</table>";
 }
 //Old $HDU_SHOWTICKET_COMMENT_HEADER
 if (!isset($HELPDESK_SHOW_TEMPLATE["comment_header"]))
 {
     $HELPDESK_SHOW_TEMPLATE["comment_header"] = "
-<table  style='width:100%;display:none;' id='hduTableComment'>
+<table  style='width:100%;' id='hduTableComment'>
 	<tr>
 		<td style='vertical-align:top;' colspan='3' class='forumheader3'>{HDU_SHOW_NEWCOMMENT}</td>
 	</tr>
@@ -153,7 +188,7 @@ if (!isset($HELPDESK_SHOW_TEMPLATE["comment_header"]))
 		<td class='forumheader2' style='width:10%; vertical-align:top;' >" . HDU_98 . "</td>
 		<td class='forumheader2' style='width:20%; vertical-align:top;' >" . HDU_99 . "</td>
 		<td class='forumheader2' style='width:70%; vertical-align:top;' >" . HDU_100 . "</td>
-	</tr>	";
+	</tr>";
 }
 // Old $HDU_SHOWTICKET_COMMENT_DETAIL
 if (!isset($HELPDESK_SHOW_TEMPLATE["comment_detail"]))

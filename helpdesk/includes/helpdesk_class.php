@@ -88,8 +88,7 @@ class helpdesk
 
 	var $hdu_memberof = ""; //php 8 warning
 
-
-	private $pluginPrefs = array();
+	public $pluginPrefs = array();
 	private $tp;
 	private $sql;
     function __construct()
@@ -165,9 +164,6 @@ class helpdesk
 		$this->hduprefs_assigned = $this->pluginPrefs['hduprefs_assigned'];
 		$this->hduprefs_escalatedays = $this->pluginPrefs['hduprefs_escalatedays'];
 		$this->hduprefs_escalateon = $this->pluginPrefs['hduprefs_escalateon'];
-
-
-
 
     }
    
@@ -816,9 +812,9 @@ class helpdesk
             {
                 $this->hdu_showemail = false;
             }
-            // Display top table containing back or print record
-            $hdu_retval = "
-
+            
+            // Display top table containing back or print record // Not needed in normal view, only when editing or new, right?
+            $hdu_retval = $this->hdu_new?"
 <script type='text/javascript'>
 <!--
 function checkform(theform)
@@ -860,17 +856,20 @@ function changed()
 		<input type='hidden' name='hduposterid' value='" . $hduposterid . "' />
 		<input type='hidden' name='hdu_ctech' value='" . $hdu_tech . "' />
 		<input type='hidden' id='hdu_changed' name='hdu_changed' value='no' />
-		<input type='hidden' id='hdu_lasttime' name='hdu_lasttime' value='" . $hdu_lastchanged . "' />";
+		<input type='hidden' id='hdu_lasttime' name='hdu_lasttime' value='" . $hdu_lastchanged . "' />":"";
+            /*
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread) && !$helpdesk_obj->hdu_super && !$helpdesk_obj->hdu_technician)
             {
-                $hdu_retval .= "	<input type='hidden' name='hdu_commentonly' value='yes' />";
+                $hdu_retval .= "<input type='hidden' name='hdu_commentonly' value='yes'>";
             }
             else
             {
-                $hdu_retval .= "	<input type='hidden' name='hdu_commentonly' value='no' />";
+                $hdu_retval .= "<input type='hidden' name='hdu_commentonly' value='no'>";
             }
-            $hdu_retval .= "
-    	</div>";
+            */
+            $hdu_retval .= "<input type='hidden' name='hdu_commentonly' value=".((!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread) && !$helpdesk_obj->hdu_super && !$helpdesk_obj->hdu_technician)?'yes':'no').">";
+
+            $hdu_retval .= $this->hdu_new?"</div>":"";
             // *
             // * Top page header
             // *
@@ -881,15 +880,17 @@ function changed()
             $hdu_shortcodes = e107::getScBatch('show','helpdesk');
 //            var_dump($hdu_shortcodes);
 //            var_dump($HDU_SHOWTICKET);
-            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["main"], false, $hdu_shortcodes);
+            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET[$this->hdu_new?"edit_main":"main"], false, $hdu_shortcodes);
             // $hdu_retval .= "
             // <tr>
             // <td class='forumheader3' colspan='2'>
             // <div id=\"tabcontentcontainer\">";
             // // Div for ticket details
             // $hdu_retval .= "<div id=\"sc1\" class=\"tabcontent\">";
-            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["ticket"], true, $hdu_shortcodes);
+            $hdu_retval .= $this->hdu_new?"":'<div class="tab-content"><div id="tab0" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab0" tabindex="0">';
+            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET[$this->hdu_new?"edit":"ticket"], true, $hdu_shortcodes);
             // $hdu_retval .= "</div>";
+            $hdu_retval .= $this->hdu_new?"":'</div><div id="tab1" class="tab-pane fade" role="tabpanel" aria-labelledby="tab1" tabindex="0">';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["details"], true, $hdu_shortcodes);
             if ($this->hdu_new)
             {
@@ -907,9 +908,12 @@ function changed()
                     $hdu_callout = $this->hduprefs_callout;
                 }
             }
+            $hdu_retval .= $this->hdu_new?"":'</div><div id="tab2" class="tab-pane fade" role="tabpanel" aria-labelledby="tab2" tabindex="0">';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["finance"], true, $hdu_shortcodes);
+
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
             {
+                $hdu_retval .= $this->hdu_new?"":'</div><div id="tab3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab3" tabindex="0">';
                 $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_header"], true, $hdu_shortcodes);
 		
 				$where = " hduc_ticketid='$hdu_showid' order by hduc_date asc";
@@ -924,12 +928,20 @@ function changed()
                 }
                 $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["comment_footer"], true, $hdu_shortcodes);
             }
+
+            $hdu_retval .= $this->hdu_new?"":'</div></div>';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["footer"], true, $hdu_shortcodes);
-            $hdu_retval .= "
-	</form>";
+            $hdu_retval .= $this->hdu_new?"</form>":"";
         }
-        return $hdu_retval;
-    }
+/*
+        echo "<pre>";
+        print_r($hdu_retval);
+        echo "</pre>";
+*/
+                return $hdu_retval;
+//        return "test";
+}
+    
     // **********************************************************************************************
     // *
     // *	Function	:	update_ticket($id)
