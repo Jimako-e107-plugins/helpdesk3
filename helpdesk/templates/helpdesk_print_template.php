@@ -1,12 +1,8 @@
 <?php
-if (!defined("HDU_PRINT_WIDTH"))
+if (!isset($HELPDESK_PRINT_TEMPLATE['ticket']))
 {
-    define(HDU_PRINT_WIDTH, "width:60%;");
-}
-if (!isset($HDU_PRINTTICKET))
-{
-    $HDU_PRINTTICKET = "
-<table style='" . HDU_PRINT_WIDTH . "' class='fborder'>
+    $HELPDESK_PRINT_TEMPLATE['ticket'] = "
+<table style='width:60%;' class='fborder'>
 	<tr>
 		<td class='fcaption' colspan='3'>" . HDU_1 . " {HDU_SHOW_ACTION}</td>
 	</tr>
@@ -35,14 +31,14 @@ if (!isset($HDU_PRINTTICKET))
 	</tr>";
     if ($helpdesk_obj->hduprefs_showassettag)
     {
-        $HDU_PRINTTICKET .= "
+        $HELPDESK_PRINT_TEMPLATE['ticket'] .= "
 	<tr>
 		<td style='width:30%; vertical-align:top;' class='forumheader3' > " . HDU_39 . " </td>
 		<td style='width:70%; vertical-align:top;' class='forumheader3'  colspan='2'>{HDU_SHOW_ASSET}</td>
 	</tr>";
         // If we show the asset tag
     }
-    $HDU_PRINTTICKET .= "
+    $HELPDESK_PRINT_TEMPLATE['ticket'] .= "
 	<tr>
 		<td style='width:30%;vertical-align:top;'  class='forumheader3'>" . HDU_12 . "</td>
 		<td style='width:70%;vertical-align:top;'  class='forumheader3' colspan='2'>{HDU_SHOW_DESCRIPTION}</td>
@@ -77,7 +73,7 @@ if (!isset($HDU_PRINTTICKET))
 }
 if ($helpdesk_obj->hduprefs_showfinance)
 {
-    $HDU_PRINTTICKET .= "
+    $HELPDESK_PRINT_TEMPLATE['ticket'] .= "
 	<tr>
 		<td  class='forumheader2' colspan='3'>" . HDU_242 . "</td>
 	</tr>
@@ -123,7 +119,7 @@ if ($helpdesk_obj->hduprefs_showfinance)
 	</tr>" ;
 }
 
-$HDU_PRINTTICKET .= "
+$HELPDESK_PRINT_TEMPLATE['ticket'] .= "
     	<tr>
 		<td  class='forumheader2' colspan='3'>" . HDU_243 . "</td>
 	</tr>
@@ -133,9 +129,9 @@ $HDU_PRINTTICKET .= "
 		<td class='forumheader2' style='width:70%; vertical-align:top;' >" . HDU_100 . "</td>
 	</tr>	";
 
-if (!isset($HDU_PRINTTICKET_DETAIL))
+if (!isset($HELPDESK_PRINT_TEMPLATE['detail']))
 {
-    $HDU_PRINTTICKET_DETAIL = "
+    $HELPDESK_PRINT_TEMPLATE['detail'] = "
 	<tr>
 		<td class='forumheader3' style='width:10%; vertical-align:top;' >{HDU_SHOW_COMMENTDATE}</td>
 		<td class='forumheader3' style='width:20%; vertical-align:top;' >{HDU_SHOW_COMMENTPOSTER}</td>
@@ -143,13 +139,11 @@ if (!isset($HDU_PRINTTICKET_DETAIL))
 	</tr>";
 }
 
-if (!isset($HDU_PRINTTICKET_FOOTER))
+if (!isset($HELPDESK_PRINT_TEMPLATE['footer']))
 {
-    $HDU_PRINTTICKET_FOOTER = "
+    $HELPDESK_PRINT_TEMPLATE['footer'] = "
 	<tr>
 		<td  class='fcaption' colspan='3'>&nbsp;</td>
 	</tr>
 </table>";
 }
-
-?>
