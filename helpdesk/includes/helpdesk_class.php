@@ -890,8 +890,6 @@ function changed()
             $hdu_retval .= $this->hdu_new?"":'<div class="tab-content"><div id="tab0" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab0" tabindex="0">';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET[$this->hdu_new?"edit":"ticket"], true, $hdu_shortcodes);
             // $hdu_retval .= "</div>";
-            $hdu_retval .= $this->hdu_new?"":'</div><div id="tab1" class="tab-pane fade" role="tabpanel" aria-labelledby="tab1" tabindex="0">';
-            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["details"], true, $hdu_shortcodes);
             if ($this->hdu_new)
             {
                 // if it is a new ticket then set the default rates
@@ -907,10 +905,12 @@ function changed()
                 {
                     $hdu_callout = $this->hduprefs_callout;
                 }
-            }
-            $hdu_retval .= $this->hdu_new?"":'</div><div id="tab2" class="tab-pane fade" role="tabpanel" aria-labelledby="tab2" tabindex="0">';
+            } else { // only display these tabs on view mode, not in edit mode
+            $hdu_retval .= '</div><div id="tab1" class="tab-pane fade" role="tabpanel" aria-labelledby="tab1" tabindex="0">';
+            $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["details"], true, $hdu_shortcodes);
+            $hdu_retval .= '</div><div id="tab2" class="tab-pane fade" role="tabpanel" aria-labelledby="tab2" tabindex="0">';
             $hdu_retval .= $this->tp->parseTemplate($HDU_SHOWTICKET["finance"], true, $hdu_shortcodes);
-
+            }
             if (!$helpdesk_obj->hdu_new && (USERID == $hdu_posterid || $helpdesk_obj->hduprefs_allread || $helpdesk_obj->hdu_super || $helpdesk_obj->hdu_technician))
             {
                 $hdu_retval .= $this->hdu_new?"":'</div><div id="tab3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab3" tabindex="0">';
